@@ -232,11 +232,9 @@ a{
 }
 
 .back-arrow {
-    position: absolute;
-    padding: 4px 4px 0px 4px;
-    border-radius: 100px;
-    top: 180px;
-    right: 30px;
+    border-radius: 100%;
+    width: 32px;
+    height: 32px;
 }
 
 .back-arrow:hover {
