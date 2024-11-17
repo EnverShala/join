@@ -555,12 +555,8 @@ function clearForm() {
   document.getElementById('category-displayed').textContent = 'Select task category';
 
   // Setzt das ausgewählte Prio-Design zurück
-  document.querySelectorAll('.btn-prio').forEach(btn => {
-      btn.classList.remove('selected');  // Entferne die "selected"-Klasse von allen Prio-Buttons
-      let imgElements = btn.getElementsByTagName('img');
-      imgElements[0].classList.remove('d-none');  // Zeige das farbige Icon an
-      imgElements[1].classList.add('d-none');  // Verstecke das weiße Icon
-  });
+  clearPrioButtons();
+  clickOnMedium();
 
   // Setzt die Subtask-Liste zurück
   document.getElementById('subtaskList').innerHTML = '';
