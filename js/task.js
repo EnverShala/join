@@ -151,7 +151,7 @@ function clickOnLow()
 
 function toggleDropdown() {
   document.getElementById("myDropdown").classList.toggle("show");
- 
+  document.getElementById("selected-contacts-container").classList.toggle("d-none");
 }
 
 /*
