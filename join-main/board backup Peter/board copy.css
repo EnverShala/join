@@ -1,0 +1,148 @@
+
+
+/* Container für das Kanban-Board */
+.board-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Hauptinhalt-Styling */
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Suchleiste und Add Task Button */
+.search-add {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-add input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    flex: 1;
+}
+
+.search-add button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-add button:hover {
+    background-color: #0056b3;
+}
+
+/* Kanban Board */
+.kanban-board {
+    display: flex;
+    justify-content: space-between;
+}
+
+.column {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    width: 22%;
+}
+
+.column h2 {
+    margin-top: 0;
+    font-size: 18px;
+}
+
+.task {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: grab;
+}
+
+.task h3 {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+}
+
+.task p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.add-task {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.add-task:hover {
+    background-color: #0056b3;
+}
+
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task-type {
+    background-color: #3498db;
+    color: #fff;
+    border-radius: 3px;
+    padding: 2px 5px;
+    font-size: 12px;
+}
+
+.task-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.progress {
+    width: 70%;
+    background-color: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 10px;
+    background-color: #007bff;
+}
+
+.assignees {
+    display: flex;
+}
+
+.assignee {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #007bff;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 5px;
+    font-size: 12px;
+}
