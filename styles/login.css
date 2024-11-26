@@ -547,16 +547,6 @@ button:disabled:hover {
     height: 20px;
   }
 }
-@media (max-width: 320px) {
-  .btn_guest {
-    width: 90px;
-    gap: 10px;
-  }
-
-  .auth_buttons {
-    gap: 10px;
-  }
-}
 @keyframes fadeIn {
   0% {
     opacity: 0;
