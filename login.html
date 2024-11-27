@@ -1,83 +1,75 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - Platform</title>
-    <link rel="stylesheet" href="./styles/login.css">
-</head>
-<body id="myBody" onload="init()">
-
-    <div id="logo-container" class="logo-container start transition2s">
-        <img class="joinLogo" src="./img//login/join-logo2.svg" style="width: 100px; height: 100px;" alt="Dein Logo" />
+    <link rel="stylesheet" href="./styles/login.css" />
+  </head>
+  <body id="myBody" onload="init()">
+    <header class="top_bar">
+      <div id="logo-container" class="logo-container start transition2s">
+        <img class="joinLogo" src="./img//login/join-logo2.svg" alt="Dein Logo"/>
       </div>
 
+      <nav class="auth_options">
+        <p>Not a Join User?</p>
+        <a href="signup.html">
+          <div class="auth_signUp" onclick="">Sign Up</div>
+        </a>
+      </nav>
+    </header>
+
     <div id="main_wrapper" class="main_wrapper d-none">
-        <header class="top_bar">
-            <nav class="auth_options">
-                <p>Not a Join User?</p>
-                <a href="signup.html">
-                    <div class="auth_signUp" onclick="">Sign Up</div>
-                </a>
-            </nav>
-        </header>
+      <div id="login_section" class="login_section d-none">
+        <h1>Log in</h1>
+        <img class="login_divider" src="./img/login/seperator.svg" alt="separator"/>
+        <form id="authForm" class="login_form" onsubmit="loginUser(); return false;" onkeyup="">
+          <div class="error_email_wrapper">
+            <div class="error_email_message" id="error_email_message"></div>
+          </div>
 
-        <div id="login_section" class="login_section d-none">
-            <h1>Log in</h1>
-            <img class="login_divider" src="./img/login/seperator.svg" alt="separator" />
+          <div id="email_wrapper" class="field_group field_group-margin32">
+            <input id="userEmail" type="email" placeholder="Email" autocomplete="email" required onkeypress=""/>
+            <img class="field_icon-email" src="./img/login/mail.svg" alt="mail"/>
+          </div>
 
-            <form id="authForm" class="login_form" onsubmit="loginUser(); return false;" onkeyup="">
+          <div id="password_wrapper" class="field_group">
+            <input onkeydown="onPasswordKeyDown()" id="userPassword" type="password" placeholder="Password" autocomplete="current-password" required onkeyup="" onkeypress=""/>
+            <img id="password_toggle" class="field_icon-password noPointer" src="./img/login/lock.svg" alt="lock" onclick=""/>
+          </div>
 
-                <div class="error_email_wrapper">
-                    <div class="error_email_message" id="error_email_message"></div>
-                </div>
+          <div class="error_password_wrapper">
+            <div class="error_password_message" id="error_password_message"></div>
+          </div>
 
-                <div id="email_wrapper" class="field_group field_group-margin32">
-                    <input id="userEmail" type="email" placeholder="Email" autocomplete="email" required onkeypress=""/>
-                    <img class="field_icon-email" src="./img/login/mail.svg" alt="mail" />
-                </div>
+          <div class="checkbox_area">
+            <input id="rememberMeButton" type="checkbox" />
+            <p>Remember me</p>
+          </div>
 
-                <div id="password_wrapper" class="field_group">
-                    <input onkeydown="onPasswordKeyDown()" id="userPassword" type="password" placeholder="Password" autocomplete="current-password" required onkeyup="" onkeypress="" />
-                    <img id="password_toggle" class="field_icon-password noPointer" src="./img/login/lock.svg" alt="lock" onclick="" />
-                </div>
+          <div class="auth_buttons">
+            <button disabled type="submit" id="loginButton" class="btn_login" onclick="">Log in</button>
+            <button id="guestButton" class="btn_guest" onclick="">Guest Log in</button>
+          </div>
+        </form>
+      </div>
 
-                <div class="error_password_wrapper">
-                    <div class="error_password_message" id="error_password_message"></div>
-                </div>
-
-                <div class="checkbox_area">
-                    <!-- <img id="rememberCheckbox" onclick="" data-checked="false" class="" src="./img/login/Check button.svg" /> -->
-                     <input id="rememberMeButton" type="checkbox">
-                    <p>Remember me</p>
-                </div>
-
-                <div class="auth_buttons">
-                    <button disabled type="submit" id="loginButton" class="btn_login" onclick="">Log in</button>
-                    <button id="guestButton" class="btn_guest" onclick="">Guest Log in</button>
-                </div>
-            </form>
-        </div>
-
-        <footer class="site_footer">
-            <nav class="auth_options-mobile">
-                <p>New here?</p>
-                <a href="#">
-                    <div class="auth_signUp-mobile" onclick="">Sign Up</div>
-                </a>
-            </nav>
-
-            <div class="legal_links">
-                <a href="./privacy.html">Privacy policy</a>
-                <a href="./legalNotice.html">Legal notice</a>
-            </div>
-        </footer>
-        <!-- Overlay for the first animation -->
-        <!-- <div id="" class="overlay_background">
-            <div class="overlay_logo"></div>
-        </div> -->
+      <nav class="auth_options_mobile d-none">
+        <p>Not a Join User?</p>
+        <a href="signup.html">
+          <div class="auth_signUp" onclick="">Sign Up</div>
+        </a>
+      </nav>
     </div>
     <script src="./js/login.js"></script>
     <script src="./js/firebase.js"></script>
-</body>
+
+    <footer class="site_footer">
+      <div class="legal_links">
+        <a href="./privacy.html">Privacy policy</a>
+        <a href="./legalNotice.html">Legal notice</a>
+      </div>
+    </footer>
+  </body>
 </html>
