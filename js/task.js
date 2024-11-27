@@ -29,16 +29,7 @@ async function createTask() {
     assignedTo = assignedTo.slice(0, -1);
   }
 
-  let newTask = {
-    title: taskTitle,
-    description: taskDescription,
-    date: taskDate,
-    category: taskCategory,
-    priority: taskPrio,
-    level: "To do",
-    subtasks: taskSubtasks,
-    assigned: assignedTo
-  };
+  let newTask = createTaskArray(taskTitle, taskDescription, taskDate, taskCategory, taskPrio, "To do", taskSubtasks, assignedTo);
 
   saveTasks("/tasks", newTask);
 
@@ -48,6 +39,27 @@ async function createTask() {
   // Formular zurücksetzen (falls gewünscht)
   clearForm();
 }
+
+/*
+** creates an array with the task informations
+*/
+
+function createTaskArray(newTitle, newDescription, newDate, oldCategory, newPrio, oldLevel, newSubtasks, newAssigned) {
+  return {
+    title: newTitle,
+    description: newDescription,
+    date: newDate,
+    category: oldCategory,
+    priority: newPrio,
+    level: oldLevel,
+    subtasks: newSubtasks,
+    assigned: newAssigned,
+  };
+}
+
+/*
+** gets the priority level of the current/opened task
+*/
 
 function getTaskPrio() {
   if (document.getElementById("urgent").className.includes("btn-bg-change-urgent-onclick")) {
@@ -218,15 +230,7 @@ async function renderAssignedTo() {
   let htmlContent = "";
 
   for (let i = 0; i < uniqueUsers.length; i++) {
-      htmlContent += `
-          <label onclick="event.stopPropagation()"><li class="list-item assigned-to"></label>
-              <div class="list-item-name" onclick="toggleCheckbox('AssignedContact${i}')">
-                  <label><div class="circle initialsColor${j}">${getUserInitials(uniqueUsers[i])}</div></label>
-                  <label>${uniqueUsers[i]}</label>
-              </div>
-              <input type="checkbox" onclick="toggleBackground(this)" id="AssignedContact${i}" name="AssignedContact">
-          </li>
-      `;
+      htmlContent += createRenderAssignedToUserTemplate(i, j, getUserInitials(uniqueUsers[i]), uniqueUsers[i]);
 
       j++;
       if (j > 15) {
@@ -338,16 +342,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const subtasksList = document.querySelector(".list-subtasks");
     subtasksList.innerHTML = "";
     subtasks.forEach((item, index) => {
-      subtasksList.innerHTML += `
-              <li class="subtask-list-item" data-index="${index}">
-                  <div class="li-text">${item}</div>
-                  <div class="subtask-edit-icon-div">
-                      <img class="edit-subtask-btn" src="./img/edit.png" alt="">
-                      <div class="subtask-divider-2"></div>
-                      <img class="delete-subtask-btn" src="./img/delete.png" alt="">
-                  </div>
-              </li>
-          `;
+      subtasksList.innerHTML += createSubtaskListItemTemplate(index, item);
     });
     editSubTask();
     deleteSubtask();
@@ -367,14 +362,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let input = item.querySelector(".edit-subtask-input");
         if (!input) {
           let liText = item.querySelector(".li-text");
-          item.innerHTML = `
-                      <input class="edit-subtask-input" type="text" value="${liText.textContent.trim()}">
-                      <div class="edit-subtask-button-div">
-                          <span class="delete-subtask-btn edit"><img src="./img/delete.png"></span>
-                          <div class="subtask-divider"></div>
-                          <span class="confirm-subtask-edit-btn"><img src="./img/check.png"></span>
-                      </div>
-                  `;
+          item.innerHTML = createListItemTextContentTemplate(liText.textContent.trim());
           item.classList.add("subtask-list-item-edit");
           deleteSubtask();
           confirmSubtaskEdit();

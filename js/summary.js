@@ -21,6 +21,15 @@ async function loadSummaryInfos() {
     sumFeedback = tasks[i].level == "Awaiting Feedback" ? sumFeedback + 1 : sumFeedback;
   }
 
+  updateSummaryInfos(sumTodo, sumDone, sumUrgent, sumTasks, sumProgress, sumFeedback);
+  greetUser();
+}
+
+/*
+** updates summary informations
+*/
+
+function updateSummaryInfos(sumTodo, sumDone, sumUrgent, sumTasks, sumProgress, sumFeedback) {
   document.getElementById("summary__todo").innerHTML = sumTodo;
   document.getElementById("summary__done").innerHTML = sumDone;
   document.getElementById("summary__urgent").innerHTML = sumUrgent;
@@ -29,7 +38,6 @@ async function loadSummaryInfos() {
   document.getElementById("summary__feedback").innerHTML = sumFeedback;
 
   document.getElementById("summary__date").innerHTML = getUpcomingDeadline();
-  greetUser();
 }
 
 /*

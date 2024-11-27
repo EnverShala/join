@@ -296,25 +296,6 @@ function getUserId(email) {
 }
 
 /*
-** template for creating contact into contact list
-*/
-
-function contactTemplate(i, j) {
-  return `<div id="user-container${i}">
-            <div id="contact-containerID" class="contact-container" onclick="loadUserInformation(${i}); hideContactsListInResponsiveMode()">
-            <div class="contact-list-ellipse">
-               <div id="userColor${i}" class="ellipse-list initialsColor${j}">${getUserInitials(users[i].name)}</div>
-            </div>
-            <div class="contact">
-                <div class="contact-list-name" id="contactName">${users[i].name}</div>
-                <div class="contact-list-email" id="contactEmail">${users[i].email}</div>
-            </div>
-            </div>
-            </div>
-            `;
-}
-
-/*
 ** renders via templates the Contacts into the contact-list incl. the sorter-div/seperator
 */
   
