@@ -7,21 +7,20 @@
     <link rel="stylesheet" href="./styles/signup.css">
 </head>
 <body>
+    <header class="top__bar">
+        <img id="site__logo" class="site__logo" src="./img/logo_desktop.svg" alt="Logo" />
+    </header>
+
     <div class="content__box">
-        <header class="top__bar">
-            <div class="logo__box">
-                <img id="site__logo" class="site__logo" src="./img/logo_desktop.svg" alt="Logo" />
-            </div>
-        </header>
-    
         <div class="registration__box">
             <div class="title__box">
                 <div class="back__button" onclick="history.back()">
                     <img src="./img/arrow-left-line.svg" alt="back"/>
                 </div>
-    
-                <h1>Sign Up</h1>
-                <img class="divider__img" src="./img/seperator.svg" alt="separator" />
+                <div class="signUpContainer">
+                    <h1>Sign Up</h1>
+                    <img class="divider__img" src="./img/seperator.svg" alt="separator" />
+                </div>
             </div>
     
             <form id="register" class="registration__form" onsubmit="registerUser(); return false;" onkeyup="toggleSignUpButton()">
@@ -88,14 +87,14 @@
                     <button type="submit" id="registerButton" class="submit__button" onclick="">Sign up</button>
                 </div>
             </form>
-        </div>
-    
-        <footer class="site__footer footer__links">
-            <a href="./privacy.html">Privacy Policy</a>
-            <a href="./legalNotice.html">Legal Notice</a>
-        </footer>
+        </div>        
     </div>
-    
+
+    <footer class="site__footer footer__links">
+        <a href="./privacy.html">Privacy Policy</a>
+        <a href="./legalNotice.html">Legal Notice</a>
+    </footer>
+
     <script src="./js/signup.js"></script>
     <script src="./js/firebase.js"></script>
 </body>
