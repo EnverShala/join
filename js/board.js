@@ -105,11 +105,60 @@ function editPopupTask() {
 
       clearPrioButtons();
       activatePrioButton(tasks[i].priority);
+
+      let subtasksList = document.getElementById("subtaskList");
+      subtasksList.innerHTML = "";
       
+      for (let j = 0; j < subtasksArray.length; j++) {        
+        subtasksList.innerHTML += createSubtaskListItemTemplate(j, subtasksArray[j]);
+      }
+
       for (let j = 0; j < subtasksArray.length; j++) {
-        let listEntry = document.createElement("li");
-        listEntry.textContent = subtasksArray[j];
-        document.getElementById("subtaskList").appendChild(listEntry);
+        document.getElementById(`deleteTask${j}`).onclick = function() {
+          subtasksArray.splice(j, 1);
+          subtasksList.innerHTML = "";        
+      
+          for (let c = 0; c < subtasksArray.length; c++) {        
+            subtasksList.innerHTML += createSubtaskListItemTemplate(c, subtasksArray[c]);
+          }
+        };
+
+        document.getElementById(`editTask${j}`).onclick = function editSubtaskFunction() {
+          
+        let listItem = document.querySelector(`ul li[data-index="${j}"]`);
+        listItem.innerHTML = `
+        <input id="editSubtaskInput${j}" class="edit-subtask-input" type="text" value="${listItem.textContent.trim()}">
+        <div class="edit-subtask-button-div">
+        <span id="deleteSubtask${j}" class="delete-subtask-btn edit"><img src="./img/delete.png"></span>
+        <div class="subtask-divider"></div>
+        <span onclick="alert('test');" id="confirmSubtaskEdit${j}" class="confirm-subtask-edit-btn edit"><img src="./img/check.png"></span>
+        </div>
+        `;
+
+        let oldSubtask = subtasksArray[j];
+ 
+        document.getElementById(`confirmSubtaskEdit${j}`).onclick = function confirmSubTaskEditFuntion() {          
+          subtasksArray[j] = document.getElementById(`editSubtaskInput${j}`).value.trim();
+          listItem.innerHTML = createSubtaskListItemTemplate2(j, subtasksArray[j]);
+          document.getElementById(`editTask${j}`).onclick = editSubtaskFunction;
+        };
+
+        document.getElementById(`deleteSubtask${j}`).onclick = function() {
+          subtasksArray[j] = oldSubtask;
+          listItem.innerHTML = createSubtaskListItemTemplate2(j, subtasksArray[j]);
+          document.getElementById(`editTask${j}`).onclick = editSubtaskFunction;
+
+          document.getElementById(`deleteTask${j}`).onclick = function() {
+            subtasksArray.splice(j, 1);
+            subtasksList.innerHTML = "";        
+        
+            for (let c = 0; c < subtasksArray.length; c++) {        
+              subtasksList.innerHTML += createSubtaskListItemTemplate(c, subtasksArray[c]);
+            }
+          };
+        };
+      }
+
       }
 
       for (let c = 0; c < users.length; c++) {
@@ -120,12 +169,10 @@ function editPopupTask() {
         }
       }
     }
-  }
-  
+  }  
   document.getElementById("popupOnTaskSelectionMainContainerID").classList.add("d-none");
   document.getElementById("editPopUpID").classList.remove("d-none");
 }
-
 
 /*
 ** activates the selected prio button

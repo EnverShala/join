@@ -88,9 +88,21 @@ function contactTemplate(i, j) {
               <li class="subtask-list-item" data-index="${index}">
                   <div class="li-text">${item}</div>
                   <div class="subtask-edit-icon-div">
-                      <img class="edit-subtask-btn" src="./img/edit.png" alt="">
+                      <img id="editTask${index}" class="edit-subtask-btn" src="./img/edit.png" alt="">
                       <div class="subtask-divider-2"></div>
-                      <img class="delete-subtask-btn" src="./img/delete.png" alt="">
+                      <img id="deleteTask${index}"class="delete-subtask-btn" src="./img/delete.png" alt="">
+                  </div>
+              </li>
+          `;
+  }
+
+  function createSubtaskListItemTemplate2(index, item) {
+    return `
+                  <div class="li-text">${item}</div>
+                  <div class="subtask-edit-icon-div">
+                      <img id="editTask${index}" class="edit-subtask-btn" src="./img/edit.png" alt="">
+                      <div class="subtask-divider-2"></div>
+                      <img id="deleteTask${index}"class="delete-subtask-btn" src="./img/delete.png" alt="">
                   </div>
               </li>
           `;
