@@ -81,6 +81,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   }
 
+  /*
+  ** function to toggle signup agreement checkbox
+  */
+
   function toggleCheckbox(checkboxId) {
     const checkbox = document.getElementById(checkboxId);
     checkbox.dataset.checked = checkbox.dataset.checked == true ? false : true;  // Umschalten des aktuellen Zustands der Checkbox
