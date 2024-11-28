@@ -55,11 +55,13 @@ function validatePassword(password) {
 function init() {
   document.getElementById("logo-container").classList.remove("start");
   document.getElementById("myBody").style.background = "white";
-  setTimeout(showLoginContainer, 2000);
+  setTimeout(showLoginContainer, 1500);
 }
 
 function showLoginContainer() {
   document.getElementById("main_wrapper").classList.remove("d-none");
+  document.getElementById("footerID").classList.remove("d-none")
+  document.getElementById("logo-container").classList.remove("d-none");
   document.getElementById("login_section").classList.remove("d-none");
   document.getElementById("logo-container").classList.remove("transition2s");
 }

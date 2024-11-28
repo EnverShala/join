@@ -7,12 +7,11 @@
     <link rel="stylesheet" href="./styles/login.css" />
   </head>
   <body id="myBody" onload="init()">
+    <div id="logo-container" class="logo-container start transition2s">
+      <img class="joinLogo" src="./img//login/join-logo2.svg" alt="Dein Logo"/>
+    </div>
     <header class="top_bar">
-      <div id="logo-container" class="logo-container start transition2s">
-        <img class="joinLogo" src="./img//login/join-logo2.svg" alt="Dein Logo"/>
-      </div>
-
-      <nav class="auth_options">
+      <nav id="authOpt" class="auth_options d-none">
         <p>Not a Join User?</p>
         <a href="signup.html">
           <div class="auth_signUp" onclick="">Sign Up</div>
@@ -65,7 +64,7 @@
     <script src="./js/login.js"></script>
     <script src="./js/firebase.js"></script>
 
-    <footer class="site_footer">
+    <footer id="footerID" class="site_footer d-none">
       <div class="legal_links">
         <a href="./privacy.html">Privacy policy</a>
         <a href="./legalNotice.html">Legal notice</a>
