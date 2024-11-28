@@ -39,15 +39,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 /*
-** show login container
-*/
-
-  function showLoginContainer() {
-    document.getElementById("main_wrapper").classList.remove("d-none");
-    document.getElementById("login_section").classList.remove("d-none");
-  }
-
-/*
 ** on keydown reaction function of password field
 */
 
@@ -56,17 +47,50 @@ document.addEventListener('DOMContentLoaded', function () {
     let pressedKey = event.key;
   
     if (inputField.length <= 1 && pressedKey == "Backspace") {
-      document.getElementById("loginButton").disabled = true;
+      document.getElementById("registerButton").disabled = true;
     } else if (pressedKey == "Enter") {
       if (inputField.length > 0) {
-        document.getElementById("loginButton").disabled = false;
+        document.getElementById("registerButton").disabled = false;
       }
     } else if (isMarkedCompletely(document.getElementById("userPassword")) && (pressedKey == "Backspace" || pressedKey == "Delete")) {
-      document.getElementById("loginButton").disabled = true;
+      document.getElementById("registerButton").disabled = true;
     } else {
       if (checkInvalidKeys(pressedKey) == false) {
-        document.getElementById("loginButton").disabled = false;
+        document.getElementById("registerButton").disabled = false;
       }
+    }
+  }
+
+  function toggleSignUpButton() {
+    document.getElementById("registerButton").disabled = document.getElementById("registerButton").disabled == true ? false : true;
+  }
+
+  function checkEmail() {
+
+  }
+
+  function clearPasswordMismatchMessage() {
+
+  }
+
+  function checkPassword() {
+
+  }
+
+  function togglePasswordIcon() {
+
+  }
+
+  function toggleCheckbox(checkboxId) {
+    const checkbox = document.getElementById(checkboxId);
+    checkbox.dataset.checked = checkbox.dataset.checked == true ? false : true;  // Umschalten des aktuellen Zustands der Checkbox
+    
+    if (checkbox.checked) {
+      checkbox.style.backgroundColor = "#2a3647";
+      checkbox.style.color = "white";
+    } else {
+      checkbox.style.backgroundColor = ""; // Setzt die Hintergrundfarbe zurück
+      checkbox.style.color = "black";
     }
   }
 
