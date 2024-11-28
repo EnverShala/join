@@ -52,6 +52,9 @@ function closePopup() {
   document.getElementById("popup").style.display = "none";
 }
 
+/**
+ * fügt einen User hinzu & schließt das Popup
+ */
 async function addUserButton() {
   await addUser();
   closePopup();

@@ -3,7 +3,7 @@
 */
 
 document.addEventListener('DOMContentLoaded', function () {
-    const signupForm = document.getElementById('signupForm');
+    const signupForm = document.getElementById('register');
     const passwordInput = document.getElementById('password');
     const confirmPasswordInput = document.getElementById('confirm-password');
 

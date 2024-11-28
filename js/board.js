@@ -8,18 +8,16 @@ function addDragAndDropEvents() {
     "#cardContainertoDo, #cardContainerinProgress, #cardContainerawaitingFeedback, #cardContainerdone"
   );
 
+  // Die ID des zu ziehenden Elements wird in den Datenübertragungsobjekt gespeichert
   draggedCards.forEach((card) => {
-    card.ondragstart = (event) => {
-      // Die ID des zu ziehenden Elements wird in den Datenübertragungsobjekt gespeichert
-      event.dataTransfer.setData("text", event.target.id);
-    };
+    card.ondragstart = (event) => { event.dataTransfer.setData("text", event.target.id); };
   });
 
+  //event.currentTarget.style.backgroundColor = "#1FD7C1";
   dropZones.forEach((zone) => {
-    zone.ondragover = (event) => {
-      event.preventDefault();
-      //event.currentTarget.style.backgroundColor = "#1FD7C1";
-      event.currentTarget.style.border = "dotted 2px grey";
+      zone.ondragover = (event) => {
+        event.preventDefault();
+        event.currentTarget.style.border = "dotted 2px grey";
     };
 
     zone.ondragleave = (event) => {
@@ -36,12 +34,7 @@ function addDragAndDropEvents() {
 
       event.currentTarget.style.border = "none";
 
-      let newLevel = event.currentTarget.id;
-
-      if (newLevel.includes("cardContainertoDo")) { newLevel = "To do"; }
-      if (newLevel.includes("cardContainerinProgress")) { newLevel = "In Progress"; }
-      if (newLevel.includes("cardContainerawaitingFeedback")) { newLevel = "Awaiting Feedback"; }
-      if (newLevel.includes("cardContainerdone")) { newLevel = "Done"; }
+      let newLevel = getNewDragAndDropContainerName(event.currentTarget.id);
 
       let taskNr = data.split("-")[1];
 
@@ -52,6 +45,17 @@ function addDragAndDropEvents() {
       checkTaskLevels();
     };
   });
+}
+
+/*
+** returns the Name of the new Drag and Drop Container when dropping
+*/
+
+function getNewDragAndDropContainerName(targetId) {
+  if (targetId.includes("cardContainertoDo")) { return "To do"; }
+  else if (targetId.includes("cardContainerinProgress")) { return "In Progress"; }
+  else if (targetId.includes("cardContainerawaitingFeedback")) { return "Awaiting Feedback"; }
+  else if (targetId.includes("cardContainerdone")) { return "Done"; }
 }
 
 /*
@@ -100,10 +104,8 @@ function editPopupTask() {
       let assignedArray = tasks[i].assigned.split(",");
 
       clearPrioButtons();
-      if (tasks[i].priority == "Urgent") { clickOnUrgent(); }
-      if (tasks[i].priority == "Medium") { clickOnMedium(); }
-      if (tasks[i].priority == "Low") { clickOnLow(); }
-
+      activatePrioButton(tasks[i].priority);
+      
       for (let j = 0; j < subtasksArray.length; j++) {
         let listEntry = document.createElement("li");
         listEntry.textContent = subtasksArray[j];
@@ -123,6 +125,21 @@ function editPopupTask() {
   document.getElementById("popupOnTaskSelectionMainContainerID").classList.add("d-none");
   document.getElementById("editPopUpID").classList.remove("d-none");
 }
+
+
+/*
+** activates the selected prio button
+*/
+
+function activatePrioButton(prioName) {
+  if (prioName == "Urgent") { clickOnUrgent(); }
+  if (prioName == "Medium") { clickOnMedium(); }
+  if (prioName == "Low") { clickOnLow(); }
+}
+
+/*
+** edits the current/opened Task
+*/
 
 async function editCurrentTask() {
   let newTitle = document.getElementById("inputEdit").value.trim();
@@ -163,7 +180,20 @@ async function editCurrentTask() {
     newAssigned = newAssigned.slice(0, -1);
   }
 
-  let newTask = {
+  let newTask = createTaskArray(newTitle, newDescription, newDate, oldCategory, newPrio, oldLevel, newSubtasks, newAssigned);
+
+  await editTask(currentId, newTask);
+  await renderTaskCards();
+
+  closeDialog();
+}
+
+/*
+** creates an array with the task informations
+*/
+
+function createTaskArray(newTitle, newDescription, newDate, oldCategory, newPrio, oldLevel, newSubtasks, newAssigned) {
+  return {
     title: newTitle,
     description: newDescription,
     date: newDate,
@@ -173,14 +203,6 @@ async function editCurrentTask() {
     subtasks: newSubtasks,
     assigned: newAssigned,
   };
-
-  //document.getElementById("popupOnTaskSelectionMainContainerID").classList.toggle("d-none");
-  //document.getElementById("editPopUpID").classList.remove("d-none");  
-
-  await editTask(currentId, newTask);
-  await renderTaskCards();
-
-  closeDialog();
 }
 
 /*
@@ -272,52 +294,6 @@ async function getUserColor(userName) {
 
 
 /*
-** task card template for render task cards function
-*/
-
-function taskCardTemplate(uniqueId, i, subTasksArray, assignedUsersHTML) {
-  return `
-                <div draggable="true" id="${uniqueId}" class="taskCard">
-                <div class="taskCardTop">
-                  <label class="categoryGreen">${tasks[i].category}</label>
-                  <div class="dropdownCard">
-                    <button onclick="toggleDropdown('dropdown-content')" class="dropdown-btn">
-                      <div class="dropdownBtnContainer">
-                        <img src="" alt="Dropdown Arrow">
-                      </div>
-                    </button>
-                    <div id="dropdown-content" class="dropdown-content">
-                      <p onclick="">In Progress</p>
-                      <p onclick="">Done</p>
-                      <p onclick="">Awaiting Feedback</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="cardBody" onclick="openDialog(); popupValueImplementFromTask(${i})">
-                  <p id="titelCardID" class="titleCard">${tasks[i].title}</p>
-                  <p id="descriptionCardID" class="descriptionCard">${tasks[i].description}</p>
-                  <div>
-                    <div class="progress">
-                      <div class="progressBarContainer">
-                        <div id="" class="progressBar" style="width: 50%;"></div>
-                      </div>
-                      <p class="amountSubtasks">${subTasksArray.length} subtask(s)</p>
-                    </div>
-                    <div class="footerCard">
-                      <div id="profileBadges${i}" class="profileBadges">
-                        ${assignedUsersHTML}
-                      </div>
-                      <div class="prioImg">
-                        <img src="./img/${tasks[i].priority.toLowerCase()}.svg" alt="">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>  
-                  `;
-}
-
-/*
 ** function returns id name of card containers from task level
 ** also if a card container gets its first card the "no task ..." gets hidden
 */
@@ -357,10 +333,7 @@ function getCardContainerId(cardContainerIdName) {
 async function renderTaskCards() {
   await loadTasks("/tasks");
 
-  document.getElementById("cardContainertoDo").innerHTML = "";
-  document.getElementById("cardContainerinProgress").innerHTML = "";
-  document.getElementById("cardContainerawaitingFeedback").innerHTML = "";
-  document.getElementById("cardContainerdone").innerHTML = "";
+  clearCardContainersInnerHtml();
 
   for (let i = 0; i < tasks.length; i++) {
     const uniqueId = `taskCard-${i}`;
@@ -395,6 +368,17 @@ async function renderTaskCards() {
 }
 
 /*
+** clears the innerHTML of all card containers
+*/
+
+function clearCardContainersInnerHtml() {
+  document.getElementById("cardContainertoDo").innerHTML = "";
+  document.getElementById("cardContainerinProgress").innerHTML = "";
+  document.getElementById("cardContainerawaitingFeedback").innerHTML = "";
+  document.getElementById("cardContainerdone").innerHTML = "";  
+}
+
+/*
 ** AddTask Pop up
 */
 
@@ -406,26 +390,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (modal && openModalButton && closeModalButton) {
     // Modal öffnen
-    openModalButton.addEventListener("click", () => {
-      modal.showModal();
-    });
+    openModalButton.addEventListener("click", () => { modal.showModal(); });
 
     alsoOpenButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        modal.showModal();
-      });
+      button.addEventListener("click", () => { modal.showModal(); });
     });
 
     // Modal schließen
-    closeModalButton.addEventListener("click", () => {
-      modal.close();
-    });
+    closeModalButton.addEventListener("click", () => { modal.close(); });
 
     // Optional: Modal schließen, wenn man außerhalb des Modals klickt
     modal.addEventListener("click", (event) => {
-      if (event.target === modal) {
-        modal.close();
-      }
+      if (event.target === modal) { modal.close(); }
     });
   } else {
     console.error("Modal, Open Button, or Close Button not found in the DOM.");
