@@ -61,6 +61,7 @@ function init() {
 function showLoginContainer() {
   document.getElementById("main_wrapper").classList.remove("d-none");
   document.getElementById("footerID").classList.remove("d-none")
+  document.getElementById("authOpt").classList.remove("d-none")
   document.getElementById("logo-container").classList.remove("d-none");
   document.getElementById("login_section").classList.remove("d-none");
   document.getElementById("logo-container").classList.remove("transition2s");
