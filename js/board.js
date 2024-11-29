@@ -134,8 +134,6 @@ function editPopupTask() {
         <span onclick="alert('test');" id="confirmSubtaskEdit${j}" class="confirm-subtask-edit-btn edit"><img src="./img/check.png"></span>
         </div>
         `;
-
-        let oldSubtask = subtasksArray[j];
  
         document.getElementById(`confirmSubtaskEdit${j}`).onclick = function confirmSubTaskEditFuntion() {          
           subtasksArray[j] = document.getElementById(`editSubtaskInput${j}`).value.trim();
@@ -144,7 +142,6 @@ function editPopupTask() {
         };
 
         document.getElementById(`deleteSubtask${j}`).onclick = function() {
-          subtasksArray[j] = oldSubtask;
           listItem.innerHTML = createSubtaskListItemTemplate2(j, subtasksArray[j]);
           document.getElementById(`editTask${j}`).onclick = editSubtaskFunction;
 
