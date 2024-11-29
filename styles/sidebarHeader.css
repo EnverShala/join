@@ -148,6 +148,7 @@ li {
 .container-nav-links {
   width: 232px;
   gap: 1rem;
+  padding-inline-start: 0;
 }
 
 .container-nav-links a:hover {
