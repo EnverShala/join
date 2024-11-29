@@ -223,28 +223,6 @@ main {
   align-items: center;
 }
 
-/*.summary__overlay__container {
-    position: absolute;
-    inset: 0 0 0 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow-y: auto;
-    opacity: 1;
-    z-index: 1;
-    background: #f6f7f8;
-    animation: fadeOut 600ms ease-in 1200ms;
-}*/
-
-/*.summary__greeting__container-mobile {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-}*/
-
 svg.circle:hover {
   fill: white;
 }
@@ -269,7 +247,6 @@ svg.circle:hover {
     opacity: 0;
   }
 }
-
 @media (max-width: 1206px) {
   .summary__greeting__container {
     display: none;
