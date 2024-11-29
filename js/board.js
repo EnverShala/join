@@ -1,3 +1,6 @@
+let subtasksArray;
+let pos;
+
 /*
 ** Funktion zum Hinzufügen der Drag-and-Drop-Events
 */
@@ -88,6 +91,79 @@ function checkTaskLevels() {
   }
 }
 
+
+/*
+** deletes the subtask and renders the subtasks again
+*/
+
+function deleteSubtask(position) {
+  subtasksArray.splice(position, 1);
+
+  renderSubtasks();
+}
+
+
+/*
+** cancels the subtask edit, and changes the subtask editing input field back to a list element
+*/
+
+
+function cancelSubtaskEdit(position) {
+  let listItem = document.querySelector(`ul li[data-index="${position}"]`);
+  listItem.innerHTML = changeSubtaskInputFieldBackToListElement(position, subtasksArray[position]);
+}
+
+
+/*
+** confirms the subtask edit, saves the new subtask into the array, and changes the subtask editing input field back to a list element
+*/
+
+
+function confirmSubtaskEdit(position) {
+  let listItem = document.querySelector(`ul li[data-index="${position}"]`);
+
+  subtasksArray[position] = document.getElementById(`editSubtaskInput${position}`).value.trim();
+  listItem.innerHTML = changeSubtaskInputFieldBackToListElement(position, subtasksArray[position]);
+}
+
+/*
+** changes the subtask from a list element into an input field for editing
+*/
+
+
+function editSubtask(position) {
+  let listItem = document.querySelector(`ul li[data-index="${position}"]`);
+  listItem.innerHTML = changeSubtaskContentToInputForEditTemplate(position, listItem.textContent.trim());
+}
+
+/*
+** renders the subtasks intro the ul list
+*/
+
+
+function renderSubtasks() {
+  let subtasksList = document.getElementById("subtaskList");
+  subtasksList.innerHTML = "";
+  
+  for (let j = 0; j < subtasksArray.length; j++) {
+    subtasksList.innerHTML += createSubtaskListItemTemplate(j, subtasksArray[j]);
+  }
+}
+
+/*
+** toggles the checkboxes of the assignedusers in the assigneduser menu
+*/
+
+function toggleAssignedUsers(assignedUsers) {
+  for (let c = 0; c < users.length; c++) {
+    for (let a = 0; a < assignedUsers.length; a++) {
+      if (users[c].name == assignedUsers[a]) {
+        toggleCheckbox(`AssignedContact${c}`);
+      }
+    }
+  }
+}
+
 /*
 ** load task information into the edit task form
 */
@@ -100,71 +176,15 @@ function editPopupTask() {
       document.getElementById("inputEdit").value = tasks[i].title;
       document.getElementById("inputDescription").value = tasks[i].description;
       document.getElementById("inputDueDate").value = tasks[i].date;
-      let subtasksArray = tasks[i].subtasks.split("|");
+      subtasksArray = tasks[i].subtasks.split("|");
       let assignedArray = tasks[i].assigned.split(",");
 
       clearPrioButtons();
       activatePrioButton(tasks[i].priority);
-
-      let subtasksList = document.getElementById("subtaskList");
-      subtasksList.innerHTML = "";
       
-      for (let j = 0; j < subtasksArray.length; j++) {        
-        subtasksList.innerHTML += createSubtaskListItemTemplate(j, subtasksArray[j]);
-      }
+      renderSubtasks();
 
-      for (let j = 0; j < subtasksArray.length; j++) {
-        document.getElementById(`deleteTask${j}`).onclick = function() {
-          subtasksArray.splice(j, 1);
-          subtasksList.innerHTML = "";        
-      
-          for (let c = 0; c < subtasksArray.length; c++) {        
-            subtasksList.innerHTML += createSubtaskListItemTemplate(c, subtasksArray[c]);
-          }
-        };
-
-        document.getElementById(`editTask${j}`).onclick = function editSubtaskFunction() {
-          
-        let listItem = document.querySelector(`ul li[data-index="${j}"]`);
-        listItem.innerHTML = `
-        <input id="editSubtaskInput${j}" class="edit-subtask-input" type="text" value="${listItem.textContent.trim()}">
-        <div class="edit-subtask-button-div">
-        <span id="deleteSubtask${j}" class="delete-subtask-btn edit"><img src="./img/delete.png"></span>
-        <div class="subtask-divider"></div>
-        <span onclick="alert('test');" id="confirmSubtaskEdit${j}" class="confirm-subtask-edit-btn edit"><img src="./img/check.png"></span>
-        </div>
-        `;
- 
-        document.getElementById(`confirmSubtaskEdit${j}`).onclick = function confirmSubTaskEditFuntion() {          
-          subtasksArray[j] = document.getElementById(`editSubtaskInput${j}`).value.trim();
-          listItem.innerHTML = createSubtaskListItemTemplate2(j, subtasksArray[j]);
-          document.getElementById(`editTask${j}`).onclick = editSubtaskFunction;
-        };
-
-        document.getElementById(`deleteSubtask${j}`).onclick = function() {
-          listItem.innerHTML = createSubtaskListItemTemplate2(j, subtasksArray[j]);
-          document.getElementById(`editTask${j}`).onclick = editSubtaskFunction;
-
-          document.getElementById(`deleteTask${j}`).onclick = function() {
-            subtasksArray.splice(j, 1);
-            subtasksList.innerHTML = "";        
-        
-            for (let c = 0; c < subtasksArray.length; c++) {        
-              subtasksList.innerHTML += createSubtaskListItemTemplate(c, subtasksArray[c]);
-            }
-          };
-        };
-      }
-
-      }
-
-      for (let c = 0; c < users.length; c++) {
-        for (let a = 0; a < assignedArray.length; a++) {
-          if (users[c].name == assignedArray[a]) {
-            toggleCheckbox(`AssignedContact${c}`);
-          }
-        }
-      }
+      toggleAssignedUsers(assignedArray);
     }
   }  
   document.getElementById("popupOnTaskSelectionMainContainerID").classList.add("d-none");
@@ -182,6 +202,55 @@ function activatePrioButton(prioName) {
 }
 
 /*
+** returns the current task nr through comparing all tasks with the current task ID
+*/
+
+
+function getTaskNrFromCurrentId() {
+  for (let i = 0; i < tasks.length; i++) {
+    if (tasks[i].id == currentId) {
+      return i;
+    }
+  }
+}
+
+/*
+** gets/reads the subtasks from the UL list (to save them into the task then)
+*/
+
+function getSubtaskItems() {
+  let subtaskItems = document.getElementById("subtaskList").getElementsByTagName("li");
+  let newSubtasks = "";
+
+  if (subtaskItems.length > 0) {
+    for (j = 0; j < subtaskItems.length; j++) {
+      newSubtasks += subtaskItems[j].innerText + "|";
+    }
+  }
+
+  newSubtasks = newSubtasks.slice(0, -1);
+
+  return newSubtasks;
+}
+
+function getAssignedUsers() {
+  let newAssigned = "";
+
+  if (users.length > 0) {
+    for (let i = 0; i < users.length; i++) {
+      let checkbox = document.getElementById(`AssignedContact${i}`);
+
+      if(checkbox.checked == true) {
+        newAssigned += users[i].name + ",";
+      }
+    }
+    newAssigned = newAssigned.slice(0, -1);
+  }
+
+  return newAssigned;
+}
+
+/*
 ** edits the current/opened Task
 */
 
@@ -194,35 +263,14 @@ async function editCurrentTask() {
   let newSubtasks = "";
   let currentTask = -1;
 
-  for (let i = 0; i < tasks.length; i++) {
-    if (tasks[i].id == currentId) {
-      currentTask = i;
-    }
-  }
+  currentTask = getTaskNrFromCurrentId();
 
   let oldLevel = tasks[currentTask].level;
   let oldCategory = tasks[currentTask].category;
 
-  let subtaskItems = document.getElementById("subtaskList").getElementsByTagName("li");
+  newSubtasks = getSubtaskItems();
 
-  if (subtaskItems.length > 0) {
-    for (j = 0; j < subtaskItems.length; j++) {
-      newSubtasks += subtaskItems[j].innerText + "|";
-    }
-  }
-
-  newSubtasks = newSubtasks.slice(0, -1);
-
-  if (users.length > 0) {
-    for (let i = 0; i < users.length; i++) {
-      let checkbox = document.getElementById(`AssignedContact${i}`);
-
-      if (checkbox.checked == true) {
-        newAssigned += users[i].name + ",";
-      }
-    }
-    newAssigned = newAssigned.slice(0, -1);
-  }
+  newAssigned = getAssignedUsers();
 
   let newTask = createTaskArray(newTitle, newDescription, newDate, oldCategory, newPrio, oldLevel, newSubtasks, newAssigned);
 
@@ -294,8 +342,7 @@ async function popupValueImplementFromTask(taskNr) {
 
   while (assignedUsers.length > 0) {
     contactEllipse += `
-    <div class="badgeImg initialsColor${await getUserColor(assignedUsers[0])}">${getUserInitials(assignedUsers[0])}</div>
-    `;
+    <div class="badgeImg initialsColor${await getUserColor(assignedUsers[0])}">${getUserInitials(assignedUsers[0])}</div>`;
     assignedUsers.splice(0, 1);
   }
 
@@ -310,9 +357,7 @@ async function popupValueImplementFromTask(taskNr) {
   currentId = tasks[taskNr].id;
 
   for (let j = 0; j < assignedNames.length; j++) {
-    valueFromName.innerHTML += `
-             <div>${assignedNames[j]}</div>
-             `;
+    valueFromName.innerHTML += `<div>${assignedNames[j]}</div>`;
   }
 }
 
@@ -391,16 +436,12 @@ async function renderTaskCards() {
     let taskUsers = assignedUsers.length;
 
     while (assignedUsers.length > 0) {
-      assignedUsersHTML += `
-      <div class="badgeImg initialsColor${await getUserColor(assignedUsers[0])}">${getUserInitials(assignedUsers[0])}</div>
-      `;
+      assignedUsersHTML += `<div class="badgeImg initialsColor${await getUserColor(assignedUsers[0])}">${getUserInitials(assignedUsers[0])}</div>`;
       assignedUsers.splice(0, 1);
       counter++;
 
       if(counter == 4 && taskUsers > 4) {
-        assignedUsersHTML += `
-        <div class="badgeImg initialsColor0">+${taskUsers - counter}</div>
-        `;
+        assignedUsersHTML += `<div class="badgeImg initialsColor0">+${taskUsers - counter}</div>`;
         break;
       }
     }
