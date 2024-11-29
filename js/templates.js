@@ -104,7 +104,6 @@ function contactTemplate(i, j) {
                       <div class="subtask-divider-2"></div>
                       <img id="deleteTask${index}"class="delete-subtask-btn" src="./img/delete.png" alt="">
                   </div>
-              </li>
           `;
   }
 
