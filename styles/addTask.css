@@ -50,7 +50,6 @@ h1 {
   gap: 10px;
 }
 
-
 .show {
   display: block;
 }
@@ -86,7 +85,7 @@ h1 {
 .col-right {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 30px;
   width: min(440px, 100%);
 }
 
@@ -109,7 +108,18 @@ h1 {
   font-family: inherit;
   font-size: 20px;
   cursor: auto;
-  width: min(440px, 100%);
+  width: 440px;
+}
+
+.inputDescription {
+  border-radius: 10px;
+  padding: 12px 21px;
+  border: 1px solid #dfdede;
+  font-family: inherit;
+  font-size: 20px;
+  cursor: auto;
+  width: 440px;
+  height: 120px;
 }
 
 .input::-webkit-inner-spin-button,
@@ -215,7 +225,7 @@ h1 {
 .selected-contacts {
   display: flex;
   z-index: 1;
-  padding: 0.5em;  
+  padding: 0.5em;
 }
 
 .circle {
@@ -260,58 +270,58 @@ h1 {
 }
 /*Begin Subtask*/
 .input-container-subtask {
-    position: relative;
-    width: 100%;
-    display: flex;
-    align-items: center;
-  }
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
 
 .input.subtask {
   width: min(440px, 100%);
   padding-right: 60px; /* Platz für die Buttons rechts im Input-Feld */
   box-sizing: border-box;
 }
-  
+
 .btn-subtask {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    align-items: center;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
 }
 
 .btn-subtask.add {
-    display: flex;
+  display: flex;
 }
-  
+
 .check-cancel {
-    display: none;
-    gap: 10px; /* Abstand zwischen X- und ✓-Symbol */
+  display: none;
+  gap: 10px; /* Abstand zwischen X- und ✓-Symbol */
 }
 .check-cancel img {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .divider-subtask {
-    width: 1px;
-    height: 20px;
-    background-color: #ccc;
-    margin: 0 5px;
+  width: 1px;
+  height: 20px;
+  background-color: #ccc;
+  margin: 0 5px;
 }
 
 .container-subtasks-display ul {
-    list-style-type: none;
-    padding: 0;
-    margin-top: 20px;
+  list-style-type: none;
+  padding: 0;
+  margin-top: 20px;
 }
 
 .subtask-list-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 0;
-    border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
 }
 
 .subtask-edit-icon-div {
@@ -320,30 +330,30 @@ h1 {
 }
 
 .subtask-list-item:hover .subtask-edit-icon-div {
-    display: flex;
+  display: flex;
 }
 
 .subtask-edit-icon-div img {
-    cursor: pointer;
-    margin-left: 10px;
+  cursor: pointer;
+  margin-left: 10px;
 }
 
 .edit-subtask-input {
-    flex-grow: 1;
-    padding: 8px;
-    font-size: 16px;
+  flex-grow: 1;
+  padding: 8px;
+  font-size: 16px;
 }
 
 .edit-subtask-button-div {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .subtask-divider {
-    width: 1px;
-    height: 20px;
-    background-color: #ccc;
-    margin: 0 5px;
+  width: 1px;
+  height: 20px;
+  background-color: #ccc;
+  margin: 0 5px;
 }
 /*End Subtask*/
 
@@ -486,9 +496,60 @@ label {
   z-index: 99;
 }
 
+.warning-landscape {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 24px;
+  z-index: 1000;
+  text-align: center;
+  padding: 20px;
+}
+
+.field-requiredMessage.category-required {
+  margin-top: 8px;
+}
+
+.gap {
+  gap: 24px;
+}
+
+.margin {
+  margin-top: 16px;
+}
+
+.placeholder {
+  color: #a9a9a9;
+}
+
+.scroll-disabled {
+  overflow-y: hidden;
+}
+
+.checked {
+  background-color: #2a3647;
+  color: #ffffff;
+}
+
+.show-menu {
+  display: block;
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+}
+
+.dropdown-container .list-items.category {
+  height: auto;
+}
 
 @media screen and (max-width: 1369px) {
-  .due-date{
+  .due-date {
     margin-top: 2em;
   }
 
@@ -544,20 +605,20 @@ label {
     gap: 16px;
   }
 
-  .btn-subtask{
+  .btn-subtask {
     position: unset;
     margin-left: -35px;
     transform: unset;
-    
   }
 }
-
-@media screen and (max-width: 1024px) {
+@media (max-width: 1025px) { 
   .taskContainer {
-    margin-left: 0;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
   }
 }
-
 @media (max-width: 576px) {
   .container-form {
     margin-top: 48px;
@@ -598,7 +659,6 @@ label {
     margin: 0 32px 128px 32px;
   }
 }
-
 @media (max-width: 427px) {
   .buttons-prio {
     flex-direction: column;
@@ -608,61 +668,7 @@ label {
     font-size: 16px;
   }
 
-  .actions-form{
+  .actions-form {
     flex-direction: column;
   }
 }
-
-
-.warning-landscape {
-  display: none;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
-  font-size: 24px;
-  z-index: 1000;
-  text-align: center;
-  padding: 20px;
-}
-
-.field-requiredMessage.category-required {
-  margin-top: 8px;
-}
-
-.gap {
-  gap: 24px;
-}
-
-.margin {
-  margin-top: 16px;
-}
-
-.placeholder {
-  color: #a9a9a9;
-}
-
-.scroll-disabled {
-  overflow-y: hidden;
-}
-
-.checked {
-  background-color: #2a3647;
-  color: #ffffff;
-}
-
-.show-menu {
-  display: block;
-  border-bottom: none;
-  border-radius: 10px 10px 0 0;
-}
-
-.dropdown-container .list-items.category {
-  height: auto;
-}
-
