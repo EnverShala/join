@@ -399,7 +399,7 @@
         <div class="editPopupSubtasksMainContainer">
           <p class="editPopupSubtasksTxt">Subtask</p>
           <div class="input-container-subtask">
-            <input class="input subtask" type="text" placeholder="Add new subtask" />
+            <input id="addNewSubtaskInput" class="input subtask" type="text" placeholder="Add new subtask" />
             <div class="btn-subtask add">
               <img src="./img/add.png" alt="Add" />
             </div>
@@ -408,7 +408,7 @@
                 <img src="./img/close.png" alt="Cancel" />
               </div>
               <div class="divider-subtask"></div>
-              <div class="check-subtask">
+              <div id="addNewSubtaskDiv" onclick="addNewSubtask()" class="check-subtask">
                 <img src="./img/check.png" alt="Check" />
               </div>
               </div>

@@ -92,6 +92,17 @@ function checkTaskLevels() {
 }
 
 
+function addNewSubtask() {
+  let newSubtask = document.getElementById("addNewSubtaskInput").value.trim();
+
+  if(newSubtask != "") {
+    subtasksArray.push(newSubtask);
+    renderSubtasks();
+    document.getElementById("addNewSubtaskInput").value = "";
+  }
+}
+
+
 /*
 ** deletes the subtask and renders the subtasks again
 */
@@ -170,6 +181,10 @@ function toggleAssignedUsers(assignedUsers) {
 
 function editPopupTask() {
   clearForm();
+  document.getElementById("addNewSubtaskDiv").removeEventListener("click", addEventListener);
+  
+  const subtaskItems = document.querySelectorAll('.subtask-list-item');
+  subtaskItems.forEach(item => { item.addEventListener('click', handleItemClick); });
   
   for (let i = 0; i < tasks.length; i++) {
     if (tasks[i].id == currentId) {
