@@ -580,7 +580,10 @@ label {
   }
 }
 @media (max-width: 576px) {
-  input,
+  .addTaskLeft,
+  .inputGroup,
+  .input,
+  .inputDescription,
   .select,
   .bottom-form,
   .header,
@@ -607,15 +610,25 @@ label {
   }
 }
 @media (max-width: 380px) {
-  input,
+  .addTaskLeft,
+  .inputGroup,
+  .input,
+  .inputDescription,
   .select,
   .bottom-form,
   .header,
+  .buttons-prio,
   form {
-    width: 315px !important;
+    width: 310px !important;
   }
   a ,.nav-links {
     height: 60px;
     width: 60px !important;
+  }
+  .btn-prio {
+    width: 90px;
+  }
+  .actions-form {
+    margin-left: 16px;
   }
 }

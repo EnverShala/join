@@ -160,21 +160,19 @@
     
       <section class="boardSection">
         <div class="boardHeader">
-          <div class="headerContent">
-                <div class="headerTitle">
-                  <h1>Board</h1>
-                </div>
-                <div class="inputTaskBtn">
-                    <div class="searchContainer">
-                      <input id="searchBar" onkeyup="searchTasks()" class="searchBar" type="search" placeholder="Find Task">
-                      <div class="seperator"></div>
-                      <button class="searchIcon">
-                      <img src="img/board/plus button.png" alt="">
-                      </button>
-                    </div>
-                    <button id="openModal" class="addBtn"><span class="addBtnText">Add task </span><span>+</span></button>
-                </div>
+          <div class="headerTitle">
+            <h1>Board</h1>
+          </div>
+          <div class="inputTaskBtn">
+            <div class="searchContainer">
+              <input id="searchBar" onkeyup="searchTasks()" class="searchBar" type="search" placeholder="Find Task">
+              <div class="seperator"></div>
+              <button class="searchIcon">
+                <img src="img/board/plus button.png" alt="">
+              </button>
             </div>
+            <button id="openModal" class="addBtn"><span class="addBtnText">Add task </span><span>+</span></button>
+          </div>
         </div>
 
         <div class="statuses">
@@ -338,7 +336,7 @@
 
         <div class="editPrio">
           <label id="inputPrio"></label>
-          <div class="buttons-prio">
+          <div class="buttonsPrioOnEditPopUp">
             <button onclick="clickOnUrgent()" type="button" id="urgent" class="btn-prio btn-prio:hover">
               Urgent<img id="urgentID" src="./img/urgent.svg" class="">
                     <img id="urgent-whiteID" class="d-none" src="./img/urgent-white.svg">
@@ -361,7 +359,7 @@
         <div class="editPopupAssignedToMainContainer">
           <p class="editAssignedToTxt">Assigned to</p>
           <div class="editDropdown">
-            <div id="contacts-list" class="select assigned-to" onclick="toggleDropdown()">
+            <div id="contacts-list" class="selectOnEditPopUp assigned-to" onclick="toggleDropdown()">
               <input class="select-input placeholder" type="text" placeholder="Select contacts to assign" readonly/>
               <span class="down-arrow">
                 <img src="img/arrow_drop_downaa.svg" alt="">
@@ -380,7 +378,7 @@
         <div class="editPopupSubtasksMainContainer">
           <p class="editPopupSubtasksTxt">Subtask</p>
           <div class="input-container-subtask">
-            <input id="addNewSubtaskInput" class="input subtask" type="text" placeholder="Add new subtask" />
+            <input id="addNewSubtaskInput" class="inputOnEditPopup subtask" type="text" placeholder="Add new subtask" />
             <div class="btn-subtask add">
               <img src="./img/add.png" alt="Add" />
             </div>
@@ -448,7 +446,7 @@
                   >Assigned to<span class="required">*</span></label
                 >
                 <div class="dropdown">
-                  <div id="contacts-list" class="select assigned-to" onclick="toggleDropdown()">
+                  <div id="contacts-list" class="selectOnEditPopUp assigned-to" onclick="toggleDropdown()">
                     <input
                       class="select-input placeholder"
                       type="text"
