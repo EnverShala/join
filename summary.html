@@ -148,80 +148,61 @@
             </div>
 
             <div class="summary__tiles__container">
-                <div class="summary__tiles">
                     <!-- two tiles  -->
-                    <div class="summary__first__section">
-                        <a href="./board.html">
-                            <div class="summary__two_tiles">
-                                <img class="summary__icons onloadImg" src="./img/editSummary.svg" alt="edit">
-                                <img class="summary__icons hoverImg" src="./img/editSummaryHover.svg" alt="edit">
+                <div class="summary__first__section">
+                    <a href="./board.html" class="firstSectionContainer">
+                        <img class="summary__icons onloadImg" src="./img/editSummary.svg" alt="edit">
+                        <img class="summary__icons hoverImg" src="./img/editSummaryHover.svg" alt="edit">
+                        <div class="summary__tiles__text">
+                             <div id="summary__todo" class="summary__tiles__number"></div>
+                             <div class="summary__text__top-and-bottom">To-do</div>
+                        </div>
+                    </a>
 
-                                <div class="summary__tiles__text">
-                                    <div id="summary__todo" class="summary__tiles__number"></div>
-                                    <div class="summary__text__top-and-bottom">To-do</div>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="./board.html">
-                            <div class="summary__two_tiles">
-                                <img class="summary__icons onloadImg" src="./img/checkSummary.svg" alt="check">
-                                <img class="summary__icons hoverImg" src="./img/checkSummaryHover.svg" alt="check">
-                                <div class="summary__tiles__text">
-                                    <div id="summary__done" class="summary__tiles__number"></div>
-                                    <div class="summary__text__top-and-bottom">Done</div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                    <a href="./board.html" class="firstSectionContainer">
+                        <img class="summary__icons onloadImg" src="./img/checkSummary.svg" alt="check">
+                        <img class="summary__icons hoverImg" src="./img/checkSummaryHover.svg" alt="check">
+                        <div class="summary__tiles__text">
+                            <div id="summary__done" class="summary__tiles__number"></div>
+                            <div class="summary__text__top-and-bottom">Done</div>
+                        </div>                        
+                    </a>
+                </div>
 
                     <!-- one tile/s  -->
-                    <div>
-                        <a href="./board.html">
-                            <div class="summary__second__section">
-                                <div class="second__section__first__tile">
-                                    <div>
-                                        <img class="summary__icons" src="./img/urgentSummary.svg" alt="urgent">
-                                    </div>
-                                    <div class="summary__tiles__text">
-                                        <div id="summary__urgent" class="summary__tiles__number"></div>
-                                        <div class="summary__text__middle">Urgent</div>
-                                    </div>
-                                </div>
-
-                                <img class="summary__tiles__seperator">
-
-                                <div>
-                                    <div id="summary__date" class="summary__deadline__date"></div>
-                                    <div class="summary__deadline__text">Upcoming deadline</div>
-                                </div>
+                <div class="summary__second__section">
+                    <a href="./board.html" class="secondSectionContainer">
+                        <div class="second__section__first__tile">
+                            <img class="summary__icons" src="./img/urgentSummary.svg" alt="urgent">
+                            <div class="summary__tiles__text">
+                                <div id="summary__urgent" class="summary__tiles__number"></div>
+                                <div class="summary__text__middle">Urgent</div>
                             </div>
-                        </a>
-                    </div>
+                        </div>
+                        <img class="summary__tiles__seperator">
+                        <div>
+                            <div id="summary__date" class="summary__deadline__date"></div>
+                            <div class="summary__deadline__text">Upcoming deadline</div>
+                        </div>
+                    </a>
+                </div>
 
                     <!-- 3 tiles  -->
-                    <div class="summary__third__section">
-                        <a href="./board.html">
-                            <div class="summary__third__section-tiles">
-                                <div id="summary__tasks" class="summary__tiles__number"></div>
-                                <div class="summary__text__top-and-bottom">Tasks in<br>Board</div>
-                            </div>
+                <div class="summary__third__section">
+                        <a href="./board.html" class="thirdSectionContainer">
+                             <div id="summary__tasks" class="summary__tiles__number"></div>
+                             <div class="summary__text__top-and-bottom">Tasks in<br>Board</div>
                         </a>
 
-                        <a href="./board.html">
-                            <div class="summary__third__section-tiles">
-                                <div id="summary__progress" class="summary__tiles__number"></div>
-                                <div class="summary__text__top-and-bottom">Tasks in<br>Progress</div>
-                            </div>
+                        <a href="./board.html" class="thirdSectionContainer">
+                            <div id="summary__progress" class="summary__tiles__number"></div>
+                            <div class="summary__text__top-and-bottom">Tasks in<br>Progress</div>
                         </a>
 
-                        <a href="./board.html">
-                            <div class="summary__third__section-tiles">
-                                <div id="summary__feedback" class="summary__tiles__number"></div>
-                                <div class="summary__text__top-and-bottom summary__text__top-and-bottom-text_align">Awaiting<br>Feedback</div>
-                            </div>
+                        <a href="./board.html" class="thirdSectionContainer">
+                            <div id="summary__feedback" class="summary__tiles__number"></div>
+                            <div class="summary__text__top-and-bottom summary__text__top-and-bottom-text_align">Awaiting<br>Feedback</div>
                         </a>
-                    </div>
                 </div>
             </div>
         </div>
