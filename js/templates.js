@@ -117,7 +117,7 @@ function changeSubtaskInputFieldBackToListElement(index, item) {
 
 function changeSubtaskContentToInputForEditTemplate(position, actualContent) {
   return `
-    <input id="editSubtaskInput${position}" class="edit-subtask-input" type="text" value="${actualContent}">
+    <input id="editSubtaskInput${position}" class="edit-subtask-input" type="text" value="${actualContent}" onkeydown = "subtaskOnKeyDown(${position})">
     <div class="edit-subtask-button-div">
     <span onclick="cancelSubtaskEdit(${position})" id="cancelSubtaskEdit${position}" class="delete-subtask-btn edit"><img src="./img/delete.png"></span>
     <div class="subtask-divider"></div>

@@ -91,6 +91,9 @@ function checkTaskLevels() {
   }
 }
 
+/*
+** adds a new subtask (and renders the subtasks then)
+*/
 
 function addNewSubtask() {
   let newSubtask = document.getElementById("addNewSubtaskInput").value.trim();
@@ -145,12 +148,13 @@ function confirmSubtaskEdit(position) {
 function editSubtask(position) {
   let listItem = document.querySelector(`ul li[data-index="${position}"]`);
   listItem.innerHTML = changeSubtaskContentToInputForEditTemplate(position, listItem.textContent.trim());
+
+  document.getElementById("addNewSubtaskInput").onkeydown = subtaskOnKeyDown(position);
 }
 
 /*
 ** renders the subtasks intro the ul list
 */
-
 
 function renderSubtasks() {
   let subtasksList = document.getElementById("subtaskList");
@@ -176,15 +180,25 @@ function toggleAssignedUsers(assignedUsers) {
 }
 
 /*
+** function for onkeydown (using enter to confirm or escape to clear) on subtask editing on edit task page:
+*/
+
+function subtaskOnKeyDown(position) {
+  if(position != -1) {
+    if(event.key == "Escape") { cancelSubtaskEdit(position); }
+    if(event.key == "Enter") { confirmSubtaskEdit(position); }
+  } else {
+    if(event.key == "Escape") { document.getElementById("addNewSubtaskInput").value = ""; } // clear the add Subtask Input Field
+    if(event.key == "Enter") { addNewSubtask(); }
+  }
+}
+
+/*
 ** load task information into the edit task form
 */
 
 function editPopupTask() {
   clearForm();
-  document.getElementById("addNewSubtaskDiv").removeEventListener("click", addEventListener);
-  
-  const subtaskItems = document.querySelectorAll('.subtask-list-item');
-  subtaskItems.forEach(item => { item.addEventListener('click', handleItemClick); });
   
   for (let i = 0; i < tasks.length; i++) {
     if (tasks[i].id == currentId) {
@@ -247,6 +261,10 @@ function getSubtaskItems() {
 
   return newSubtasks;
 }
+
+/*
+** returns the assigned Users (as a String)
+*/
 
 function getAssignedUsers() {
   let newAssigned = "";
