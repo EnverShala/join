@@ -68,19 +68,33 @@ document.addEventListener('DOMContentLoaded', function () {
   function checkEmail() {
     let email = document.getElementById("userEmail").value;
 
-    if(email.includes("@") && email.includes(".") && email.length > 8) {
-      console.log("passt");
+    if(email.includes("@") &&
+       email.includes(".") &&
+       email.length > 8 &&
+       (email[email.length - 3] == "." || email[email.length - 4] == ".")) {
+      console.log("passt"); // tauschen gegen message/string
     } else {
-      console.log("keine gültige email addresse");
+      console.log("keine gültige email addresse"); // tauschen gegen message/string
     }
   }
 
   function clearPasswordMismatchMessage() {
-
+    if(checkPassword() == true)  {
+      // "passwort zu kurz" anzeige entfernen
+      if(document.getElementById("userPassword").value == document.getElementById("confirmPassword").value) {
+        console.log("passwörter stimmen überein");
+      } else {
+        console.log("passwörter stimmen nicht überein.");
+      }
+    } else {
+      // anzeigen, dass passwort zu kurz ist
+    }
   }
 
   function checkPassword() {
+    let password = document.getElementById("userPassword").value.trim();
 
+    return password.length >= 6;
   }
 
   function togglePasswordIcon() {

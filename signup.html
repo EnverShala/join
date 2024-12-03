@@ -42,9 +42,7 @@
                         placeholder="Password"
                         autocomplete="current-password"
                         required
-                        onkeyup="togglePasswordIcon('userPassword')"
-                        oninput="checkPassword()"
-                        onkeypress="clearPasswordMismatchMessage()" 
+                        onkeyup="togglePasswordIcon('userPassword'); clearPasswordMismatchMessage(); checkPassword()"
                         onkeydown="onPasswordKeyDown()"/>
                     <img id="password__toggle" class="password__icon pointer--disabled" src="./img/lock.svg" alt="lock" onclick="togglePasswordVisibility('userPassword')" />
                 </div>
@@ -57,8 +55,7 @@
                         placeholder="Confirm Password"
                         autocomplete="off"
                         required
-                        onkeyup="togglePasswordIcon('confirmPassword')"
-                        onkeypress="clearPasswordMismatchMessage()" 
+                        onkeyup="togglePasswordIcon('confirmPassword'); clearPasswordMismatchMessage()"
                         />
                     <img
                         id="confirmPassword__toggle"
