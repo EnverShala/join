@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        // signUpUser();
+        signUpUser();
 
         // If validation passes, you can proceed with the sign-up logic
         // Example: sending data to the server (e.g., via fetch API)

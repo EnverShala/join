@@ -145,7 +145,7 @@ async function signUpUser(data = {}) {
   }
 
   if (stopSignUp == false) {
-    await fetch(FIREBASE_URL + "/login" + ".json", {
+    await fetch(FIREBASE_URL + "/accounts" + ".json", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -161,7 +161,7 @@ async function signUpUser(data = {}) {
 
 async function loadAccounts() {
   accounts = [];
-  let userResponse = await fetch(FIREBASE_URL + "/login" + ".json");
+  let userResponse = await fetch(FIREBASE_URL + "/accounts" + ".json");
   let responseToJson = await userResponse.json();
 
   if (responseToJson) {
