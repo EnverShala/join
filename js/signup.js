@@ -19,6 +19,11 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
+        if (checkEmail == false) {
+          alert("Invalid Email");
+          return;
+        }
+
         if (password !== confirmPassword) {
             alert('Passwords do not match.');
             return;
@@ -28,6 +33,8 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('You must accept the Privacy Policy to sign up.');
             return;
         }
+
+        // signUpUser();
 
         // If validation passes, you can proceed with the sign-up logic
         // Example: sending data to the server (e.g., via fetch API)
@@ -73,8 +80,10 @@ document.addEventListener('DOMContentLoaded', function () {
        email.length > 8 &&
        (email[email.length - 3] == "." || email[email.length - 4] == ".")) {
       console.log("passt"); // tauschen gegen message/string
+      return true;
     } else {
       console.log("keine gültige email addresse"); // tauschen gegen message/string
+      return false;
     }
   }
 
