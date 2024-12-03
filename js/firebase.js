@@ -133,7 +133,18 @@ async function loginUser() {
  ** sign up user (also check if user/email already exists)
  */
 
-async function signUpUser(data = {}) {
+async function signUpUser() {
+  console.log("TEST");
+  data = { fullName: document.getElementById("fullName").value,
+           email: document.getElementById("userEmail").value,
+           password: document.getElementById("userPassword").value,
+  };
+
+  if(!data) {
+    alert("NO DATA");
+    return;
+  }
+
   let stopSignUp = false;
   await loadAccounts();
 
