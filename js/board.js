@@ -148,8 +148,6 @@ function confirmSubtaskEdit(position) {
 function editSubtask(position) {
   let listItem = document.querySelector(`ul li[data-index="${position}"]`);
   listItem.innerHTML = changeSubtaskContentToInputForEditTemplate(position, listItem.textContent.trim());
-
-  document.getElementById("addNewSubtaskInput").onkeydown = subtaskOnKeyDown(position);
 }
 
 /*
