@@ -66,7 +66,13 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function checkEmail() {
+    let email = document.getElementById("userEmail").value;
 
+    if(email.includes("@") && email.includes(".") && email.length > 8) {
+      console.log("passt");
+    } else {
+      console.log("keine gültige email addresse");
+    }
   }
 
   function clearPasswordMismatchMessage() {
