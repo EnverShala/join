@@ -9,10 +9,12 @@
 </head>
 <body>
     <!-- Header und Sidebar-->
-    <header class="desktop-header">
+    <header class="desktop-header" style="padding-left: 100px;">
         <h1>Kanban Project Management Tool</h1>
         <div class="header-icons">
-            <img src="img/contacts/help.png" alt="icon help" width="32px" height="32px">
+            <a href="./help.html">
+                <img src="img/contacts/help.png" alt="icon help" width="32px" height="32px"><img>
+            </a>
             <button class="profile-icon openModalHeader">
                 <div id="header-profile-icon" class="profile-name guest-font-size">G</div>
             </button>
@@ -34,40 +36,6 @@
             </a>
         </div>
     </dialog>
-
-    <aside class="sidebar desktop-sidebar">
-        <div class="logo-sidebar">
-            <a href="summary.html"><img class="logo-join-white" src="img/contacts/logo_join_white.png" alt="logo"></a>
-        </div>
-        <nav class="menu-sidebar">
-            <ul class="container-nav-links">
-                <div class="nav-links">
-                    <img class="nav-icons" src="img/contacts/summary_icon.svg" alt="icon summary">
-                    <li><a href="summary.html">Summary</a></li>
-                </div>
-                <div class="nav-links">
-                    <img class="nav-icons" src="img/contacts/addTask_icon.svg" alt="icon add task">
-                    <li><a href="task.html">Add Task</a></li>
-                </div>
-                <div class="nav-links">
-                    <img class="nav-icons" src="img/contacts/board_icon.svg" alt="icon board">
-                    <li><a href="board.html">Board</a></li>
-                </div>
-                <div class="nav-links">
-                    <img class="nav-icons" src="img/contacts/contacts_icon.svg" alt="contacts">
-                    <li><a href="contacts.html">Contacts</a></li>
-                </div>
-            </ul>
-        </nav>
-        <nav>
-            <ul>
-                <div class="nav-links-footer">
-                    <li><a href="privacy.html">Privacy Policy</a></li>
-                    <li><a href="legalNotice.html">Legal notice</a></li>
-                </div>
-            </ul>
-        </nav>
-    </aside>
 
      <!--Mobile Header-->
      <header class="mobile-header">
@@ -125,18 +93,11 @@
 
   <!-- End of Header und Sidebar-->
 
-    <!-- Back arrow button-->
-    <div onclick="history.back()" class="back-arrow">
-        <img src="./img/back-arrow.svg" alt="left arrow">
-    </div>
+    <div class="textContentHelp">
+        <div onclick="history.back()" class="back-arrow">
+            <img src="./img/back-arrow.svg" alt="left arrow">
+        </div>
 
-    <!-- Back arrow button-->
-    <div onclick="history.back()" class="back-arrow">
-        <img src="./img/back-arrow.svg" alt="left arrow">
-    </div>
-
-
-    <div class="text-content">
         <h1>Help</h1>
         <p>Welcome to the help page for Join, your guide to using our kanban project management tool. Here, we'll provide an overview of what 
         Join is, how it can benefit you, and how to use it.</p>

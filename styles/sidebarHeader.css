@@ -5,8 +5,6 @@ body {
   overflow-x: hidden;
 }
 
-/*End Basic settings*/
-
 /*Header & Sidebar settings*/
 .desktop-header h1 {
   font-size: 20px;
@@ -29,6 +27,7 @@ header {
   align-items: center;
   gap: 20px;
   padding-right: 50px;
+  cursor: pointer;
 }
 
 .profile-icon {
@@ -56,6 +55,13 @@ header {
   border-radius: 559px;
   color: rgba(41, 171, 226, 1);
   font-weight: 700;
+}
+
+.sub-menu-bg {
+  border-width: unset;
+  border-style: unset;
+  margin: 0;
+  padding: 0;
 }
 
 .sub-menu {
@@ -181,7 +187,7 @@ ul {
 
 a {
   text-decoration: none;
-  color: #A8A8A8;
+  color: #a8a8a8;
 }
 
 .content-contacts {
@@ -198,21 +204,32 @@ a {
 }
 
 /*Legal, Privacy und Help Seite*/
-.text-content {
+.textContentPrivacy,
+.textContentLegalNotice,
+.textContentHelp {
   display: flex;
   flex-direction: column;
-  margin-bottom: 100px;
-  padding: 4em 6em 0em 6em;
+  justify-content: center;
+  text-wrap: wrap;
+  margin: 50px 50px 100px 100px;
   flex: 1;
-  gap: 1em;
 }
 
-.text-content h1 {
+.textContentPrivacy h1 {
   font-size: 3rem;
   margin-bottom: 32px;
 }
 
-.text-content a {
+.textContentLegalNotice h1 {
+  font-size: 3rem;
+  margin-bottom: 32px;
+}
+
+.textContentPrivacy a {
+  color: #29abe2;
+}
+
+.textContentLegalNotice a {
   color: #29abe2;
 }
 
@@ -282,5 +299,38 @@ a {
     border-radius: 10px;
     cursor: pointer;
     height: 96px;
+  }
+}
+@media (max-width: 700px) {
+  .textContentPrivacy,
+  .textContentHelp {
+    margin: 30px 50px 200px 30px;
+  }
+}
+@media (max-width: 570px) {
+  .textContentPrivacy h1 {
+    font-size: 32px;
+  }
+  .textContentPrivacy p,
+  .textContentLegalNotice p {
+    font-size: 16px;
+  }
+  .textContentLegalNotice {
+    margin: 30px 50px 200px 30px;
+  }
+}
+@media (max-width: 400px) {
+  .textContentPrivacy h1 {
+    font-size: 24px;
+  }
+  .textContentPrivacy h2 {
+    font-size: 18px;
+  }
+  .textContentPrivacy p {
+    font-size: 14px;
+  }
+  .a,
+  .nav-links {
+    width: 70px !important;
   }
 }
