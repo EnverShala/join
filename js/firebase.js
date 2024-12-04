@@ -186,9 +186,11 @@ async function registerUser() {
   let signUpPassword = document.getElementById("userPassword").value.trim();
   let signUpPassword2 = document.getElementById("confirmPassword").value.trim();
 
+  let agreementCheckbox = document.getElementById("agreeCheckbox").checked;
+
   let loginData = { name: signUpName, email: signUpEmail, password: signUpPassword };
 
-  if(signUpPassword == signUpPassword2) {
+  if(signUpPassword == signUpPassword2 && agreementCheckbox == true && signUpPassword.length >= 6) {
     await signUpUser(loginData);
     window.location.href = "login.html";
   } else {
