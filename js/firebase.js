@@ -6,16 +6,16 @@ let login = [];
 let currentUser = -1;
 let currentId = -1;
 
- /*
+/*
  ** routes user to login html (or to summary if user already logged in)
  */
 
 function indexHtmlInit() {
   // Hier noch eine if Abfrage einbauen: wenn User bereits eingeloggt ist, verlinke direkt zu summary.html, ansonsten zu login.html
-  window.location.href = "login.html"
+  window.location.href = "login.html";
 }
 
- /*
+/*
  ** load users from firebase
  */
 
@@ -39,7 +39,7 @@ async function loadUsers(path = "/users") {
   }
 }
 
- /*
+/*
  ** load tasks from firebase
  */
 
@@ -65,7 +65,7 @@ async function loadTasks(path = "/tasks") {
   }
 }
 
- /*
+/*
  ** save task function
  */
 
@@ -79,7 +79,7 @@ async function saveTasks(path = "", data = {}) {
   });
 }
 
- /*
+/*
  ** edit task function
  */
 
@@ -93,7 +93,7 @@ async function editTask(id, data = {}) {
   });
 }
 
- /*
+/*
  ** delete task function
  */
 
@@ -108,39 +108,77 @@ async function deleteTask(id) {
   window.location.href = "board.html";
 }
 
- /*
+/*
+ ** remembers user account
+ */
+
+function rememberUserAccount(accountEmail) {
+  let rememberedUsers = localStorage.getItem("remember");
+
+  if (rememberedUsers) {
+    if (!rememberedUsers.includes(accountEmail)) {
+      let accountAsText = rememberedUsers + JSON.stringify(accountEmail);
+      localStorage.setItem("remember", accountAsText);
+    }
+  } else {
+    let accountAsText = JSON.stringify(accountEmail);
+    localStorage.setItem("remember", accountAsText);
+  }
+}
+
+/*
+ ** load Password from remembered Users and checks the rememberme checkbox
+ */
+
+async function loginOnInput() {
+  await loadAccounts();
+
+  let rememberedAccounts = localStorage.getItem("remember");
+  let email = document.getElementById("userEmail").value.trim();
+
+  if(rememberedAccounts.includes(email)) {
+    for (let i = 0; i < accounts.length; i++) {
+      if (accounts[i].email == email) {
+        document.getElementById("userPassword").value = accounts[i].password;
+        document.getElementById("rememberMeButton").checked = true;
+      }
+    }
+  }
+}
+
+/*
  ** logs user in (via email address)
  */
 
 function logInUserAccount(accountEmail) {
   let accountAsText = JSON.stringify(accountEmail);
-  
+
   localStorage.setItem("loggedInAccount", accountAsText);
 }
 
- /*
+/*
  ** logs out actual user
  */
 
-function logOutUserAccount() {  
+function logOutUserAccount() {
   localStorage.setItem("loggedInAccount", "");
 }
 
- /*
+/*
  ** returns email address of logged in user or empty string if nobody is logged in
  */
 
 function getLoggedInUser() {
   let loggedInUserAsText = localStorage.getItem("loggedInAccount");
 
-  if(loggedInUserAsText) {
-      return JSON.parse(loggedInUserAsText);
+  if (loggedInUserAsText) {
+    return JSON.parse(loggedInUserAsText);
   }
 
   return "";
 }
 
- /*
+/*
  ** login user (check password also)
  */
 
@@ -150,19 +188,22 @@ async function loginUser() {
 
   await loadAccounts();
 
-  for(let i = 0; i < accounts.length; i++) {
-    if(accounts[i].email == userEmail) {
-      if(accounts[i].password == userPassword) {
+  for (let i = 0; i < accounts.length; i++) {
+    if (accounts[i].email == userEmail) {
+      if (accounts[i].password == userPassword) {
+        if (document.getElementById("rememberMeButton").checked) {
+          rememberUserAccount(userEmail);
+        }
         logInUserAccount(userEmail);
         alert("LOGIN ERFOLGREICH");
         window.location.href = "board.html";
-        break;        
+        break;
       }
     }
   }
 }
 
- /*
+/*
  ** sign up user (also check if user/email already exists)
  */
 
@@ -188,7 +229,7 @@ async function signUpUser(data = {}) {
   }
 }
 
- /*
+/*
  ** load accounts from firebase
  */
 
@@ -201,7 +242,7 @@ async function loadAccounts() {
     Object.keys(responseToJson).forEach((key) => {
       accounts.push({
         id: key,
-        name : responseToJson[key]["name"],
+        name: responseToJson[key]["name"],
         email: responseToJson[key]["email"],
         password: responseToJson[key]["password"],
       });
@@ -209,7 +250,7 @@ async function loadAccounts() {
   }
 }
 
- /*
+/*
  ** register user function (also check if passwords are both same while creating)
  */
 
@@ -223,11 +264,13 @@ async function registerUser() {
 
   let loginData = { name: signUpName, email: signUpEmail, password: signUpPassword };
 
-  if(signUpPassword == signUpPassword2 &&
+  if (
+    signUpPassword == signUpPassword2 &&
     agreementCheckbox == true &&
     signUpPassword.length >= 6 &&
     checkEmail(signUpEmail) == true &&
-    signUpName != "") {
+    signUpName != ""
+  ) {
     await signUpUser(loginData);
     window.location.href = "login.html";
   } else {
@@ -235,7 +278,7 @@ async function registerUser() {
   }
 }
 
- /*
+/*
  ** add user function & save on firebase & load users new into array (sorted)
  */
 
@@ -251,7 +294,7 @@ async function addUser() {
   await renderContacts();
 }
 
- /*
+/*
  ** save data into firebase
  */
 
@@ -265,11 +308,10 @@ async function postData(path = "", data = {}) {
   });
 }
 
-
 /*
-** id = path in firebase. delete user function. also checks if user is integrated into tasks, which has to be removed before deleting
-** save in firebase, load users new (sorted)
-*/
+ ** id = path in firebase. delete user function. also checks if user is integrated into tasks, which has to be removed before deleting
+ ** save in firebase, load users new (sorted)
+ */
 
 async function deleteUser(id) {
   await loadTasks("/tasks");
@@ -296,7 +338,7 @@ async function deleteUser(id) {
   }
 }
 
- /*
+/*
  ** edit user function, save in firebase and load users new into array (sorted)
  */
 
@@ -318,7 +360,7 @@ async function editUser(id, data = {}) {
   closePopup();
 }
 
- /*
+/*
  ** get user id, compare users via mail, because there might be 2 persons with the same name
  */
 
@@ -335,9 +377,9 @@ function getUserId(email) {
 }
 
 /*
-** renders via templates the Contacts into the contact-list incl. the sorter-div/seperator
-*/
-  
+ ** renders via templates the Contacts into the contact-list incl. the sorter-div/seperator
+ */
+
 async function renderContacts() {
   let html = "";
   let firstLetter = "0";
@@ -371,7 +413,10 @@ async function renderContacts() {
  * gets first Letter from first Name and first Letter from last Name
  */
 function getUserInitials(username) {
-  let result = username.trim().split(" ").map((wort) => wort[0].toUpperCase());
+  let result = username
+    .trim()
+    .split(" ")
+    .map((wort) => wort[0].toUpperCase());
 
   if (username.split(" ").length > 1) {
     result = result[0] + result[result.length - 1];
@@ -381,7 +426,7 @@ function getUserInitials(username) {
   return result;
 }
 
- /*
+/*
  ** load user information into user container
  */
 
@@ -405,7 +450,7 @@ async function loadUserInformation(id) {
   currentUser = id;
 }
 
- /*
+/*
  ** hide contacts list in responsive mode
  */
 
@@ -418,7 +463,7 @@ function hideContactsListInResponsiveMode() {
   }
 }
 
- /*
+/*
  ** show contacts in detail in responsive mode
  */
 
@@ -427,7 +472,7 @@ function showContactsInDetailInResponsiveMode() {
   document.getElementById("display-contactID").style.display = "flex";
 }
 
- /*
+/*
  ** show contact list back again in responsive mode
  */
 
@@ -441,7 +486,7 @@ function showContactListAgainInResponsiveMode() {
   }
 }
 
- /*
+/*
  ** change background on selected user
  */
 
@@ -449,7 +494,7 @@ function changeBgOnSelectedUser(id) {
   document.getElementById("contact-containerID").classList.add("selected-user-color");
 }
 
- /*
+/*
  ** initialize contacts
  */
 
@@ -458,7 +503,7 @@ async function initContacts() {
   loadUserInformation(-1);
 }
 
- /*
+/*
  ** highlight user
  */
 
