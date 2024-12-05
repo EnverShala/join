@@ -367,6 +367,7 @@ function loadPopupValueData(taskNr, contactEllipse) {
 */
 
 async function popupValueImplementFromTask(taskNr) {
+  subtasksArray = tasks[taskNr].subtasks.split("|");
   let contactEllipse = "";
   
   let assignedUsers = tasks[taskNr].assigned.split(",");
@@ -389,6 +390,13 @@ async function popupValueImplementFromTask(taskNr) {
 
   for (let j = 0; j < assignedNames.length; j++) {
     valueFromName.innerHTML += `<div>${assignedNames[j]}</div>`;
+  }
+
+  let subtasksList = document.getElementById("showSubtasksContainer");
+  subtasksList.innerHTML = "";
+  
+  for (let j = 0; j < subtasksArray.length; j++) {
+    subtasksList.innerHTML += `<p class="subtasksP">${subtasksArray[j]}<p>`;
   }
 }
 
