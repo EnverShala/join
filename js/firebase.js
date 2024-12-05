@@ -109,11 +109,43 @@ async function deleteTask(id) {
 }
 
  /*
+ ** logs user in (via email address)
+ */
+
+function logInUserAccount(accountEmail) {
+  let accountAsText = JSON.stringify(accountEmail);
+  
+  localStorage.setItem("loggedInAccount", accountAsText);
+}
+
+ /*
+ ** logs out actual user
+ */
+
+function logOutUserAccount() {  
+  localStorage.setItem("loggedInAccount", "");
+}
+
+ /*
+ ** returns email address of logged in user or empty string if nobody is logged in
+ */
+
+function getLoggedInUser() {
+  let loggedInUserAsText = localStorage.getItem("loggedInAccount");
+
+  if(loggedInUserAsText) {
+      return JSON.parse(loggedInUserAsText);
+  }
+
+  return "";
+}
+
+ /*
  ** login user (check password also)
  */
 
 async function loginUser() {
-  let userEmail = document.getElementById("userEmail").value;
+  let userEmail = document.getElementById("userEmail").value.trim();
   let userPassword = document.getElementById("userPassword").value;
 
   await loadAccounts();
@@ -121,6 +153,7 @@ async function loginUser() {
   for(let i = 0; i < accounts.length; i++) {
     if(accounts[i].email == userEmail) {
       if(accounts[i].password == userPassword) {
+        logInUserAccount(userEmail);
         alert("LOGIN ERFOLGREICH");
         window.location.href = "board.html";
         break;        
