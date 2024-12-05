@@ -1099,6 +1099,9 @@ h2 {
     left: -440px;
     width: 500px;
   }
+  .deleteAndEditMainContainer {
+    margin-top: 64px;
+  }
 }
 @media (max-width: 595px) {
   .popupOnTaskSelectionMainContainer,
