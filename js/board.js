@@ -367,6 +367,8 @@ function loadPopupValueData(taskNr, contactEllipse) {
 */
 
 async function popupValueImplementFromTask(taskNr) {
+  await loadTasks();
+
   subtasksArray = tasks[taskNr].subtasks.split("|");
   let contactEllipse = "";
   

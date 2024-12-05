@@ -315,27 +315,28 @@ async function postData(path = "", data = {}) {
 
 async function deleteUser(id) {
   await loadTasks("/tasks");
-  let stopDelete = false;
 
   for (let i = 0; i < users.length; i++) {
     if (users[i].id == id) {
       for (let j = 0; j < tasks.length; j++) {
         if (tasks[j].assigned.includes(users[i].name)) {
-          alert("Bitte entferne den User aus allen Tasks vor dem Löschen.");
-          stopDelete = true;
-          break;
+          tasks[j].assigned = tasks[j].assigned.replace(users[i].name, "");
+          tasks[j].assigned = tasks[j].assigned.replace(",,", ",");
+          if(tasks[j].assigned[tasks[j].assigned.length - 1] == ",") { 
+            tasks[j].assigned = tasks[j].assigned.slice(0, -1);
+          }
+          await editTask(tasks[j].id, tasks[j]);
         }
       }
     }
   }
 
-  if (stopDelete == false) {
-    await fetch(FIREBASE_URL + `/users/${id}` + ".json", {
-      method: "DELETE",
-    });
-    await renderContacts();
-    loadUserInformation(-1);
-  }
+  await fetch(FIREBASE_URL + `/users/${id}` + ".json", {
+    method: "DELETE",
+  });  
+
+  await renderContacts();
+  loadUserInformation(-1);
 }
 
 /*
