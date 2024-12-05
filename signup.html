@@ -25,19 +25,20 @@
             </div>
     
             <div id="register" class="registration__form">
-                <div class="input__box input__box--spaced">
-                    <input id="fullName" type="text" placeholder="Name" autocomplete="name" required />
+                <div class="input__box input__box--spaced" style="cursor: auto;">
+                    <input id="fullName" type="text" placeholder="Name" autocomplete="name" style="cursor: auto;" required />
                     <img class="input__icon" src="./img/person.svg" alt="person" />
                 </div>
     
-                <div class="input__box input__box--spaced">
-                    <input id="userEmail" type="email" placeholder="Email" autocomplete="email" required oninput="checkEmail()" />
+                <div class="input__box input__box--spaced" style="cursor: auto;">
+                    <input id="userEmail" type="email" placeholder="Email" autocomplete="email" style="cursor: auto;" required oninput="checkEmail()" />
                     <img class="input__icon" src="./img/mail.svg" alt="mail" />
                 </div>
     
                 <!-- Password -->
-                <div class="input__box input__box--spaced">
+                <div class="input__box input__box--spaced" style="cursor: auto;">
                     <input
+                        style="cursor: auto;"
                         id="userPassword"
                         type="password"
                         placeholder="Password"
@@ -49,8 +50,9 @@
                 </div>
     
                 <!-- Confirm Password -->
-                <div id="confirmPasswordBox" class="input__box">
+                <div id="confirmPasswordBox" class="input__box" style="cursor: auto;">
                     <input
+                        style="cursor: auto;"
                         id="confirmPassword"
                         type="password"
                         placeholder="Confirm Password"
