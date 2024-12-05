@@ -190,7 +190,11 @@ async function registerUser() {
 
   let loginData = { name: signUpName, email: signUpEmail, password: signUpPassword };
 
-  if(signUpPassword == signUpPassword2 && agreementCheckbox == true && signUpPassword.length >= 6) {
+  if(signUpPassword == signUpPassword2 &&
+    agreementCheckbox == true &&
+    signUpPassword.length >= 6 &&
+    checkEmail(signUpEmail) == true &&
+    signUpName != "") {
     await signUpUser(loginData);
     window.location.href = "login.html";
   } else {

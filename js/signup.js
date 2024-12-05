@@ -31,7 +31,8 @@
     if(email.includes("@") &&
        email.includes(".") &&
        email.length > 8 &&
-       (email[email.length - 3] == "." || email[email.length - 4] == ".")) {
+       (email[email.length - 3] == "." || email[email.length - 4] == ".") &&
+       (email[email.length - 4] != "@" && email[email.length - 5] != "@")) {
       console.log("passt"); // tauschen gegen message/string
       return true;
     } else {
