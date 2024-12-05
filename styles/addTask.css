@@ -608,6 +608,10 @@ label {
   .btn-text {
     font-size: 16px;
   }
+  .circle {
+    width: 32px;
+    height: 32px;
+  }
 }
 @media (max-width: 380px) {
   .addTaskLeft,
@@ -630,5 +634,9 @@ label {
   }
   .actions-form {
     margin-left: 16px;
+  }
+  .circle {
+    width: 40px;
+    height: 30px;
   }
 }
