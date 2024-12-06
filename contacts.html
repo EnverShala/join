@@ -12,7 +12,7 @@
     <script src="./js/sidebarHeader.js"></script>
   </head>
 
-  <body onload="initContacts()">
+  <body onload="initContacts(); loadAccountInitials()">
     <!-- Header and Sidebar-->
     <header class="desktop-header">
       <h1>Kanban Project Management Tool</h1>
@@ -37,7 +37,7 @@
               <div>Privacy Policy</div>
           </a>
           <a> 
-            <div onclick="logOutUserAccount(); location.href='./login.html'">Log Out</div>
+            <div class="help-link" onclick="logOutUserAccount(); location.href='./login.html'">Log Out</div>
         </a>
       </div>
   </dialog>
@@ -104,7 +104,7 @@
      <header class="mobile-header">
       <a href="summary.html"><img class="logo-join-mobile" src="img/contacts/logo_blue_mobile.png" alt="logo"></a>
       <button class="profile-icon openModalHeader">
-          <div id="header-profile-icon" class="profile-name guest-font-size">G</div>
+          <div id="header-profile-icon" class="profile-name guest-font-size"></div>
       </button>
   </header>
   <dialog id="sub-menu-modal-mobile" class="sub-menu-bg">
@@ -119,7 +119,7 @@
               <div>Privacy Policy</div>
           </a>
           <a href="./login.html"> 
-              <div>Log Out</div>
+            <div class="help-link" onclick="logOutUserAccount(); location.href='./login.html'">Log Out</div>
           </a>
       </div>
   </dialog>

@@ -89,6 +89,8 @@ function greetUser() {
   const hour = now.getHours();
   let greeting;
 
+  let userName = localStorage.getItem("username");
+
   if (hour < 12) {
       greeting = "Good Morning,";
   } else if (hour < 18) {
@@ -98,5 +100,9 @@ function greetUser() {
   }
 
   document.getElementById("greeting__text").innerText = greeting;
+
+  if(userName) {
+    document.getElementById("user__name").innerHTML = userName == "" ? "Guest" : userName;
+  }
 }
 

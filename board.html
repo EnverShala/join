@@ -16,7 +16,7 @@
     
 
 </head>
-<body onload="renderTaskCards(); renderAssignedTo();">
+<body onload="renderTaskCards(); renderAssignedTo(); loadAccountInitials()">
     <!-- Header and Sidebar-->
     <header class="desktop-header">
       <h1>Kanban Project Management Tool</h1>
@@ -25,7 +25,7 @@
             <img src="img/contacts/help.png" alt="icon help" width="32px" height="32px"><img>
         </a>
         <button class="profile-icon openModalHeader">
-            <div id="header-profile-icon" class="profile-name guest-font-size">G</div>
+            <div id="header-profile-icon" class="profile-name guest-font-size"></div>
         </button>
     </div>
   </header>
@@ -41,7 +41,7 @@
               <div>Privacy Policy</div>
           </a>
           <a href="./login.html"> 
-              <div>Log Out</div>
+            <div class="help-link" onclick="logOutUserAccount(); location.href='./login.html'">Log Out</div>
           </a>
       </div>
   </dialog>
@@ -123,7 +123,7 @@
                 <div>Privacy Policy</div>
             </a>
             <a> 
-              <div onclick="logOutUserAccount(); location.href='./login.html'">Log Out</div>
+              <div class="help-link" onclick="logOutUserAccount(); location.href='./login.html'">Log Out</div>
           </a>
         </div>
     </dialog>

@@ -11,6 +11,10 @@ body {
   font-weight: 400;
 }
 
+.help-link {
+  cursor: pointer;
+}
+
 header {
   display: flex;
   justify-content: space-between;
@@ -44,6 +48,7 @@ header {
 
 .guest-font-size {
   font-size: 28px;
+  cursor: pointer;
 }
 
 .profile-name {

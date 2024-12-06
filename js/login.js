@@ -59,6 +59,14 @@ function init() {
 }
 
 function showLoginContainer() {
+  let loggedInAccount = localStorage.getItem("loggedInAccount");
+  if(loggedInAccount) {
+    if(loggedInAccount != "") {
+      location.href = "./summary.html";
+      return;
+    }
+  }
+
   document.getElementById("main_wrapper").classList.remove("d-none");
   document.getElementById("footerID").classList.remove("d-none")
   document.getElementById("authOpt").classList.remove("d-none")

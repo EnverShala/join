@@ -141,6 +141,7 @@ async function loginOnInput() {
       if (accounts[i].email == email) {
         document.getElementById("userPassword").value = accounts[i].password;
         document.getElementById("rememberMeButton").checked = true;
+        document.getElementById("loginButton").disabled = false;
       }
     }
   }
@@ -153,6 +154,12 @@ async function loginOnInput() {
 function logInUserAccount(accountEmail) {
   let accountAsText = JSON.stringify(accountEmail);
 
+  for(let i = 0; i < accounts.length; i++) {
+    if(accounts[i].email == accountEmail) {
+      localStorage.setItem("username", accounts[i].name);
+    }
+  }
+
   localStorage.setItem("loggedInAccount", accountAsText);
 }
 
@@ -162,6 +169,7 @@ function logInUserAccount(accountEmail) {
 
 function logOutUserAccount() {
   localStorage.setItem("loggedInAccount", "");
+  localStorage.setItem("username", "");
 }
 
 /*
@@ -248,6 +256,12 @@ async function loadAccounts() {
       });
     });
   }
+}
+
+function loadAccountInitials() {
+  let accountName = localStorage.getItem("username");
+  accountName = accountName == "" ? "Guest" : accountName;
+  document.getElementById("header-profile-icon").innerHTML = getUserInitials(accountName);
 }
 
 /*
