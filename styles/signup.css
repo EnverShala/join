@@ -228,6 +228,12 @@ a {
   display: none;
 }
 
+.requiredMessage {
+  color: red;
+  font-size: 0.9em;
+  display: none;
+}
+
 @media (max-width: 1000px) {
   .site__logo {
     height: 60px;
