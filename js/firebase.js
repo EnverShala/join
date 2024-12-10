@@ -269,6 +269,15 @@ function loadAccountInitials() {
  */
 
 async function registerUser() {
+  let name = document.getElementById("fullName").value.trim();
+  let email = document.getElementById("userEmail").value.trim();
+  let password = document.getElementById("userPassword").value;
+
+  let loginData = {
+    name: name,
+    email: email,
+    password: password,
+  };
 
   if(checkSignUpConditions()) {
     await signUpUser(loginData);

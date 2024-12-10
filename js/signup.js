@@ -40,18 +40,26 @@
     return false;
   }
 
-  function checkSignUpConditions() {
-    let name = checkName();
-    let email = checkEmail();
-    let password = checkPassword();
-    let confirmation = clearPasswordMismatchMessage();
-    let agreeCheckbox = checkPrivacyPolicy();
+  function checkSignUpButton() {
+    let registerButton = document.getElementById("registerButton");
 
-    if(name && email && password && confirmation && agreeCheckbox) {
+    if(checkSignUpConditions()) {
+      registerButton.className = "submit__button";
+      registerButton.onclick = registerUser;
       return true;
     } else {
+      registerButton.className = "submit__button__disabled";
+      registerButton.onclick = "";
       return false;
     }
+  }
+
+  function checkSignUpConditions() {
+    if(checkName() && checkEmail() && checkPassword() && clearPasswordMismatchMessage() && checkPrivacyPolicy()) {
+      return true;
+    }
+
+    return false;
   }
 
   function checkEmail() {
