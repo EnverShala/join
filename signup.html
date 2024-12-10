@@ -44,7 +44,7 @@
                 <!-- Password -->
                 <div id="passwordBox" class="input__box input__box--spaced margin-bottom24px" style="cursor: auto;">
                     <input style="cursor: auto;" id="userPassword" type="password" placeholder="Password" autocomplete="current-password" oninput="checkPassword(); checkSignUpButton()">
-                    <img id="password__toggle" class="password__icon pointer--disabled" src="./img/lock.svg" alt="lock" onclick="togglePasswordVisibility('userPassword')" />
+                    <img id="password__toggle" class="password__icon cursor-pointer" src="./img/lock.svg" alt="lock" onclick="togglePasswordIcon('password__toggle','userPassword')" />
                 </div>
                 <div id="requiredPassword" class="requiredMessage d-none">
                     Please enter a password with at least 6 characters!
@@ -53,7 +53,7 @@
                 <!-- Confirm Password -->
                 <div id="confirmPasswordBox" class="input__box  margin-bottom24px" style="cursor: auto;">
                     <input style="cursor: auto;" id="confirmPassword" type="password" placeholder="Confirm Password" autocomplete="off" oninput="clearPasswordMismatchMessage(); checkSignUpButton()">
-                    <img id="confirmPassword__toggle" class="password__icon pointer--disabled" src="./img/lock.svg" alt="lock" onclick="togglePasswordVisibility('confirmPassword')" />
+                    <img id="confirmPassword__toggle" class="password__icon cursor-pointer" src="./img/lock.svg" alt="lock" onclick="togglePasswordIcon('confirmPassword__toggle','confirmPassword')" />
                 </div>
                 <div id="requiredConfirmation" class="requiredMessage d-none">
                     The entered passwords don't match!

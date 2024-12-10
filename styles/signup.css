@@ -114,8 +114,8 @@ a {
   cursor: pointer;
 }
 
-.input__box--spaced {
-  /*margin-bottom: 24px;*/
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .input__box input {

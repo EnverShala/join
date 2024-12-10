@@ -258,6 +258,10 @@ async function loadAccounts() {
   }
 }
 
+/*
+ ** loads the accounts username initials into the header profile icon
+ */
+
 function loadAccountInitials() {
   let accountName = localStorage.getItem("username");
   accountName = accountName == "" ? "Guest" : accountName;

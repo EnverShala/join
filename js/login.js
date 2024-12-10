@@ -1,62 +1,17 @@
-// scripts.js
+ /*
+  ** function to initialize login site: logo animation, then show logo container function
+  */
 
-/**
- * Funktion, die beim Laden des Logos eine Animation ausführt.
- */
-document.addEventListener("DOMContentLoaded", function () {
-  const logo = document.getElementById("logo");
-  //logo.style.transition = "transform 1s, opacity 1s";
-  //logo.style.transform = "translateY(0)";
-  //logo.style.opacity = "1";
-});
-
-/**
- * Funktion für den Demo-Login.
- * Diese Funktion setzt vordefinierte Demo-Anmeldeinformationen und leitet den Benutzer weiter zum Dashboard.
- */
-function demoLogin() {
-  const emailInput = document.getElementById("email");
-  const passwordInput = document.getElementById("password");
-
-  // Setzt Demo-Anmeldeinformationen
-  emailInput.value = "demo@example.com";
-  passwordInput.value = "demopassword";
-
-  // Weiterleitung zur Dashboard-Seite
-  window.location.href = "summary.html";
-}
-
-/**
- * Funktion zur Validierung der E-Mail-Adresse.
- * @param {string} email - Die zu validierende E-Mail-Adresse.
- * @returns {boolean} - True, wenn die E-Mail-Adresse gültig ist, andernfalls false.
- */
-function validateEmail(email) {
-  const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-  return re.test(String(email).toLowerCase());
-}
-
-/**
- * Funktion zur Validierung des Passworts.
- * @param {string} password - Das zu validierende Passwort.
- * @returns {boolean} - True, wenn das Passwort gültig ist, andernfalls false.
- */
-function validatePassword(password) {
-  // Beispielhafte Passwortvalidierung: mindestens 8 Zeichen
-  return password.length >= 8;
-}
-
-// Event-Listener für das Absenden des Formulars
-//document.querySelector("form").addEventListener("submit", handleSubmit);
-
-// Event-Listener für den Demo-Login
-//document.querySelector(".demo-login button").addEventListener("click", demoLogin);
 
 function init() {
   document.getElementById("logo-container").classList.remove("start");
   document.getElementById("myBody").style.background = "white";
   setTimeout(showLoginContainer, 1500);
 }
+
+ /*
+  ** shows the login container if no account is logged in, else direct to summary
+  */
 
 function showLoginContainer() {
   let loggedInAccount = localStorage.getItem("loggedInAccount");
@@ -74,6 +29,10 @@ function showLoginContainer() {
   document.getElementById("login_section").classList.remove("d-none");
   document.getElementById("logo-container").classList.remove("transition2s");
 }
+
+ /*
+  ** function to check how to act on pressed key for the password input field
+  */
 
 function onPasswordKeyDown() {
   let inputField = document.getElementById("userPassword").value;

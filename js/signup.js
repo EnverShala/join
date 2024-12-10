@@ -21,9 +21,17 @@
     }
   }
 
+ /*
+ ** toggles the signup button disability
+ */
+
   function toggleSignUpButton() {
     document.getElementById("registerButton").disabled = document.getElementById("registerButton").disabled == true ? false : true;
   }
+
+ /*
+ ** checks if the privacy policy checkbox is checked, if not, the font color will turn red
+ */
 
   function checkPrivacyPolicy() {
     let agreeCheckbox = document.getElementById("agreeCheckbox").checked;
@@ -40,6 +48,10 @@
     return false;
   }
 
+ /*
+ ** checks signup conditions, if true, signup button will be manually enabled, else manually disabled
+ */
+
   function checkSignUpButton() {
     let registerButton = document.getElementById("registerButton");
 
@@ -54,6 +66,10 @@
     }
   }
 
+ /*
+ ** checks the signup conditions (correct name, email, password, password confirmation, privacy policy checkbox/agreement)
+ */
+
   function checkSignUpConditions() {
     if(checkName() && checkEmail() && checkPassword() && clearPasswordMismatchMessage() && checkPrivacyPolicy()) {
       return true;
@@ -61,6 +77,10 @@
 
     return false;
   }
+
+ /*
+ ** checks if the email is a valid email address
+ */
 
   function checkEmail() {
     let email = document.getElementById("userEmail").value.trim();
@@ -77,13 +97,16 @@
     } else if(email == "") {
       messageContainer.classList.add("d-none");
       document.getElementById("emailBox").classList.add("margin-bottom24px");
-    }
-    else {
+    } else {
       messageContainer.classList.remove("d-none");
       document.getElementById("emailBox").classList.remove("margin-bottom24px");
     }
     return false;
   }
+
+ /*
+ ** checks if the 2 entered passwords match
+ */
 
   function clearPasswordMismatchMessage() {
     let messageContainer = document.getElementById("requiredConfirmation");
@@ -98,6 +121,10 @@
     }
     return false;
   }
+
+ /*
+ ** checks if the password is longer than 6 characters & also updates password confirmation message/check
+ */
 
   function checkPassword() {
     let messageContainer = document.getElementById("requiredPassword");
@@ -122,6 +149,10 @@
     return false;
   }
 
+ /*
+ ** checks whether the name consists of at least 5 characters and 2 words
+ */
+
   function checkName() {
     let messageContainer = document.getElementById("requiredName");
 
@@ -143,8 +174,21 @@
     return false;
   }
 
-  function togglePasswordIcon() {
+   /*
+  ** function to toggle the password icon and also the password inputfield type (text or password)
+  */
 
+  function togglePasswordIcon(iconId, passwordInputfieldId) {
+    let icon = document.getElementById(iconId);
+    inputField = document.getElementById(passwordInputfieldId);
+
+    if(icon.src.includes("unlock")) {
+      inputField.type = "password";
+      icon.src = "./img/lock.svg";
+    } else {
+      inputField.type = "text";
+      icon.src = "./img/unlock.svg";
+    }
   }
 
   /*
