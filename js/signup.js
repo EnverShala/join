@@ -55,7 +55,7 @@
   }
 
   function checkEmail() {
-    let email = document.getElementById("userEmail").value;
+    let email = document.getElementById("userEmail").value.trim();
     let messageContainer = document.getElementById("requiredEmail");
 
     if(email.includes("@") &&
@@ -64,9 +64,15 @@
        (email[email.length - 3] == "." || email[email.length - 4] == ".") &&
        (email[email.length - 4] != "@" && email[email.length - 5] != "@")) {
       messageContainer.classList.add("d-none");
+      document.getElementById("emailBox").classList.add("margin-bottom24px");
       return true;
-    } else {
+    } else if(email == "") {
+      messageContainer.classList.add("d-none");
+      document.getElementById("emailBox").classList.add("margin-bottom24px");
+    }
+    else {
       messageContainer.classList.remove("d-none");
+      document.getElementById("emailBox").classList.remove("margin-bottom24px");
     }
     return false;
   }
@@ -76,9 +82,11 @@
 
     if(document.getElementById("userPassword").value.trim() == document.getElementById("confirmPassword").value.trim()) {
       messageContainer.classList.add("d-none");
+      document.getElementById("confirmPasswordBox").classList.add("margin-bottom24px");
       return true;
     } else {
       messageContainer.classList.remove("d-none");
+      document.getElementById("confirmPasswordBox").classList.remove("margin-bottom24px");
     }
     return false;
   }
@@ -86,12 +94,18 @@
   function checkPassword() {
     let messageContainer = document.getElementById("requiredPassword");
 
-    let password = document.getElementById("userPassword").value.trim();
+    let password = document.getElementById("userPassword").value;
 
     if(password.length >= 6) {
       messageContainer.classList.add("d-none");
+      document.getElementById("passwordBox").classList.add("margin-bottom24px");
       return true;
-    } else {
+    } else if(password == "") {
+      messageContainer.classList.add("d-none");
+      document.getElementById("passwordBox").classList.add("margin-bottom24px");
+    }
+    else {
+      document.getElementById("passwordBox").classList.remove("margin-bottom24px");
       messageContainer.classList.remove("d-none");
     }
 
@@ -107,9 +121,15 @@
 
     if(name.length >= 5 && name.split(" ").length > 1) {
       messageContainer.classList.add("d-none");
+      document.getElementById("nameBox").classList.add("margin-bottom24px");
       return true;
-    } else {
+    } else if(name == "") {
+      messageContainer.classList.add("d-none");
+      document.getElementById("nameBox").classList.add("margin-bottom24px");
+    }
+     else {
       messageContainer.classList.remove("d-none");
+      document.getElementById("nameBox").classList.remove("margin-bottom24px");
     }
 
     return false;
