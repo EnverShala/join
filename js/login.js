@@ -136,10 +136,10 @@ function checkInvalidKeys(key) {
     case "Pause":
     case "ScrollLock":
       return true;
-      break;
+    break;
     default:
       return false;
-      break;
+    break;
   }
 }
 
@@ -155,16 +155,6 @@ function isMarkedCompletely(inputField) {
 ** routes guest to summary page
 */
 
-document.getElementById('guestButton').addEventListener('click', function(event) {
-  event.preventDefault();
+function guestLogin() {
   window.location.href = 'summary.html';
-});
-
-
-// Show Username on the Page
-document.addEventListener('DOMContentLoaded', (event) => {
-  const username = localStorage.getItem('username');
-  if (username) {
-      document.getElementById('header-profile-icon').textContent = username.charAt(0).toUpperCase();
-  }
-});
+}
