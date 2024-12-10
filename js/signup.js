@@ -25,39 +25,80 @@
     document.getElementById("registerButton").disabled = document.getElementById("registerButton").disabled == true ? false : true;
   }
 
+  function checkSignUpConditions() {
+    let name = checkName();
+    let email = checkEmail();
+    let password = checkPassword();
+    let confirmation = clearPasswordMismatchMessage();
+
+    let agreeCheckbox = document.getElementById("agreeCheckbox").checked;
+
+    if(name && email && password && confirmation && agreeCheckbox) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   function checkEmail() {
     let email = document.getElementById("userEmail").value;
+    let messageContainer = document.getElementById("requiredEmail");
 
     if(email.includes("@") &&
        email.includes(".") &&
        email.length > 8 &&
        (email[email.length - 3] == "." || email[email.length - 4] == ".") &&
        (email[email.length - 4] != "@" && email[email.length - 5] != "@")) {
-      console.log("passt"); // tauschen gegen message/string
+      messageContainer.classList.add("d-none");
       return true;
     } else {
-      console.log("keine gültige email addresse"); // tauschen gegen message/string
-      return false;
+      messageContainer.classList.remove("d-none");
     }
+    return false;
   }
 
   function clearPasswordMismatchMessage() {
-    if(checkPassword() == true)  {
-      // "passwort zu kurz" anzeige entfernen
-      if(document.getElementById("userPassword").value == document.getElementById("confirmPassword").value) {
-        console.log("passwörter stimmen überein");
-      } else {
-        console.log("passwörter stimmen nicht überein.");
-      }
+    let messageContainer = document.getElementById("requiredConfirmation");
+
+    if(document.getElementById("userPassword").value.trim() == document.getElementById("confirmPassword").value.trim()) {
+      messageContainer.classList.add("d-none");
+      return true;
     } else {
-      // anzeigen, dass passwort zu kurz ist
+      messageContainer.classList.remove("d-none");
     }
+    return false;
   }
 
   function checkPassword() {
+    let messageContainer = document.getElementById("requiredPassword");
+
     let password = document.getElementById("userPassword").value.trim();
 
-    return password.length >= 6;
+    if(password.length >= 6) {
+      messageContainer.classList.add("d-none");
+      return true;
+    } else {
+      messageContainer.classList.remove("d-none");
+    }
+
+    clearPasswordMismatchMessage();
+
+    return false;
+  }
+
+  function checkName() {
+    let messageContainer = document.getElementById("requiredName");
+
+    let name = document.getElementById("fullName").value.trim();
+
+    if(name.length >= 5 && name.split(" ").length > 1) {
+      messageContainer.classList.add("d-none");
+      return true;
+    } else {
+      messageContainer.classList.remove("d-none");
+    }
+
+    return false;
   }
 
   function togglePasswordIcon() {

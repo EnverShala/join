@@ -115,7 +115,7 @@ a {
 }
 
 .input__box--spaced {
-  margin-bottom: 24px;
+  /*margin-bottom: 24px;*/
 }
 
 .input__box input {
@@ -231,7 +231,7 @@ a {
 .requiredMessage {
   color: red;
   font-size: 0.9em;
-  display: none;
+  margin: 8px;
 }
 
 @media (max-width: 1000px) {

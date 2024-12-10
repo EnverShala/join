@@ -26,35 +26,38 @@
     
             <div id="register" class="registration__form">
                 <div class="input__box input__box--spaced" style="cursor: auto;">
-                    <input id="fullName" type="text" placeholder="Name" autocomplete="name" style="cursor: auto;" required />
+                    <input id="fullName" oninput="checkName()" type="text" placeholder="Name" autocomplete="name" style="cursor: auto;"/>
                     <img class="input__icon" src="./img/person.svg" alt="person" />
                 </div>
-                <div id="required" class="requiredMessage">
-                    This field is required
+                <div id="requiredName" class="requiredMessage d-none">
+                    Please enter your full name!
                   </div>
     
                 <div class="input__box input__box--spaced" style="cursor: auto;">
-                    <input id="userEmail" type="email" placeholder="Email" autocomplete="email" style="cursor: auto;" required oninput="checkEmail()" />
+                    <input id="userEmail" type="email" placeholder="Email" autocomplete="email" style="cursor: auto;" oninput="checkEmail()" />
                     <img class="input__icon" src="./img/mail.svg" alt="mail" />
                 </div>
-                <div id="required" class="requiredMessage">
-                    This field is required
+                <div id="requiredEmail" class="requiredMessage d-none">
+                    Please enter a valid email address!
                   </div>
     
                 <!-- Password -->
                 <div class="input__box input__box--spaced" style="cursor: auto;">
-                    <input style="cursor: auto;" id="userPassword" type="password" placeholder="Password" autocomplete="current-password" required onkeyup="togglePasswordIcon('userPassword'); clearPasswordMismatchMessage(); checkPassword()" onkeydown="onPasswordKeyDown()"/>
+                    <input style="cursor: auto;" id="userPassword" type="password" placeholder="Password" autocomplete="current-password" oninput="checkPassword()">
                     <img id="password__toggle" class="password__icon pointer--disabled" src="./img/lock.svg" alt="lock" onclick="togglePasswordVisibility('userPassword')" />
                 </div>
-                <div id="required" class="requiredMessage">
-                    This field is required
+                <div id="requiredPassword" class="requiredMessage d-none">
+                    Please enter a password with at least 6 characters!
                   </div>
     
                 <!-- Confirm Password -->
                 <div id="confirmPasswordBox" class="input__box" style="cursor: auto;">
-                    <input style="cursor: auto;" id="confirmPassword" type="password" placeholder="Confirm Password" autocomplete="off" required onkeyup="togglePasswordIcon('confirmPassword'); clearPasswordMismatchMessage()"/>
+                    <input style="cursor: auto;" id="confirmPassword" type="password" placeholder="Confirm Password" autocomplete="off" oninput="clearPasswordMismatchMessage()">
                     <img id="confirmPassword__toggle" class="password__icon pointer--disabled" src="./img/lock.svg" alt="lock" onclick="togglePasswordVisibility('confirmPassword')" />
                 </div>
+                <div id="requiredConfirmation" class="requiredMessage d-none">
+                    The entered passwords don't match!
+                  </div>
     
                 <!-- If passwords do not match, show message -->
                 <div class="error__box">
