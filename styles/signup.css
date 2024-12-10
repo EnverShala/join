@@ -166,6 +166,10 @@ a {
   text-wrap: nowrap;
 }
 
+.redFont {
+  color: red !important;
+}
+
 .submit__button:hover {
   color: #ffffff;
   background-color: #29abe2;

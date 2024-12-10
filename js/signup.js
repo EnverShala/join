@@ -25,13 +25,27 @@
     document.getElementById("registerButton").disabled = document.getElementById("registerButton").disabled == true ? false : true;
   }
 
+  function checkPrivacyPolicy() {
+    let agreeCheckbox = document.getElementById("agreeCheckbox").checked;
+
+    if(agreeCheckbox) {
+      document.getElementById("agreementText").classList.remove("redFont");
+      document.getElementById("agreementLink").classList.remove("redFont");
+      return true;
+    } else {
+      document.getElementById("agreementText").classList.add("redFont");
+      document.getElementById("agreementLink").classList.add("redFont");
+    }
+
+    return false;
+  }
+
   function checkSignUpConditions() {
     let name = checkName();
     let email = checkEmail();
     let password = checkPassword();
     let confirmation = clearPasswordMismatchMessage();
-
-    let agreeCheckbox = document.getElementById("agreeCheckbox").checked;
+    let agreeCheckbox = checkPrivacyPolicy();
 
     if(name && email && password && confirmation && agreeCheckbox) {
       return true;

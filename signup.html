@@ -65,11 +65,11 @@
                 </div>
     
                 <div class="checkbox__wrapper">
-                    <input type="checkbox" id="agreeCheckbox" onclick="toggleCheckbox('agreeCheckbox')" data-checked="false"/></input>
+                    <input type="checkbox" id="agreeCheckbox" onclick="toggleCheckbox('agreeCheckbox'); checkPrivacyPolicy()" data-checked="false"/></input>
                     <div>
-                        <div>
+                        <div id="agreementText">
                             I agree to the
-                            <a href="./privacy.html" class="privacy__link">&nbspPrivacy Policy</a>
+                            <a id="agreementLink" href="./privacy.html" class="privacy__link">&nbspPrivacy Policy</a>
                         </div>
                     </div>
                 </div>
