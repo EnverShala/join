@@ -114,8 +114,8 @@ a {
   cursor: pointer;
 }
 
-.input__box--spaced {
-  margin-bottom: 24px;
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .input__box input {
@@ -164,6 +164,32 @@ a {
   cursor: pointer;
   padding: 15px 24px;
   text-wrap: nowrap;
+}
+
+.submit__button__disabled {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 25.2px;
+  text-align: left;
+  width: 126px;
+  height: 55px;
+  border: none;
+  border-radius: 8px;
+  color: #ffffff;
+  background: gray;
+  padding: 15px 24px;
+  text-wrap: nowrap;
+}
+
+.redFont {
+  color: red !important;
+}
+
+.margin-bottom24px {
+  margin-bottom: 24px;
 }
 
 .submit__button:hover {
@@ -231,7 +257,7 @@ a {
 .requiredMessage {
   color: red;
   font-size: 0.9em;
-  display: none;
+  margin: 8px;
 }
 
 @media (max-width: 1000px) {

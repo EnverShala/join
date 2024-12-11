@@ -258,6 +258,10 @@ async function loadAccounts() {
   }
 }
 
+/*
+ ** loads the accounts username initials into the header profile icon
+ */
+
 function loadAccountInitials() {
   let accountName = localStorage.getItem("username");
   accountName = accountName == "" ? "Guest" : accountName;
@@ -269,26 +273,21 @@ function loadAccountInitials() {
  */
 
 async function registerUser() {
-  let signUpName = document.getElementById("fullName").value.trim();
-  let signUpEmail = document.getElementById("userEmail").value.trim();
-  let signUpPassword = document.getElementById("userPassword").value.trim();
-  let signUpPassword2 = document.getElementById("confirmPassword").value.trim();
+  let name = document.getElementById("fullName").value.trim();
+  let email = document.getElementById("userEmail").value.trim();
+  let password = document.getElementById("userPassword").value;
 
-  let agreementCheckbox = document.getElementById("agreeCheckbox").checked;
+  let loginData = {
+    name: name,
+    email: email,
+    password: password,
+  };
 
-  let loginData = { name: signUpName, email: signUpEmail, password: signUpPassword };
-
-  if (
-    signUpPassword == signUpPassword2 &&
-    agreementCheckbox == true &&
-    signUpPassword.length >= 6 &&
-    checkEmail(signUpEmail) == true &&
-    signUpName != ""
-  ) {
+  if(checkSignUpConditions()) {
     await signUpUser(loginData);
     window.location.href = "login.html";
   } else {
-    alert("PASSWORTEINGABEN UNGLEICH");
+    alert("Please enter the required informations & accept the privacy policy.");
   }
 }
 
