@@ -816,18 +816,17 @@ h2 {
 }
 /*Pop up Addtask*/
 #myModal {
-  width: 70%;
+  width: 30%;
+  height: 90%;
+  padding-left: 40px;
+  padding-top: 40px;
+  padding-bottom: 40px;
   position: fixed;
   top: 50%;
   left: 50%;
   translate: -50% -50%;
   border: 0;
   border-radius: 15px;
-}
-
-.taskContainerPopup {
-  display: flex;
-  flex-direction: column;
   background-color: #f6f7f8;
 }
 
@@ -922,6 +921,12 @@ h2 {
 
 .buttonsPrioOnEditPopUp {
   display: flex;
+}
+
+.inputGroupOnPopUp {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .okButtonMainContainer {
