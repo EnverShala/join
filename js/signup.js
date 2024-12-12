@@ -1,26 +1,3 @@
-/*
-** on keydown reaction function of password field
-*/
-
-  function onPasswordKeyDown() {
-    let inputField = document.getElementById("userPassword").value;
-    let pressedKey = event.key;
-  
-    if (inputField.length <= 1 && pressedKey == "Backspace") {
-      document.getElementById("registerButton").disabled = true;
-    } else if (pressedKey == "Enter") {
-      if (inputField.length > 0) {
-        document.getElementById("registerButton").disabled = false;
-      }
-    } else if (isMarkedCompletely(document.getElementById("userPassword")) && (pressedKey == "Backspace" || pressedKey == "Delete")) {
-      document.getElementById("registerButton").disabled = true;
-    } else {
-      if (checkInvalidKeys(pressedKey) == false) {
-        document.getElementById("registerButton").disabled = false;
-      }
-    }
-  }
-
  /*
  ** toggles the signup button disability
  */
@@ -79,18 +56,14 @@
   }
 
  /*
- ** checks if the email is a valid email address
+ ** checks if the email is a valid email address plus shows messages and changes css (of the messages/inputfields)
  */
 
   function checkEmail() {
     let email = document.getElementById("userEmail").value.trim();
     let messageContainer = document.getElementById("requiredEmail");
 
-    if(email.includes("@") &&
-       email.includes(".") &&
-       email.length > 8 &&
-       (email[email.length - 3] == "." || email[email.length - 4] == ".") &&
-       (email[email.length - 4] != "@" && email[email.length - 5] != "@")) {
+    if(isEmailValid(email)) {
       messageContainer.classList.add("d-none");
       document.getElementById("emailBox").classList.add("margin-bottom24px");
       return true;
@@ -206,61 +179,4 @@
       checkbox.style.backgroundColor = ""; // Setzt die Hintergrundfarbe zurück
       checkbox.style.color = "black";
     }
-  }
-
-  /*
-  ** function to check invalid keys
-  */
-  
-  function checkInvalidKeys(key) {
-    switch (key) {
-      case "Backspace":
-      case "Escape":
-      case "Shift":
-      case "Alt":
-      case "AltGraph":
-      case "Space":
-      case "Control":
-      case "F1":
-      case "F2":
-      case "F3":
-      case "F4":
-      case "F5":
-      case "F6":
-      case "F7":
-      case "F8":
-      case "F9":
-      case "F10":
-      case "F11":
-      case "F12":
-      case "PageUp":
-      case "PageDown":
-      case "Home":
-      case "End":
-      case "Insert":
-      case "Meta":
-      case "ContextMenu":
-      case "ArrowLeft":
-      case "ArrowRight":
-      case "ArrowUp":
-      case "ArrowDown":
-      case "LaunchApplication2":
-      case "LaunchMail":
-      case "NumLock":
-      case "Pause":
-      case "ScrollLock":
-        return true;
-        break;
-      default:
-        return false;
-        break;
-    }
-  }
-
-  /*
-  ** checks if the input of an input field is marked completely
-  */
-  
-  function isMarkedCompletely(inputField) {
-    return inputField.selectionStart == 0 && inputField.selectionEnd == inputField.value.length;
   }

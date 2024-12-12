@@ -126,24 +126,46 @@ function rememberUserAccount(accountEmail) {
   }
 }
 
+  /*
+ ** checks if the email is a valid email address
+ */
+
+ function isEmailValid(email) {
+  return (email.includes("@") &&
+          email.includes(".") &&
+          email.length >= 8 &&
+          (email[email.length - 3] == "." || email[email.length - 4] == ".") &&
+          (email[email.length - 4] != "@" && email[email.length - 5] != "@"));
+}
+
 /*
  ** load Password from remembered Users and checks the rememberme checkbox
  */
 
 async function loginOnInput() {
   await loadAccounts();
+  let password = document.getElementById("userPassword").value;
 
   let rememberedAccounts = localStorage.getItem("remember");
   let email = document.getElementById("userEmail").value.trim();
 
-  if(rememberedAccounts.includes(email)) {
-    for (let i = 0; i < accounts.length; i++) {
-      if (accounts[i].email == email) {
-        document.getElementById("userPassword").value = accounts[i].password;
-        document.getElementById("rememberMeButton").checked = true;
-        document.getElementById("loginButton").disabled = false;
+  if (rememberedAccounts) {
+    if (rememberedAccounts.includes(email)) {
+      for (let i = 0; i < accounts.length; i++) {
+        if (accounts[i].email == email) {
+          document.getElementById("userPassword").value = accounts[i].password;
+          document.getElementById("rememberMeButton").checked = true;
+          document.getElementById("loginButton").disabled = false;
+          return;
+        }
       }
     }
+  }
+
+  if (password.length >= 6 && isEmailValid(email)) {
+    document.getElementById("loginButton").disabled = false;
+  } else {
+    document.getElementById("loginButton").disabled = true;
   }
 }
 
@@ -154,8 +176,8 @@ async function loginOnInput() {
 function logInUserAccount(accountEmail) {
   let accountAsText = JSON.stringify(accountEmail);
 
-  for(let i = 0; i < accounts.length; i++) {
-    if(accounts[i].email == accountEmail) {
+  for (let i = 0; i < accounts.length; i++) {
+    if (accounts[i].email == accountEmail) {
       localStorage.setItem("username", accounts[i].name);
     }
   }
@@ -193,6 +215,7 @@ function getLoggedInUser() {
 async function loginUser() {
   let userEmail = document.getElementById("userEmail").value.trim();
   let userPassword = document.getElementById("userPassword").value;
+  let rememberedAccounts = localStorage.getItem("remember");
 
   await loadAccounts();
 
@@ -201,14 +224,25 @@ async function loginUser() {
       if (accounts[i].password == userPassword) {
         if (document.getElementById("rememberMeButton").checked) {
           rememberUserAccount(userEmail);
+        } else {
+          if(rememberedAccounts.includes(userEmail)) {
+            rememberedAccounts = rememberedAccounts.replace(`"${userEmail}"`, "");
+
+            localStorage.setItem("remember", rememberedAccounts);
+          }
         }
         logInUserAccount(userEmail);
         alert("LOGIN ERFOLGREICH");
         window.location.href = "board.html";
-        break;
+        return;
+      } else {
+        alert("PASSWORT FALSCH!");
+        return;
       }
     }
   }
+
+  alert("ZU DIESER EMAIL EXISTIERT KEIN ACCOUNT");
 }
 
 /*
@@ -283,7 +317,7 @@ async function registerUser() {
     password: password,
   };
 
-  if(checkSignUpConditions()) {
+  if (checkSignUpConditions()) {
     await signUpUser(loginData);
     window.location.href = "login.html";
   } else {
@@ -335,7 +369,7 @@ async function deleteUser(id) {
         if (tasks[j].assigned.includes(users[i].name)) {
           tasks[j].assigned = tasks[j].assigned.replace(users[i].name, "");
           tasks[j].assigned = tasks[j].assigned.replace(",,", ",");
-          if(tasks[j].assigned[tasks[j].assigned.length - 1] == ",") { 
+          if (tasks[j].assigned[tasks[j].assigned.length - 1] == ",") {
             tasks[j].assigned = tasks[j].assigned.slice(0, -1);
           }
           await editTask(tasks[j].id, tasks[j]);
@@ -346,7 +380,7 @@ async function deleteUser(id) {
 
   await fetch(FIREBASE_URL + `/users/${id}` + ".json", {
     method: "DELETE",
-  });  
+  });
 
   await renderContacts();
   loadUserInformation(-1);
