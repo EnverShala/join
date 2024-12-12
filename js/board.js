@@ -511,12 +511,15 @@ function clearCardContainersInnerHtml() {
 document.addEventListener("DOMContentLoaded", () => {
   const modal = document.querySelector("dialog[data-modal]");
   const openModalButton = document.getElementById("openModal");
+  const searchIconButton = document.getElementById("searchIconButton");
   const closeModalButton = document.getElementById("closeModal");
   const alsoOpenButtons = document.querySelectorAll(".alsoOpenModal"); // Alle Elemente mit der Klasse "alsobtn"
 
   if (modal && openModalButton && closeModalButton) {
     // Modal öffnen
     openModalButton.addEventListener("click", () => { modal.showModal(); });
+
+    searchIconButton.addEventListener("click", () => { modal.showModal(); });
 
     alsoOpenButtons.forEach((button) => {
       button.addEventListener("click", () => { modal.showModal(); });
