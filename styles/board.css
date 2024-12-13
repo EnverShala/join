@@ -816,18 +816,42 @@ h2 {
 }
 /*Pop up Addtask*/
 #myModal {
-  width: 30%;
+  width: 550px;
   height: 90%;
-  padding-left: 40px;
+  padding-left: 60px;
   padding-top: 40px;
   padding-bottom: 40px;
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   translate: -50% -50%;
   border: 0;
   border-radius: 15px;
-  background-color: #f6f7f8;
+  background-color: #ffffff;
+}
+#myModal::-webkit-scrollbar {
+  width: 8px;
+}
+#myModal::-webkit-scrollbar-thumb {
+  background-color: #cccccc;
+  border-radius: 100px;
+}
+
+.bottomAddTaskContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.createClearButtonContainer {
+  display: flex;
+  margin-top: 50px;
+  justify-content: space-between;
+}
+
+.btn-create {
+  margin-left: 10px;
 }
 
 .addTaskPopupClose {
@@ -1076,6 +1100,14 @@ h2 {
   .emptyTask {
     font-size: 16px;
   }
+  #myModal {
+    width: 500px;
+    height: 80%;
+    overflow-x: hidden;
+  }
+  .containerForm {
+    margin-left: -30px;
+  }
 }
 @media (max-width: 941px) {
   .popupOnTaskSelectionMainContainer,
@@ -1121,6 +1153,13 @@ h2 {
   a {
     width: 100% !important;
   }
+  #myModal {
+    width: 400px;
+  }
+  .containerForm {
+    margin-left: -50px;
+  }
+  
 }
 @media (max-width: 560px) {
   .popupOnTaskSelectionMainContainer,

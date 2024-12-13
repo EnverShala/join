@@ -353,7 +353,7 @@ form {
 .buttons-prio {
   display: flex;
   gap: 16px;
-  width: min(440px, 100%);
+  width: 100%;
 }
 
 .btn-prio {
