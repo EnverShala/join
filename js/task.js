@@ -424,6 +424,10 @@ document.addEventListener("DOMContentLoaded", function () {
   dateInput.setAttribute("min", today);
 });
 
+/*
+** function for the select category dropdown menu to select technical stack
+*/
+
 function selectTechnicalStack()
 {
   let categoryTechnicalStack = document.getElementById('categoryTechnicalStack').innerHTML;
@@ -431,7 +435,11 @@ function selectTechnicalStack()
   let selectCategory = document.getElementById('category-displayed');
   selectCategory.innerHTML = '';
   selectCategory.innerHTML = categoryTechnicalStack;
-} 
+}
+
+/*
+** function for the select category dropdown menu to select user story
+*/
 
 function selectUserStory()
 {
