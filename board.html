@@ -461,71 +461,73 @@
                   <ul id="myDropdown" class="dropdown-content ">
                   </ul>
                   <!-- End Contacts Assigned to-->
-                  <div class="selected-contacts"></div>
-                </div>
+                <div class="selected-contacts"></div>
               </div>
-              <div id="assigned-to-required" class="requiredMessage">
+            </div>
+            <div id="assigned-to-required" class="requiredMessage">
+              This field is required
+            </div>
+          </div>
+          <div class="col-middle"></div>
+          <div class="col-right gap">
+            <div class="inputGroup">
+              <label class="due-date" for="due-date-input"
+                >Due date<span class="starFromRequired">*</span></label
+              >
+              <input class="input" type="date" id="due-date-input" />
+              <div id="date-required" class="requiredMessage">
                 This field is required
               </div>
             </div>
-           
-            <div class="col-right gap">
-              <div class="inputGroupOnPopUp">
-                <div>
-                  <label class="due-date" for="due-date-input"
-                  >Due date<span class="required">*</span></label
-                >
-                <input class="input" type="date" id="due-date-input" />
-                <div id="date-required" class="requiredMessage">
-                 This field is required
-                </div>
-              </div>
-              <div class="inputGroupOnPopUp">
-                <label>Prio</label>
-                <div class="buttons-prio">
-                  <button onclick="clickOnUrgent()" type="button" id="urgent" class="btn-prio">
-                    Urgent<img id="urgentID" src="./img/urgent.svg"/>
-                          <img id="urgent-whiteID" class="d-none" src="./img/urgent-white.svg"/>
-                  </button>
-                  <div class>
+            <div class="inputGroup">
+              <label>Prio<span class="starFromRequired">*</span></label>
+              <div class="buttons-prio">
+                <button onclick="clickOnUrgent()" type="button" id="urgent" class="btn-prio">
+                  Urgent
+                  <img id="urgentID" src="./img/urgent.svg"/>
+                  <img id="urgent-whiteID" class="d-none" src="./img/urgent-white.svg"/>
+                </button>
+                <div class>
                   <button onclick="clickOnMedium()" type="button" id="medium" class="btn-prio">
-                    Medium<img id="mediumID" src="./img/medium.svg"/>
+                    Medium
+                    <img id="mediumID" src="./img/medium.svg"/>
                     <img id="medium-whiteID" class="d-none" src="./img/medium-white.svg"/>
                   </button>
                 </div>
-                  <button onclick="clickOnLow()" type="button" id="low" class="btn-prio">
-                    Low<img id="lowID" src="./img/low.svg"/>
-                    <img id="low-whiteID" class="d-none" src="./img/low-white.svg"/>
-                  </button>
+                <button onclick="clickOnLow()" type="button" id="low" class="btn-prio">
+                  Low
+                  <img id="lowID" src="./img/low.svg"/>
+                  <img id="low-whiteID" class="d-none" src="./img/low-white.svg"/>
+                </button>
+              </div>
+              <div id="prio-required" class="requiredMessage">
+                This field is required
+              </div>
+            </div>
+            <div class="inputGroup">
+              <label for="category-selected">
+                Category
+                <span class="starFromRequired">*</span></label>
+              <div class="dropdown">
+                <div id="category-container" class="select category" onclick="toggleDropdownCategory()">
+                  <span id="category-displayed" class="btn-text">Select task category</span>
+                  <span class="down-arrow">
+                    <img src="img/arrow_drop_downaa.svg" alt="" />
+                  </span>
                 </div>
-                <div id="prio-required" class="requiredMessage">
+                <div id="category-required" class="requiredMessage">
                   This field is required
-                </div>  
-              </div>
-              <div class="inputGroupOnPopUp">
-                <label for="category-selected"
-                  >Category<span class="required">*</span></label
-                >
-                <div class="dropdown" >
-                  <div id="category-container" class="select category" onclick="toggleDropdownCategory()" >
-                    <span id="category-displayed" class="btn-text">Select task category</span>
-                    <span class="down-arrow" >
-                      <img src="img/arrow_drop_downaa.svg" alt="">
-                    </span>
-                  </div>
-                  <div id="category-required" class="requiredMessage">               
-                    This field is required
-                  </div>
-                  <ul class="category scroll-disabled dropdown-content" id="myDropdownCategory" >
-                    <li onclick="selectTechnicalStack()" id="categoryTechnicalStack" data-value="Technical stack" class="item category">
-                      <span>Technical stack</span>
-                    </li>
-                    <li onclick="selectUserStory()" id="categoryUserStory" data-value="User-story" class="item category">
-                      <span>User Story</span>
-                    </li>
-                  </ul>
                 </div>
+                <ul class="category scroll-disabled dropdown-content" id="myDropdownCategory">
+                  <li onclick="selectTechnicalStack(); toggleDropdownCategory();" id="categoryTechnicalStack" data-value="Technical stack" class="item category">
+                    <span>Technical stack</span>
+                  </li>
+                  <li onclick="selectUserStory(); toggleDropdownCategory();" id="categoryUserStory" data-value="User-story" class="item category">
+                    <span>User Story</span>
+                  </li>
+                </ul>
               </div>
+            </div>
               <!--Begin subtask-->
               <div class="inputGroupOnPopUp">
                 <label for="subtasks">Subtasks<span class="required">*</span></label>
