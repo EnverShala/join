@@ -80,7 +80,7 @@ function getTaskPrio() {
 
 function clearPrioButtons()
 {
-  document.getElementById('urgent').className = "btn-prio btn-prio:hover";
+  document.getElementById('urgent').className = "btn-prio";
   document.getElementById('urgent-whiteID').className ="d-none";
   document.getElementById('urgentID').className ="";
   document.getElementById('urgent').style.boxShadow = "";
