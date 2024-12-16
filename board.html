@@ -517,10 +517,10 @@
                     This field is required
                   </div>
                   <ul class="category scroll-disabled dropdown-content" id="myDropdownCategory" >
-                    <li onclick="selectTechnicalStack()" id="categoryTechnicalStack" data-value="Technical stack" class="item category">
+                    <li onclick="selectTechnicalStack(); toggleDropdownCategory()" id="categoryTechnicalStack" data-value="Technical stack" class="item category">
                       <span>Technical stack</span>
                     </li>
-                    <li onclick="selectUserStory()" id="categoryUserStory" data-value="User-story" class="item category">
+                    <li onclick="selectUserStory(); toggleDropdownCategory()" id="categoryUserStory" data-value="User-story" class="item category">
                       <span>User Story</span>
                     </li>
                   </ul>
