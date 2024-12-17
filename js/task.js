@@ -61,14 +61,14 @@ function createTaskArray(newTitle, newDescription, newDate, oldCategory, newPrio
 ** gets the priority level of the current/opened task
 */
 
-function getTaskPrio() {
-  if (document.getElementById("urgent").className.includes("btn-bg-change-urgent-onclick")) {
+function getTaskPrio(id = "") {
+  if (document.getElementById("urgent" + id).className.includes("btn-bg-change-urgent-onclick")) {
     return "Urgent";
   }
-  if (document.getElementById("medium").className.includes("btn-bg-change-medium-onclick")) {
+  if (document.getElementById("medium" + id).className.includes("btn-bg-change-medium-onclick")) {
     return "Medium";
   }
-  if (document.getElementById("low").className.includes("btn-bg-change-low-onclick")) {
+  if (document.getElementById("low" + id).className.includes("btn-bg-change-low-onclick")) {
     return "Low";
   }
   return "None";
@@ -78,76 +78,78 @@ function getTaskPrio() {
 **reset all Class from Prio Buttons
 */
 
-function clearPrioButtons()
+function clearPrioButtons(id = "")
 {
-  document.getElementById('urgent').className = "btn-prio";
-  document.getElementById('urgent-whiteID').className ="d-none";
-  document.getElementById('urgentID').className ="";
-  document.getElementById('urgent').style.boxShadow = "";
+  document.getElementById('urgent' + id).className = "btn-prio";
+  document.getElementById('urgent-whiteID' + id).className ="d-none";
+  document.getElementById('urgentID' + id).className ="";
+  document.getElementById('urgent' + id).style.boxShadow = "";
 
-  document.getElementById('medium').className = "btn-prio";
-  document.getElementById('medium-whiteID').className ="d-none";
-  document.getElementById('mediumID').className ="";
-  document.getElementById('medium').style.boxShadow = "";
+  document.getElementById('medium' + id).className = "btn-prio";
+  document.getElementById('medium-whiteID' + id).className ="d-none";
+  document.getElementById('mediumID' + id).className ="";
+  document.getElementById('medium' + id).style.boxShadow = "";
 
-  document.getElementById('low').className = "btn-prio";
-  document.getElementById('low-whiteID').className ="d-none";
-  document.getElementById('lowID').className ="";
-  document.getElementById('low').style.boxShadow = "";
+  document.getElementById('low' + id).className = "btn-prio";
+  document.getElementById('low-whiteID' + id).className ="d-none";
+  document.getElementById('lowID' + id).className ="";
+  document.getElementById('low' + id).style.boxShadow = "";
 }
 
 /*
 ** click on Urgent Prio Button
 */
 
-function clickOnUrgent() {
-  if (getTaskPrio() == "Urgent") {
-    clearPrioButtons();
+function clickOnUrgent(id = "") {
+  if (getTaskPrio('Popup') == "Urgent") {
+    clearPrioButtons('Popup');
     return;
   }
 
-  clearPrioButtons();
+  clearPrioButtons('Popup');
 
-  document.getElementById("urgent").className = "btn-prio btn-bg-change-urgent-onclick prio-txt-color-set-white";
-  document.getElementById("urgent").style.boxShadow = "none";
-  document.getElementById("urgentID").className = "d-none";
-  document.getElementById("urgent-whiteID").className = "";
+  document.getElementById("urgent" + id).className = "btn-prio btn-bg-change-urgent-onclick prio-txt-color-set-white";
+  document.getElementById("urgent" + id).style.boxShadow = "none";
+  document.getElementById("urgentID" + id).className = "d-none";
+  document.getElementById("urgent-whiteID" + id).className = "";
 }
 
 /*
 ** click on Medium Prio Button
 */
 
-function clickOnMedium() {
-  if (getTaskPrio() == "Medium") {
-    clearPrioButtons();
+function clickOnMedium(id = "") {
+  if (getTaskPrio('Popup') == "Medium") {
+    clearPrioButtons('Popup');
     return;
   }
 
-  clearPrioButtons();
+  clearPrioButtons('Popup');
 
-  document.getElementById("medium").className = "btn-prio btn-bg-change-medium-onclick prio-txt-color-set-white";
-  document.getElementById("medium").style.boxShadow = "none";
-  document.getElementById("mediumID").className = "d-none";
-  document.getElementById("medium-whiteID").className = "";
+  document.getElementById("medium" + id).className = "btn-prio btn-bg-change-medium-onclick prio-txt-color-set-white";
+  document.getElementById("medium" + id).style.boxShadow = "none";
+  document.getElementById("mediumID" + id).className = "d-none";
+  document.getElementById("medium-whiteID" + id).className = "";
+
+  console.log("medium" + id);
 }
 
 /*
 ** click on Low Prio Button
 */
 
-function clickOnLow() {
-  if (getTaskPrio() == "Low") {
-    clearPrioButtons();
+function clickOnLow(id = "") {
+  if (getTaskPrio('Popup') == "Low") {
+    clearPrioButtons('Popup');
     return;
   }
 
-  clearPrioButtons();
+  clearPrioButtons('Popup');
 
-  document.getElementById("low").className = "btn-prio btn-bg-change-low-onclick prio-txt-color-set-white";
-  document.getElementById("low").style.boxShadow = "none";
-  document.getElementById("lowID").className = "d-none";
-  document.getElementById("low-whiteID").className = "";
+  document.getElementById("low" + id).className = "btn-prio btn-bg-change-low-onclick prio-txt-color-set-white";
+  document.getElementById("low" + id).style.boxShadow = "none";
+  document.getElementById("lowID" + id).className = "d-none";
+  document.getElementById("low-whiteID" + id).className = "";
 }
 
 /*
