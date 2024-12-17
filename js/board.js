@@ -329,21 +329,25 @@ function createTaskArray(newTitle, newDescription, newDate, oldCategory, newPrio
 }
 
 /*
-** make edit task popup visible
+** make edit task popup visible, timeout so the dialog will be showed after its fully loaded
 */
 
 function openDialog() {
-  document.getElementById("popupOnTaskSelectionID").style.visibility = "visible";
+  setTimeout(() => {
+    document.getElementById("popupOnTaskSelectionID").style.visibility = "visible";
+  }, 100);
 }
 
 /*
-** make edit task popup invisible
+** make edit task popup invisible, time out to hide the closing dialogs
 */
 
 function closeDialog() {
   document.getElementById("popupOnTaskSelectionID").style.visibility = "hidden";
   document.getElementById('editPopUpID').classList.add('d-none');
-  document.getElementById('popupOnTaskSelectionMainContainerID').classList.remove('d-none');
+  
+  setTimeout(() => { document.getElementById('popupOnTaskSelectionMainContainerID').classList.remove('d-none')
+  }, 250);
 }
 
 /*
