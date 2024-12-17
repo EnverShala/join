@@ -255,6 +255,7 @@ function toggleBackground(checkbox) {
   const contactCircle = listItem.querySelector(".circle").cloneNode(true); // Kopiere das Kreis-Element
 
   const selectedContactsContainer = document.getElementById("selected-contacts-container");
+  const selectedContactsContainerPopup = document.getElementById("selected-contacts-containerPopup");
 
   if (checkbox.checked) {
     listItem.style.backgroundColor = "#2a3647";
@@ -262,15 +263,22 @@ function toggleBackground(checkbox) {
 
     // Füge das Kreis-Element zum ausgewählten Kontaktcontainer hinzu
     selectedContactsContainer.appendChild(contactCircle);
+    selectedContactsContainerPopup.appendChild(contactCircle);
   } else {
     listItem.style.backgroundColor = ""; // Setzt die Hintergrundfarbe zurück
     listItem.style.color = "black";
 
     // Entferne das Kreis-Element aus dem ausgewählten Kontaktcontainer
     const circles = selectedContactsContainer.querySelectorAll(".circle");
+    const circlesPopup = selectedContactsContainerPopup.querySelectorAll(".circle");
     circles.forEach((circle) => {
       if (circle.textContent.trim() === contactCircle.textContent.trim()) {
         selectedContactsContainer.removeChild(circle);
+      }
+    });
+    circlesPopup.forEach((circle) => {
+      if (circle.textContent.trim() === contactCircle.textContent.trim()) {
+        selectedContactsContainerPopup.removeChild(circle);
       }
     });
   }

@@ -20,7 +20,7 @@ function taskCardTemplate(uniqueId, i, subTasksArray, assignedUsersHTML) {
                     </div>
                   </div>
                 </div>
-                <div class="cardBody" onclick="openDialog(); popupValueImplementFromTask(${i})">
+                <div class="cardBody" onclick="popupValueImplementFromTask(${i}); openDialog()">
                   <p id="titelCardID" class="titleCard">${tasks[i].title}</p>
                   <p id="descriptionCardID" class="descriptionCard">${tasks[i].description}</p>
                   <div>
