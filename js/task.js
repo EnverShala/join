@@ -101,19 +101,17 @@ function clearPrioButtons()
 */
 
 function clickOnUrgent() {
-  let alreadyKlicked = false;
   if (getTaskPrio() == "Urgent") {
-    alreadyKlicked = true;
+    clearPrioButtons();
+    return;
   }
+
   clearPrioButtons();
-  if (alreadyKlicked == false) {
-    document.getElementById("urgent").classList.remove("btn-bg-change-back-onclick");
-    document.getElementById("urgent").classList.toggle("btn-bg-change-urgent-onclick");
-    document.getElementById("urgent").style.boxShadow = "none";
-    document.getElementById("urgentID").classList.toggle("d-none");
-    document.getElementById("urgent").classList.toggle("prio-txt-color-set-white");
-    document.getElementById("urgent-whiteID").classList.toggle("d-none");
-  }
+
+  document.getElementById("urgent").className = "btn-prio btn-bg-change-urgent-onclick prio-txt-color-set-white";
+  document.getElementById("urgent").style.boxShadow = "none";
+  document.getElementById("urgentID").className = "d-none";
+  document.getElementById("urgent-whiteID").className = "";
 }
 
 /*
@@ -121,40 +119,35 @@ function clickOnUrgent() {
 */
 
 function clickOnMedium() {
-  let alreadyKlicked = false;
   if (getTaskPrio() == "Medium") {
-    alreadyKlicked = true;
+    clearPrioButtons();
+    return;
   }
+
   clearPrioButtons();
-  if (alreadyKlicked == false) {
-    document.getElementById("medium").classList.remove("btn-bg-change-back-onclick");
-    document.getElementById("medium").classList.toggle("btn-bg-change-medium-onclick");
-    document.getElementById("medium").style.boxShadow = "none";
-    document.getElementById("mediumID").classList.toggle("d-none");
-    document.getElementById("medium").classList.toggle("prio-txt-color-set-white");
-    document.getElementById("medium-whiteID").classList.toggle("d-none");
-  }
+
+  document.getElementById("medium").className = "btn-prio btn-bg-change-medium-onclick prio-txt-color-set-white";
+  document.getElementById("medium").style.boxShadow = "none";
+  document.getElementById("mediumID").className = "d-none";
+  document.getElementById("medium-whiteID").className = "";
 }
 
 /*
 ** click on Low Prio Button
 */
 
-function clickOnLow() 
-{
-  let alreadyKlicked = false;
+function clickOnLow() {
   if (getTaskPrio() == "Low") {
-    alreadyKlicked = true;
+    clearPrioButtons();
+    return;
   }
+
   clearPrioButtons();
-  if (alreadyKlicked == false) {
-    document.getElementById("low").classList.remove("btn-bg-change-back-onclick");
-    document.getElementById("low").classList.toggle("btn-bg-change-low-onclick");
-    document.getElementById("low").style.boxShadow = "none";
-    document.getElementById("lowID").classList.toggle("d-none");
-    document.getElementById("low").classList.toggle("prio-txt-color-set-white");
-    document.getElementById("low-whiteID").classList.toggle("d-none");
-  }
+
+  document.getElementById("low").className = "btn-prio btn-bg-change-low-onclick prio-txt-color-set-white";
+  document.getElementById("low").style.boxShadow = "none";
+  document.getElementById("lowID").className = "d-none";
+  document.getElementById("low-whiteID").className = "";
 }
 
 /*
