@@ -527,11 +527,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Modal schließen
-    closeModalButton.addEventListener("click", () => { modal.close(); });
+    closeModalButton.addEventListener("click", () => { modal.close(); clearForm('Popup'); });
 
     // Optional: Modal schließen, wenn man außerhalb des Modals klickt
     modal.addEventListener("click", (event) => {
-      if (event.target === modal) { modal.close(); }
+      if (event.target === modal) { modal.close(); clearForm('Popup'); }
     });
   } else {
     console.error("Modal, Open Button, or Close Button not found in the DOM.");
