@@ -445,7 +445,7 @@
                   >Assigned to<span class="required">*</span></label
                 >
                 <div class="dropdown">
-                  <div id="contacts-list" class="selectOnEditPopUp assigned-to" onclick="toggleDropdown()">
+                  <div id="contacts-listPopup" class="selectOnEditPopUp assigned-to" onclick="toggleDropdown('Popup')">
                     <input
                       class="select-input placeholder"
                       type="text"
@@ -456,10 +456,10 @@
                       <img src="img/arrow_drop_downaa.svg" alt="">
                     </span>
                   </div>
-                  <div id="selected-contacts-container" class="selected-contacts"></div>
+                  <div id="selected-contacts-containerPopup" class="selected-contacts"></div>
 
                   <!-- Begin Contacts Assigned to-->
-                  <ul id="myDropdown" class="dropdown-content ">
+                  <ul id="myDropdownPopup" class="dropdown-content ">
                   </ul>
                   <!-- End Contacts Assigned to-->
                   <div class="selected-contacts"></div>
@@ -547,9 +547,9 @@
                 </div>
 
                   <div class="container-subtasks-display">
-                      <ul id="subtaskList" class="list-subtasks"></ul>
+                      <ul id="subtaskListPopup" class="list-subtasks"></ul>
                   </div>
-                  <div id="subtasks-required" class="requiredMessage">
+                  <div id="subtasks-requiredPopup" class="requiredMessage">
                     This field is required
                   </div>
               </div>
@@ -562,7 +562,7 @@
             </p>
             <div class="createClearButtonContainer">
               <button
-                onclick="clearForm()"
+                onclick="clearForm('Popup')"
                 type="button"
                 class="btn-clear"
                 id="clear-btn"

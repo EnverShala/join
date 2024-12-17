@@ -1,4 +1,4 @@
-async function createTask() {
+async function createTask(id = "") {
   let taskTitle = document.getElementById("title").value;
   let taskDescription = document.getElementById("description").value;
   let taskDate = document.getElementById("due-date-input").value;
@@ -9,7 +9,7 @@ async function createTask() {
   let taskSubtasks = "";
   let assignedTo = "";
 
-  let subtaskItems = document.getElementById("subtaskList").children;
+  let subtaskItems = document.getElementById("subtaskList" + id).children;
 
   if (subtaskItems.length > 0) {
     for (let i = 0; i < subtaskItems.length; i++) {
@@ -20,7 +20,7 @@ async function createTask() {
 
   if (users.length > 0) {
     for (let i = 0; i < users.length; i++) {
-      let checkbox = document.getElementById(`AssignedContact${i}`);
+      let checkbox = document.getElementById(`AssignedContact${id}${i}`);
 
       if (checkbox.checked == true) {
         assignedTo += users[i].name + ",";
@@ -37,7 +37,7 @@ async function createTask() {
   showSuccessMessage();
 
   // Formular zurücksetzen (falls gewünscht)
-  clearForm();
+  clearForm(id);
 }
 
 /*
@@ -101,12 +101,12 @@ function clearPrioButtons(id = "")
 */
 
 function clickOnUrgent(id = "") {
-  if (getTaskPrio('Popup') == "Urgent") {
-    clearPrioButtons('Popup');
+  if (getTaskPrio(id) == "Urgent") {
+    clearPrioButtons(id);
     return;
   }
 
-  clearPrioButtons('Popup');
+  clearPrioButtons(id);
 
   document.getElementById("urgent" + id).className = "btn-prio btn-bg-change-urgent-onclick prio-txt-color-set-white";
   document.getElementById("urgent" + id).style.boxShadow = "none";
@@ -119,19 +119,17 @@ function clickOnUrgent(id = "") {
 */
 
 function clickOnMedium(id = "") {
-  if (getTaskPrio('Popup') == "Medium") {
-    clearPrioButtons('Popup');
+  if (getTaskPrio(id) == "Medium") {
+    clearPrioButtons(id);
     return;
   }
 
-  clearPrioButtons('Popup');
+  clearPrioButtons(id);
 
   document.getElementById("medium" + id).className = "btn-prio btn-bg-change-medium-onclick prio-txt-color-set-white";
   document.getElementById("medium" + id).style.boxShadow = "none";
   document.getElementById("mediumID" + id).className = "d-none";
   document.getElementById("medium-whiteID" + id).className = "";
-
-  console.log("medium" + id);
 }
 
 /*
@@ -139,12 +137,12 @@ function clickOnMedium(id = "") {
 */
 
 function clickOnLow(id = "") {
-  if (getTaskPrio('Popup') == "Low") {
-    clearPrioButtons('Popup');
+  if (getTaskPrio(id) == "Low") {
+    clearPrioButtons(id);
     return;
   }
 
-  clearPrioButtons('Popup');
+  clearPrioButtons(id);
 
   document.getElementById("low" + id).className = "btn-prio btn-bg-change-low-onclick prio-txt-color-set-white";
   document.getElementById("low" + id).style.boxShadow = "none";
@@ -156,17 +154,17 @@ function clickOnLow(id = "") {
 ** open dropdown assigned to and dropdown category
 */
 
-function toggleDropdown() {
-  document.getElementById("myDropdown").classList.toggle("show");
+function toggleDropdown(id = "") {
+  document.getElementById("myDropdown" + id).classList.toggle("show");
 }
 
 /*
 ** close dropdown assigned to and dropdown category
 */
 
-function closeAssignedto() {
-  let dropdown = document.getElementById('myDropdown');
-  let container = document.getElementById('contacts-list'); 
+function closeAssignedto(id = "") {
+  let dropdown = document.getElementById('myDropdown' + id);
+  let container = document.getElementById('contacts-list' + id);
 
   document.addEventListener('click', (event) => {
   if (!container.contains(event.target) && dropdown.classList.contains('show')) {
@@ -202,8 +200,8 @@ function toggleDropdownCategory() {
 ** render assigned to menu with users, initials, etc.
 */
 
-async function renderAssignedTo() {
-  let assignedMenu = document.getElementById("myDropdown");
+async function renderAssignedTo(id = "") {
+  let assignedMenu = document.getElementById("myDropdown" + id);
   let j = 1;
 
   // Setze den Inhalt von assignedMenu zurück
@@ -215,7 +213,7 @@ async function renderAssignedTo() {
   // Duplikate entfernen
   let uniqueUsers = [];
   users.forEach(user => {
-      if (!uniqueUsers.some(uniqueUser => uniqueUser.email === user.email)) {
+      if (!uniqueUsers.some(uniqueUser => uniqueUser.email == user.email)) {
           uniqueUsers.push(user.name.trim());
       }
   });
@@ -224,7 +222,7 @@ async function renderAssignedTo() {
   let htmlContent = "";
 
   for (let i = 0; i < uniqueUsers.length; i++) {
-      htmlContent += createRenderAssignedToUserTemplate(i, j, getUserInitials(uniqueUsers[i]), uniqueUsers[i]);
+      htmlContent += createRenderAssignedToUserTemplate(id, i, j, getUserInitials(uniqueUsers[i]), uniqueUsers[i]);
 
       j++;
       if (j > 15) {
@@ -535,7 +533,7 @@ if (priority === "None") { // Überprüfen, ob die Priorität auf "None" gesetzt
 ** setting back the create task form
 */
 
-function clearForm() {
+function clearForm(id = "") {
   // Leert alle Textfelder
   document.getElementById('title').value = '';
   document.getElementById('description').value = '';
@@ -545,17 +543,19 @@ function clearForm() {
   document.getElementById('category-displayed').textContent = 'Select task category';
 
   // Setzt das ausgewählte Prio-Design zurück
-  clearPrioButtons();
-  clickOnMedium();
+  clearPrioButtons(id);
+  clickOnMedium(id);
+
+  closeAssignedto(id);
 
   // Setzt die Subtask-Liste zurück
-  document.getElementById('subtaskList').innerHTML = '';
+  document.getElementById('subtaskList' + id).innerHTML = '';
 
   // Leert das Dropdown-Menü "Assigned to"
-  document.getElementById('selected-contacts-container').innerHTML = '';
+  document.getElementById('selected-contacts-container' + id).innerHTML = '';
 
   // Alle Checkboxen im Dropdown "Assigned to" zurücksetzen
-  const checkboxes = document.querySelectorAll('#myDropdown input[type="checkbox"]');
+  const checkboxes = document.querySelectorAll(`#myDropdown${id} input[type="checkbox"]`);
   checkboxes.forEach(checkbox => {
       checkbox.checked = false;
       const listItem = checkbox.closest(".list-item");

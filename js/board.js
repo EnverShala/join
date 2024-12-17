@@ -167,11 +167,11 @@ function renderSubtasks() {
 ** toggles the checkboxes of the assignedusers in the assigneduser menu
 */
 
-function toggleAssignedUsers(assignedUsers) {
+function toggleAssignedUsers(assignedUsers, id = "") {
   for (let c = 0; c < users.length; c++) {
     for (let a = 0; a < assignedUsers.length; a++) {
       if (users[c].name == assignedUsers[a]) {
-        toggleCheckbox(`AssignedContact${c}`);
+        toggleCheckbox(`AssignedContact${id}${c}`);
       }
     }
   }
@@ -245,8 +245,8 @@ function getTaskNrFromCurrentId() {
 ** gets/reads the subtasks from the UL list (to save them into the task then)
 */
 
-function getSubtaskItems() {
-  let subtaskItems = document.getElementById("subtaskList").getElementsByTagName("li");
+function getSubtaskItems(id = "") {
+  let subtaskItems = document.getElementById("subtaskList" + id).getElementsByTagName("li");
   let newSubtasks = "";
 
   if (subtaskItems.length > 0) {
@@ -264,12 +264,12 @@ function getSubtaskItems() {
 ** returns the assigned Users (as a String)
 */
 
-function getAssignedUsers() {
+function getAssignedUsers(id = "") {
   let newAssigned = "";
 
   if (users.length > 0) {
     for (let i = 0; i < users.length; i++) {
-      let checkbox = document.getElementById(`AssignedContact${i}`);
+      let checkbox = document.getElementById(`AssignedContact${id}${i}`);
 
       if(checkbox.checked == true) {
         newAssigned += users[i].name + ",";
@@ -520,10 +520,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (modal && openModalButton && closeModalButton) {
     // Modal öffnen
-    openModalButton.addEventListener("click", () => { modal.showModal(); });
+    openModalButton.addEventListener("click", () => { modal.showModal(); renderAssignedTo('Popup'); });
 
     alsoOpenButtons.forEach((button) => {
-      button.addEventListener("click", () => { modal.showModal(); });
+      button.addEventListener("click", () => { modal.showModal(); renderAssignedTo('Popup');  });
     });
 
     // Modal schließen
