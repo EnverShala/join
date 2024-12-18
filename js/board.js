@@ -134,6 +134,8 @@ function cancelSubtaskEdit(position) {
 
 
 function confirmSubtaskEdit(position) {
+  if(document.getElementById(`editSubtaskInput${position}`).value.trim() == "") { cancelSubtaskEdit(position); return; }
+
   let listItem = document.querySelector(`ul li[data-index="${position}"]`);
 
   subtasksArray[position] = document.getElementById(`editSubtaskInput${position}`).value.trim();
