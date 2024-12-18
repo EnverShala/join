@@ -224,10 +224,10 @@ function editPopupTask() {
 ** activates the selected prio button
 */
 
-function activatePrioButton(prioName) {
-  if (prioName == "Urgent") { clickOnUrgent(); }
-  if (prioName == "Medium") { clickOnMedium(); }
-  if (prioName == "Low") { clickOnLow(); }
+function activatePrioButton(prioName, id = "") {
+  if (prioName == "Urgent") { clickOnUrgent(id); }
+  if (prioName == "Medium") { clickOnMedium(id); }
+  if (prioName == "Low") { clickOnLow(id); }
 }
 
 /*
@@ -522,10 +522,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (modal && openModalButton && closeModalButton) {
     // Modal öffnen
-    openModalButton.addEventListener("click", () => { popupIdString = "Popup"; modal.showModal(); renderAssignedTo('Popup'); });
+    openModalButton.addEventListener("click", () => {
+      popupIdString = "Popup";
+      modal.showModal();
+      renderAssignedTo('Popup');
+      activatePrioButton("Medium", "Popup");
+    });
 
     alsoOpenButtons.forEach((button) => {
-      button.addEventListener("click", () => { popupIdString = "Popup"; modal.showModal(); renderAssignedTo('Popup');  });
+      button.addEventListener("click", () => {
+        popupIdString = "Popup";
+        modal.showModal();
+        renderAssignedTo('Popup');
+        activatePrioButton("Medium", "Popup");
+      });
     });
 
     // Modal schließen
