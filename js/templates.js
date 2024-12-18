@@ -67,10 +67,10 @@ function contactTemplate(i, j) {
 ** template for creating render assigned to menu user
 */
 
-function createRenderAssignedToUserTemplate(id = "", i, j, userInitials, userName) {
+function createRenderAssignedToUserTemplate(i, j, userInitials, userName, id = "") {
   return `
         <label onclick="event.stopPropagation()"><li class="list-item assigned-to"></label>
-            <div class="list-item-name" onclick="toggleCheckbox('AssignedContact${id}${i}')">
+            <div class="list-item-name" onclick="toggleCheckbox('AssignedContact${id}${i}', '${id}')">
                 <label><div class="circle initialsColor${j}">${userInitials}</div></label>
                 <label>${userName}</label>
             </div>

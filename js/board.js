@@ -522,18 +522,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (modal && openModalButton && closeModalButton) {
     // Modal öffnen
-    openModalButton.addEventListener("click", () => { modal.showModal(); renderAssignedTo('Popup'); });
+    openModalButton.addEventListener("click", () => { popupIdString = "Popup"; modal.showModal(); renderAssignedTo('Popup'); });
 
     alsoOpenButtons.forEach((button) => {
-      button.addEventListener("click", () => { modal.showModal(); renderAssignedTo('Popup');  });
+      button.addEventListener("click", () => { popupIdString = "Popup"; modal.showModal(); renderAssignedTo('Popup');  });
     });
 
     // Modal schließen
-    closeModalButton.addEventListener("click", () => { modal.close(); });
+    closeModalButton.addEventListener("click", () => { modal.close(); popupIdString = ""; });
 
     // Optional: Modal schließen, wenn man außerhalb des Modals klickt
     modal.addEventListener("click", (event) => {
-      if (event.target === modal) { modal.close(); }
+      if (event.target === modal) { modal.close(); popupIdString = ""; }
     });
   } else {
     console.error("Modal, Open Button, or Close Button not found in the DOM.");

@@ -1,3 +1,5 @@
+let popupIdString = "";
+
 async function createTask(id = "") {
   let taskTitle = document.getElementById("title").value;
   let taskDescription = document.getElementById("description").value;
@@ -222,7 +224,7 @@ async function renderAssignedTo(id = "") {
   let htmlContent = "";
 
   for (let i = 0; i < uniqueUsers.length; i++) {
-      htmlContent += createRenderAssignedToUserTemplate(id, i, j, getUserInitials(uniqueUsers[i]), uniqueUsers[i]);
+      htmlContent += createRenderAssignedToUserTemplate(i, j, getUserInitials(uniqueUsers[i]), uniqueUsers[i], id);
 
       j++;
       if (j > 15) {
@@ -251,10 +253,9 @@ function toggleCheckbox(checkboxId) {
 
 function toggleBackground(checkbox) {
   const listItem = checkbox.closest(".list-item");
-  const contactName = listItem.querySelector(".list-item-name label").textContent.trim();
   const contactCircle = listItem.querySelector(".circle").cloneNode(true); // Kopiere das Kreis-Element
 
-  const selectedContactsContainer = document.getElementById("selected-contacts-container");
+  const selectedContactsContainer = document.getElementById("selected-contacts-container" + popupIdString);
 
   if (checkbox.checked) {
     listItem.style.backgroundColor = "#2a3647";
