@@ -410,18 +410,13 @@
     <dialog data-modal id="myModal">
       <button class="addTaskPopupClose" id="closeModal">X</button>
       <div class="mainContainerPopUp">
-        <div class="header">
-            <h1>Add Task</h1>
+        <div class="headerPopupContainer">
+            <h1 class="headerPopupText">Add Task</h1>
         </div>
             
         <div class="inputGroupOnPopUp">
                 <label>Title<span class="required">*</span></label>
-                <input
-                  class="input"
-                  type="text"
-                  id="title"
-                  placeholder="Enter a title"
-                />
+                <input class="inputPopup" type="text" id="title" placeholder="Enter a title" />
                 <div id="title-required" class="requiredMessage">
                   This field is required
                 </div>
@@ -429,10 +424,7 @@
 
         <div class="inputGroupOnPopUp">
                 <label for="description">Description<span class="required">*</span></label>
-                <input
-                  id="description" class="input"
-                  placeholder="Enter a description"
-                ></input>
+                <input id="description" class="inputPopup" placeholder="Enter a description"></input>
                 <div id="description-required" class="requiredMessage">
                   This field is required
                 </div>
@@ -440,16 +432,10 @@
 
         <div class="inputGroupOnPopUp">
                 <label class="margin" for="dropdown-container"
-                  >Assigned to<span class="required">*</span></label
-                >
+                  >Assigned to<span class="required">*</span></label>
                 <div class="dropdown">
                   <div id="contacts-listPopup" class="selectOnEditPopUp assigned-to" onclick="toggleDropdown('Popup')">
-                    <input
-                      class="select-input placeholder"
-                      type="text"
-                      placeholder="Select contacts to assign"
-                      readonly
-                    />
+                    <input class="select-input placeholder" type="text" placeholder="Select contacts to assign" readonly/>
                     <span class="down-arrow" >
                       <img src="img/arrow_drop_downaa.svg" alt="">
                     </span>
@@ -463,19 +449,20 @@
                   <div class="selected-contacts"></div>
                 </div>
         </div>
+
         <div id="assigned-to-required" class="requiredMessage">
             This field is required
         </div>
        
         <div class="inputGroupOnPopUp">
             <label class="due-date" for="due-date-input"> Due date <span class="required">*</span></label>
-            <input class="input" type="date" id="due-date-input"/>
+            <input class="inputPopup" type="date" id="due-date-input"/>
             <div id="date-required" class="requiredMessage">This field is required</div>
         </div>
 
         <div class="inputGroupOnPopUp">
             <label>Prio</label>
-            <div class="buttons-prio">
+            <div class="buttonsPrioOnPopUp">
               <button onclick="clickOnUrgent('Popup')" type="button" id="urgentPopup" class="btn-prio">
                 Urgent<img id="urgentIDPopup" src="./img/urgent.svg"/>
                       <img id="urgent-whiteIDPopup" class="d-none" src="./img/urgent-white.svg"/>
@@ -498,7 +485,7 @@
         <div class="inputGroupOnPopUp">
           <label for="category-selected">Category<span class="required">*</span></label>
           <div class="dropdown">
-            <div id="category-container" class="select category" onclick="toggleDropdownCategory()" >
+            <div id="category-container" class="selectPopup" onclick="toggleDropdownCategory()" >
               <span id="category-displayed" class="btn-text">Select task category</span>
               <span class="down-arrow" >
                 <img src="img/arrow_drop_downaa.svg" alt="">
@@ -520,7 +507,7 @@
         <div class="inputGroupOnPopUp">
           <label for="subtasks">Subtasks<span class="required">*</span></label>
           <div class="input-container-subtask">
-            <input class="input subtask" type="text" placeholder="Add new subtask" />
+            <input class="inputPopup" type="text" placeholder="Add new subtask" />
             <div class="btn-subtask add">
               <img src="./img/add.png" alt="Add" />
             </div>
@@ -547,10 +534,10 @@
             <span class="required">*This field is required</span> 
           </p>
           <div class="createClearButtonContainer">
-            <button onclick="clearForm('Popup')" type="button" class="btn-clear" id="clear-btn">Clear
+            <button onclick="clearForm('Popup')" type="button" class="btnClearOnPopup" id="clear-btn">Clear
                 <img id="cancel-icon" src="./img/close.png" alt="">
             </button>
-            <button type="button" class="btn-create" onclick="validateAndCreateTask(event)">Create Task
+            <button type="button" class="btnCreateOnPopup" onclick="validateAndCreateTask(event)">Create Task
                 <img src="./img/check_white.svg" alt="" />
             </button>
           </div>

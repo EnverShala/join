@@ -834,11 +834,61 @@ h2 {
   border-radius: 100px;
 }
 
+.headerPopup {
+  text-wrap: nowrap;
+}
+
+.headerPopupText {
+  font-size: 42px;
+}
+
+.inputPopup {
+  border-radius: 10px;
+  padding: 12px 21px;
+  border: 1px solid #dfdede;
+  font-family: inherit;
+  font-size: 20px;
+  cursor: auto;
+  width: 440px;
+}
+
 .mainContainerPopUp {
   display: flex;
   justify-content: center;
   flex-direction: column;
   gap: 30px;
+}
+
+.btnClearOnPopup,
+.btnCreateOnPopup {
+  border: 1px solid #2a3647;
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 20px;
+  background-color: white;
+}
+
+.btnCreateOnPopup {
+  background-color: #2a3647;
+  color: white;
+  font-weight: 700;
+}
+
+.btnClearOnPopup:hover {
+  border: 1px solid rgba(43, 169, 227, 1);
+  color: rgba(43, 169, 227, 1);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.3);
+}
+
+.btnCreateOnPopup:hover {
+  background-color: rgba(43, 169, 227, 1);
+  border: 1px solid rgba(43, 169, 227, 1);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.3);
 }
 
 label {
@@ -958,7 +1008,7 @@ label {
   gap: 30px;
 }
 
-.buttonsPrioOnEditPopUp {
+.buttonsPrioOnEditPopUp,.buttonsPrioOnPopUp {
   display: flex;
   justify-content: center;
   gap: 0;
@@ -967,7 +1017,6 @@ label {
 .inputGroupOnPopUp {
   display: flex;
   flex-direction: column;
-  
 }
 
 .okButtonMainContainer {
@@ -1169,7 +1218,23 @@ label {
   }
   #myModal {
     width: 400px;
-  }  
+  }
+  .inputGroupOnPopUp,
+  .inputPopup {
+    width: 350px;
+  }
+  .selectPopup {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 48px;
+    padding: 0 16px;
+    border: 1px solid #dfdede;
+    border-radius: 10px;
+    background-color: #ffffff;
+    font-size: 20px;
+    cursor: pointer;
+  }
 }
 @media (max-width: 560px) {
   .popupOnTaskSelectionMainContainer,
@@ -1213,12 +1278,30 @@ label {
     width: 350px;
     height: 80%;
   }
-  .buttonsPrioOnEditPopUp {
+  .buttonsPrioOnPopUp {
     width: 280px;
     gap: 2px;
   }
   .btn-prio {
     width: 90px;
+  }
+  #myModal {
+    width: 320px;
+  }
+  .inputGroupOnPopUp {
+    width: 280px;
+  }
+  .inputPopup {
+    width: 280px;
+  }
+  .buttonsPrioOnEditPopUp {
+    gap: 0;
+  }
+  .btnClearOnPopup,
+  .btnCreateOnPopup {
+    padding: 10px;
+    gap: 6px;
+    font-size: 16px;
   }
 }
 @media (max-width: 410px) {
@@ -1242,9 +1325,7 @@ label {
   .okButtonMainContainer {
     width: 260px;
   }
-  .buttonsPrioOnEditPopUp {
-    width: 240px;
-  }
+
   .btn-prio {
     width: 90px;
   }
@@ -1303,9 +1384,6 @@ label {
   .okButtonMainContainer {
     width: 240px;
   }
-  .buttonsPrioOnEditPopUp {
-    width: 80px;
-  }
   .popupOnTaskSelectionMainContainer,
   .popupOnTaskEdit {
     width: 300px;
@@ -1325,5 +1403,30 @@ label {
   .taskCard {
     width: 300px !important;
     margin-left: -4px;
+  }
+  #myModal {
+    width: 300px;
+    height: 600px;
+  }
+  .inputGroupOnPopUp {
+    width: 240px;
+  }
+  .inputPopup {
+    width: 240px;
+  }
+  .buttonsPrioOnEditPopUp {
+    width: 260px;
+  }
+  .buttonsPrioOnPopUp {
+    width: 230px;
+  }
+  .btnClearOnPopup,
+  .btnCreateOnPopup {
+    padding: 8px;
+    gap: 6px;
+    font-size: 16px;
+  }
+  .addTaskPopupClose {
+    right: 20px;
   }
 }
