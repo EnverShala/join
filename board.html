@@ -340,12 +340,12 @@
               Urgent<img id="urgentID" src="./img/urgent.svg" class="">
                     <img id="urgent-whiteID" class="d-none" src="./img/urgent-white.svg">
             </button>
-            <div class="">
+          
             <button onclick="clickOnMedium()" type="button" id="medium" class="btn-prio">
               Medium<img id="mediumID" src="./img/medium.svg" class="d-none">
               <img id="medium-whiteID" class="" src="./img/medium-white.svg">
             </button>
-          </div>
+          
             <button onclick="clickOnLow()" type="button" id="low" class="btn-prio">
               Low<img id="lowID" src="./img/low.svg" class="">
               <img id="low-whiteID" class="d-none" src="./img/low-white.svg">
@@ -406,19 +406,15 @@
 
 
   <!-- Start AddTask PopUp Container -->
-  <section class="boardSection">
-
-  <dialog data-modal id="myModal">
-   
+  <section class="boardSectionPopup">
+    <dialog data-modal id="myModal">
       <button class="addTaskPopupClose" id="closeModal">X</button>
-      <form id="" action="">
-        <div class="containerForm">
-          <div class="header">
+      <div class="mainContainerPopUp">
+        <div class="header">
             <h1>Add Task</h1>
-          </div>
-          <div class="addTaskContainer">
-            <div class="addTaskLeft">
-              <div class="inputGroupOnPopUp">
+        </div>
+            
+        <div class="inputGroupOnPopUp">
                 <label>Title<span class="required">*</span></label>
                 <input
                   class="input"
@@ -429,8 +425,9 @@
                 <div id="title-required" class="requiredMessage">
                   This field is required
                 </div>
-              </div>
-              <div class="inputGroupOnPopUp">
+        </div>
+
+        <div class="inputGroupOnPopUp">
                 <label for="description">Description<span class="required">*</span></label>
                 <input
                   id="description" class="input"
@@ -439,8 +436,9 @@
                 <div id="description-required" class="requiredMessage">
                   This field is required
                 </div>
-              </div>
-              <div class="inputGroupOnPopUp">
+        </div>
+
+        <div class="inputGroupOnPopUp">
                 <label class="margin" for="dropdown-container"
                   >Assigned to<span class="required">*</span></label
                 >
@@ -464,133 +462,106 @@
                   <!-- End Contacts Assigned to-->
                   <div class="selected-contacts"></div>
                 </div>
-              </div>
-              <div id="assigned-to-required" class="requiredMessage">
-                This field is required
-              </div>
-            </div>
-           
-            <div class="col-right gap">
-              <div class="inputGroupOnPopUp">
-                <div>
-                  <label class="due-date" for="due-date-input"
-                  >Due date<span class="required">*</span></label
-                >
-                <input class="input" type="date" id="due-date-input" />
-                <div id="date-required" class="requiredMessage">
-                 This field is required
-                </div>
-              </div>
-              <div class="inputGroupOnPopUp">
-                <label>Prio</label>
-                <div class="buttons-prio">
-                  <button onclick="clickOnUrgent('Popup')" type="button" id="urgentPopup" class="btn-prio">
-                    Urgent<img id="urgentIDPopup" src="./img/urgent.svg"/>
-                          <img id="urgent-whiteIDPopup" class="d-none" src="./img/urgent-white.svg"/>
-                  </button>
-                  <div class>
-                  <button onclick="clickOnMedium('Popup')" type="button" id="mediumPopup" class="btn-prio">
-                    Medium<img id="mediumIDPopup" src="./img/medium.svg"/>
-                    <img id="medium-whiteIDPopup" class="d-none" src="./img/medium-white.svg"/>
-                  </button>
-                </div>
-                  <button onclick="clickOnLow('Popup')" type="button" id="lowPopup" class="btn-prio">
-                    Low<img id="lowIDPopup" src="./img/low.svg"/>
-                    <img id="low-whiteIDPopup" class="d-none" src="./img/low-white.svg"/>
-                  </button>
-                </div>
-                <div id="prio-required" class="requiredMessage">
-                  This field is required
-                </div>  
-              </div>
-              <div class="inputGroupOnPopUp">
-                <label for="category-selected"
-                  >Category<span class="required">*</span></label
-                >
-                <div class="dropdown" >
-                  <div id="category-container" class="select category" onclick="toggleDropdownCategory()" >
-                    <span id="category-displayed" class="btn-text">Select task category</span>
-                    <span class="down-arrow" >
-                      <img src="img/arrow_drop_downaa.svg" alt="">
-                    </span>
-                  </div>
-                  <div id="category-required" class="requiredMessage">               
-                    This field is required
-                  </div>
-                  <ul class="category scroll-disabled dropdown-content" id="myDropdownCategory" >
-                    <li onclick="selectTechnicalStack(); toggleDropdownCategory()" id="categoryTechnicalStack" data-value="Technical stack" class="item category">
-                      <span>Technical stack</span>
-                    </li>
-                    <li onclick="selectUserStory(); toggleDropdownCategory()" id="categoryUserStory" data-value="User-story" class="item category">
-                      <span>User Story</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <!--Begin subtask-->
-              <div class="inputGroupOnPopUp">
-                <label for="subtasks">Subtasks<span class="required">*</span></label>
-                <div class="input-container-subtask">
-                  <input class="input subtask" type="text" placeholder="Add new subtask" />
-                  <div class="btn-subtask add">
-                    <img src="./img/add.png" alt="Add" />
-                  </div>
-                  <div class="btn-subtask check-cancel">
-                    <div class="cancel-subtask">
-                      <img src="./img/close.png" alt="Cancel" />
-                    </div>
-                    <div class="divider-subtask"></div>
-                    <div class="check-subtask">
-                      <img src="./img/check.png" alt="Check" />
-                    </div>
-                    </div>
-                </div>
+        </div>
+        <div id="assigned-to-required" class="requiredMessage">
+            This field is required
+        </div>
+       
+        <div class="inputGroupOnPopUp">
+            <label class="due-date" for="due-date-input"> Due date <span class="required">*</span></label>
+            <input class="input" type="date" id="due-date-input"/>
+            <div id="date-required" class="requiredMessage">This field is required</div>
+        </div>
 
-                  <div class="container-subtasks-display">
-                      <ul id="subtaskListPopup" class="list-subtasks"></ul>
-                  </div>
-                  <div id="subtasks-requiredPopup" class="requiredMessage">
-                    This field is required
-                  </div>
-              </div>
-              <!--End subtask-->  
-            </div>
-          </div>
-          <div class="bottomAddTaskContainer">
-            <p class="required-note">
-              <span class="required">*This field is required</span> 
-            </p>
-            <div class="createClearButtonContainer">
-              <button
-                onclick="clearForm('Popup')"
-                type="button"
-                class="btn-clear"
-                id="clear-btn"
-              >
-                Clear
-                <img
-                  id="cancel-icon"
-                  src="./img/close.png"
-                  alt=""
-                >
+        <div class="inputGroupOnPopUp">
+            <label>Prio</label>
+            <div class="buttons-prio">
+              <button onclick="clickOnUrgent('Popup')" type="button" id="urgentPopup" class="btn-prio">
+                Urgent<img id="urgentIDPopup" src="./img/urgent.svg"/>
+                      <img id="urgent-whiteIDPopup" class="d-none" src="./img/urgent-white.svg"/>
               </button>
-              <button type="button" class="btn-create" onclick="validateAndCreateTask(event)">
-                Create Task
-                <img src="./img/check_white.svg" alt="" />
+                  
+              <button onclick="clickOnMedium('Popup')" type="button" id="mediumPopup" class="btn-prio">
+                Medium<img id="mediumIDPopup" src="./img/medium.svg"/>
+                      <img id="medium-whiteIDPopup" class="d-none" src="./img/medium-white.svg"/>
+              </button>
+                
+              <button onclick="clickOnLow('Popup')" type="button" id="lowPopup" class="btn-prio">
+                Low<img id="lowIDPopup" src="./img/low.svg"/>
+                    <img id="low-whiteIDPopup" class="d-none" src="./img/low-white.svg"/>
               </button>
             </div>
+            <div id="prio-required" class="requiredMessage">This field is required
+            </div>  
+        </div>
+              
+        <div class="inputGroupOnPopUp">
+          <label for="category-selected">Category<span class="required">*</span></label>
+          <div class="dropdown">
+            <div id="category-container" class="select category" onclick="toggleDropdownCategory()" >
+              <span id="category-displayed" class="btn-text">Select task category</span>
+              <span class="down-arrow" >
+                <img src="img/arrow_drop_downaa.svg" alt="">
+              </span>
+            </div>
+            <div id="category-required" class="requiredMessage">This field is required
+            </div>
+            <ul class="category scroll-disabled dropdown-content" id="myDropdownCategory" >
+              <li onclick="selectTechnicalStack(); toggleDropdownCategory()" id="categoryTechnicalStack" data-value="Technical stack" class="item category">
+                <span>Technical stack</span>
+              </li>
+              <li onclick="selectUserStory(); toggleDropdownCategory()" id="categoryUserStory" data-value="User-story" class="item category">
+                <span>User Story</span>
+              </li>
+            </ul>
           </div>
         </div>
-      </form>
-    
+
+        <div class="inputGroupOnPopUp">
+          <label for="subtasks">Subtasks<span class="required">*</span></label>
+          <div class="input-container-subtask">
+            <input class="input subtask" type="text" placeholder="Add new subtask" />
+            <div class="btn-subtask add">
+              <img src="./img/add.png" alt="Add" />
+            </div>
+            <div class="btn-subtask check-cancel">
+              <div class="cancel-subtask">
+                <img src="./img/close.png" alt="Cancel" />
+              </div>
+              <div class="divider-subtask"></div>
+              <div class="check-subtask">
+                <img src="./img/check.png" alt="Check" />
+              </div>
+            </div>
+          </div>
+          <div class="container-subtasks-display">
+            <ul id="subtaskListPopup" class="list-subtasks"></ul>
+          </div>
+          <div id="subtasks-requiredPopup" class="requiredMessage">This field is required
+          </div>
+        </div>
+      </div>
+          
+        <div class="bottomAddTaskContainer">
+          <p class="required-note">
+            <span class="required">*This field is required</span> 
+          </p>
+          <div class="createClearButtonContainer">
+            <button onclick="clearForm('Popup')" type="button" class="btn-clear" id="clear-btn">Clear
+                <img id="cancel-icon" src="./img/close.png" alt="">
+            </button>
+            <button type="button" class="btn-create" onclick="validateAndCreateTask(event)">Create Task
+                <img src="./img/check_white.svg" alt="" />
+            </button>
+          </div>
+        </div>
+
     <div class="msg-task-added" style="display:none;">
       <p>Task added to board</p>
       <img src="./img/board.png" alt="" />
     </div>
-
-
   </dialog>
-  </section>
+</section>
 
   <script src="./js/firebase.js"></script>
   <script src="./js/board.js"></script>

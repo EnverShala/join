@@ -816,11 +816,7 @@ h2 {
 }
 /*Pop up Addtask*/
 #myModal {
-  width: 550px;
-  height: 90%;
-  padding-left: 60px;
-  padding-top: 40px;
-  padding-bottom: 40px;
+  height: 85%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -828,6 +824,7 @@ h2 {
   border: 0;
   border-radius: 15px;
   background-color: #ffffff;
+  padding: 24px 24px 24px 24px;
 }
 #myModal::-webkit-scrollbar {
   width: 8px;
@@ -835,6 +832,17 @@ h2 {
 #myModal::-webkit-scrollbar-thumb {
   background-color: #cccccc;
   border-radius: 100px;
+}
+
+.mainContainerPopUp {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 30px;
+}
+
+label {
+  margin-bottom: 5px;
 }
 
 .bottomAddTaskContainer {
@@ -943,14 +951,23 @@ h2 {
   width: 440px;
 }
 
+.addTaskLeft,
+.col-right {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
 .buttonsPrioOnEditPopUp {
   display: flex;
+  justify-content: center;
+  gap: 0;
 }
 
 .inputGroupOnPopUp {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  
 }
 
 .okButtonMainContainer {
@@ -1105,9 +1122,6 @@ h2 {
     height: 80%;
     overflow-x: hidden;
   }
-  .containerForm {
-    margin-left: -30px;
-  }
 }
 @media (max-width: 941px) {
   .popupOnTaskSelectionMainContainer,
@@ -1155,11 +1169,7 @@ h2 {
   }
   #myModal {
     width: 400px;
-  }
-  .containerForm {
-    margin-left: -50px;
-  }
-  
+  }  
 }
 @media (max-width: 560px) {
   .popupOnTaskSelectionMainContainer,
