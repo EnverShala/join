@@ -27,11 +27,12 @@ h1 {
   background-color: #fff;
   border-radius: 0 0 10px 10px;
   border: 1px solid #d1d1d1;
-  margin-top: -57px;
   border-top: none;
   display: none;
-  z-index: 5;
+  z-index: 100;
+  margin-top: -10px;
   font-size: 20px;
+  z-index: 10;
 }
 
 .dropdown-content li {
@@ -217,8 +218,9 @@ form {
 
 .selected-contacts {
   display: flex;
-  z-index: 1;
-  padding: 0.5em;
+  position: sticky;
+  padding-top: 5px;
+  z-index: 1; 
 }
 
 .circle {
@@ -591,7 +593,9 @@ label {
   form {
     width: 340px !important;
   }
-  .mobile-nav,.container-nav-links,a {
+  .mobile-nav,
+  .container-nav-links,
+  a {
     width: 90%;
   }
   .input,
@@ -626,7 +630,8 @@ label {
   form {
     width: 310px !important;
   }
-  a ,.nav-links {
+  a,
+  .nav-links {
     height: 60px;
     width: 60px !important;
   }

@@ -1019,6 +1019,52 @@ label {
   flex-direction: column;
 }
 
+.dropdownContentPopup{
+  position: sticky;
+  width: 100%;
+  max-height: 250px;
+  overflow-y: scroll;
+  padding-top: 8px;
+  background-color: #fff;
+  border-radius: 0 0 10px 10px;
+  border: 1px solid #d1d1d1;
+  border-top: none;
+  display: none;
+  z-index: 100;
+  margin-top: -10px;
+  font-size: 20px;
+  z-index: 10;
+}
+
+.dropdownContentPopup li {
+  padding: 8px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dropdownContentPopup li:hover {
+  background-color: #ddd;
+}
+
+.dropdownContentPopup .list-item-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.selectedContactsPopup {
+  display: flex;
+  position: fixed;
+  padding-top: 5px;
+  z-index: 1;
+}
+
+.selected-contacts{
+  margin-bottom: 10px;
+}
+
 .okButtonMainContainer {
   position: sticky;
   width: 450px;
