@@ -510,6 +510,18 @@ function clearCardContainersInnerHtml() {
   document.getElementById("cardContainerdone").innerHTML = "";  
 }
 
+
+function addSubtaskPopup() {
+  alert("yo");
+
+  let subtasksListPopup = document.getElementById("subtaskListPopup");
+  let subtask = document.getElementById("addSubtaskInputPopup").value.trim();
+  
+  subtasksListPopup.innerHTML += createSubtaskListItemTemplate(0, subtask);
+
+  document.getElementById("addSubtaskInputPopup").value = "";
+}
+
 /*
 ** AddTask Pop up
 */
@@ -539,11 +551,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Modal schließen
-    closeModalButton.addEventListener("click", () => { modal.close(); popupIdString = ""; });
+    closeModalButton.addEventListener("click", () => { modal.close(); popupIdString = ""; clearForm("Popup"); });
 
     // Optional: Modal schließen, wenn man außerhalb des Modals klickt
     modal.addEventListener("click", (event) => {
-      if (event.target === modal) { modal.close(); popupIdString = ""; }
+      if (event.target === modal) { modal.close(); popupIdString = ""; clearForm("Popup"); }
     });
   } else {
     console.error("Modal, Open Button, or Close Button not found in the DOM.");
