@@ -539,6 +539,7 @@ document.addEventListener("DOMContentLoaded", () => {
       modal.showModal();
       renderAssignedTo('Popup');
       activatePrioButton("Medium", "Popup");
+      clearForm("Popup");
     });
 
     alsoOpenButtons.forEach((button) => {
@@ -547,15 +548,16 @@ document.addEventListener("DOMContentLoaded", () => {
         modal.showModal();
         renderAssignedTo('Popup');
         activatePrioButton("Medium", "Popup");
+        clearForm("Popup");
       });
     });
 
     // Modal schließen
-    closeModalButton.addEventListener("click", () => { modal.close(); popupIdString = ""; clearForm("Popup"); });
+    closeModalButton.addEventListener("click", () => { modal.close(); popupIdString = ""; });
 
     // Optional: Modal schließen, wenn man außerhalb des Modals klickt
     modal.addEventListener("click", (event) => {
-      if (event.target === modal) { modal.close(); popupIdString = ""; clearForm("Popup"); }
+      if (event.target === modal) { modal.close(); popupIdString = ""; }
     });
   } else {
     console.error("Modal, Open Button, or Close Button not found in the DOM.");
