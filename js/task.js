@@ -6,7 +6,7 @@ async function createTask(id = "") {
   let taskDate = document.getElementById("due-date-input").value;
   let taskCategory = document.getElementById("category-displayed").textContent.trim();
 
-  let taskPrio = getTaskPrio();
+  let taskPrio = getTaskPrio(id);
 
   let taskSubtasks = "";
   let assignedTo = "";
@@ -448,7 +448,7 @@ function selectUserStory()
 ** Begin Form validation
 */
 
-function validateAndCreateTask(event) {
+function validateAndCreateTask(event, id = "") {
   event.preventDefault(); // Immer das Standardverhalten verhindern
 
   let isValid = true;
@@ -495,8 +495,8 @@ function validateAndCreateTask(event) {
 
   // "Assigned To"-Validierung
   const assignedToError = document.getElementById("assigned-to-required");
-  const assignedCheckboxes = document.querySelectorAll('#myDropdown input[type="checkbox"]:checked');
-  if (assignedCheckboxes.length === 0) {
+  const assignedUsers = getAssignedUsers(id);
+  if (assignedUsers === "") {
       assignedToError.style.display = "block";
       isValid = false;
   } else {
@@ -504,7 +504,7 @@ function validateAndCreateTask(event) {
   }
 
   // Prioritäts-Validierung
-const priority = getTaskPrio();
+const priority = getTaskPrio(id);
 const priorityError = document.getElementById("prio-required");
 if (priority === "None") { // Überprüfen, ob die Priorität auf "None" gesetzt ist
     priorityError.style.display = "block";
@@ -514,19 +514,9 @@ if (priority === "None") { // Überprüfen, ob die Priorität auf "None" gesetzt
 }
 
 
-  // Subtasks-Validierung
-  const subtasks = document.getElementById('subtaskList').children;
-  const subtasksError = document.getElementById("subtasks-required");
-  if (subtasks.length === 0) {
-      subtasksError.style.display = "block";
-      isValid = false;
-  } else {
-      subtasksError.style.display = "none";
-  }
-
   if (isValid) {
       // Wenn die Validierung erfolgreich war, die Aufgabe erstellen
-      createTask();
+      createTask(id);
   }
 }
 
@@ -549,8 +539,21 @@ function clearForm(id = "") {
 
   closeAssignedto(id);
 
+  document.getElementById('title-required').style.display = 'none';
+
+  document.getElementById('date-required').style.display = 'none';
+
+  document.getElementById('category-required').style.display = 'none';
+
+  document.getElementById('description-required').style.display = 'none';
+
+  document.getElementById('assigned-to-required').style.display = 'none';
+
+  document.getElementById('prio-required').style.display = 'none';
+
   // Setzt die Subtask-Liste zurück
   document.getElementById('subtaskList' + id).innerHTML = '';
+  document.getElementById('addSubtaskInputPopup').value = '';
 
   // Leert das Dropdown-Menü "Assigned to"
   document.getElementById('selected-contacts-container' + id).innerHTML = '';

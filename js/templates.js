@@ -97,6 +97,23 @@ function createSubtaskListItemTemplate(index, item) {
 }
 
 /*
+** template for creating subtask list item for add task Popup
+*/
+
+function createSubtaskListItemPopupTemplate(index, item) {
+  return `
+            <li class="subtask-list-item" data-index="${index}">
+                <div class="li-text">${item}</div>
+                <div class="subtask-edit-icon-div">
+                    <img onclick="editSubtaskPopup(${index})" id="editTaskPopup${index}" class="edit-subtask-btn" src="./img/edit.png" alt="">
+                    <div class="subtask-divider-2"></div>
+                    <img onclick="deleteSubtaskPopup(${index})" id="deleteSubtaskPopup${index}"class="delete-subtask-btn" src="./img/delete.png" alt="">
+                </div>
+            </li>
+        `;
+}
+
+/*
 ** changes the subtask input field (for editing) back into a list element
 */
 
@@ -112,6 +129,21 @@ function changeSubtaskInputFieldBackToListElement(index, item) {
 }
 
 /*
+** changes the subtask input field (for editing) back into a list element for add task popup
+*/
+
+function changeSubtaskInputFieldBackToListElementPopup(index, item) {
+  return `
+                <div class="li-text">${item}</div>
+                <div class="subtask-edit-icon-div">
+                    <img onclick="editSubtaskPopup(${index})" id="editTaskPopup${index}" class="edit-subtask-btn" src="./img/edit.png" alt="">
+                    <div class="subtask-divider-2"></div>
+                    <img onclick="deleteSubtaskPopup(${index})" id="deleteSubtaskPopup${index}"class="delete-subtask-btn" src="./img/delete.png" alt="">
+                </div>
+        `;
+}
+
+/*
 ** changes the subtask list item into an inpud field to edit the subtask
 */
 
@@ -122,6 +154,21 @@ function changeSubtaskContentToInputForEditTemplate(position, actualContent) {
     <span onclick="cancelSubtaskEdit(${position})" id="cancelSubtaskEdit${position}" class="delete-subtask-btn edit"><img src="./img/delete.png"></span>
     <div class="subtask-divider"></div>
     <span onclick="confirmSubtaskEdit(${position})" id="confirmSubtaskEdit${position}" class="confirm-subtask-edit-btn edit"><img src="./img/check.png"></span>
+    </div>
+`;
+}
+
+/*
+** changes the subtask list item into an inpud field to edit the subtask
+*/
+
+function changeSubtaskContentToInputForEditPopupTemplate(position, actualContent) {
+  return `
+    <input id="editSubtaskInputPopup${position}" class="edit-subtask-input" type="text" value="${actualContent}" onkeydown = "subtaskOnKeyDownPopup(${position})">
+    <div class="edit-subtask-button-div">
+    <span onclick="cancelSubtaskEditPopup(${position})" id="cancelSubtaskEditPopup${position}" class="delete-subtask-btn edit"><img src="./img/delete.png"></span>
+    <div class="subtask-divider"></div>
+    <span onclick="confirmSubtaskEditPopup(${position})" id="confirmSubtaskEditPopup${position}" class="confirm-subtask-edit-btn edit"><img src="./img/check.png"></span>
     </div>
 `;
 }
