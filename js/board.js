@@ -1,4 +1,5 @@
 let subtasksArray;
+let subtasksArrayPopup = [];
 let pos;
 
 /*
@@ -190,6 +191,20 @@ function subtaskOnKeyDown(position) {
   } else {
     if(event.key == "Escape") { document.getElementById("addNewSubtaskInput").value = ""; } // clear the add Subtask Input Field
     if(event.key == "Enter") { addNewSubtask(); }
+  }
+}
+
+/*
+** function for onkeydown (using enter to confirm or escape to clear) on subtask editing on add task popup
+*/
+
+function subtaskOnKeyDownPopup(position) {
+  if(position != -1) {
+    if(event.key == "Escape") { cancelSubtaskEditPopup(position); }
+    if(event.key == "Enter") { confirmSubtaskEditPopup(position); }
+  } else {
+    if(event.key == "Escape") { document.getElementById("addNewSubtaskInputPopup").value = ""; } // clear the add Subtask Input Field
+    if(event.key == "Enter") { addSubtaskPopup(); }
   }
 }
 
@@ -510,20 +525,71 @@ function clearCardContainersInnerHtml() {
   document.getElementById("cardContainerdone").innerHTML = "";  
 }
 
+/*
+** AddTask add Subtask
+*/
 
 function addSubtaskPopup() {
-  alert("yo");
-
   let subtasksListPopup = document.getElementById("subtaskListPopup");
   let subtask = document.getElementById("addSubtaskInputPopup").value.trim();
+  let listIndex = subtasksListPopup.getElementsByTagName("li").length;
+
+  if(subtask == "") { return; }
   
-  subtasksListPopup.innerHTML += createSubtaskListItemTemplate(0, subtask);
+  subtasksListPopup.innerHTML += createSubtaskListItemPopupTemplate(listIndex, subtask);
+
+  subtasksArrayPopup.push(subtask);
 
   document.getElementById("addSubtaskInputPopup").value = "";
 }
 
 /*
-** AddTask Pop up
+** changes the subtask from a list element into an input field for editing for add task popup
+*/
+
+function editSubtaskPopup(position) {
+  let listItem = document.querySelector(`ul li[data-index="${position}"]`);
+  listItem.innerHTML = changeSubtaskContentToInputForEditPopupTemplate(position, listItem.textContent.trim());
+}
+
+/*
+** AddTask Popup delete subtask
+*/
+
+function deleteSubtaskPopup(position) {
+  let subtasksListPopup = document.getElementById("subtaskListPopup");
+  let listChild = subtasksListPopup.getElementsByTagName("li")[position];
+
+  subtasksListPopup.removeChild(listChild);
+
+  subtasksArrayPopup.splice(position, 1);
+}
+
+/*
+** AddTask Popup confirm subtask editing
+*/
+
+function confirmSubtaskEditPopup(position) {
+  let subtasksListPopup = document.getElementById("subtaskListPopup");
+  let subtask = document.getElementById(`editSubtaskInputPopup${position}`).value.trim();
+
+  subtasksListPopup.getElementsByTagName("li")[position].innerHTML = changeSubtaskInputFieldBackToListElementPopup(position, subtask);
+
+  subtasksArrayPopup[position] = subtask;
+}
+
+/*
+** AddTask Popup cancel subtask editing
+*/
+
+function cancelSubtaskEditPopup(position) {
+  let subtasksListPopup = document.getElementById("subtaskListPopup");
+
+  subtasksListPopup.getElementsByTagName("li")[position].innerHTML = changeSubtaskInputFieldBackToListElementPopup(position, subtasksArrayPopup[position]);
+}
+
+/*
+** AddTask Pop up modal opening / closing
 */
 
 document.addEventListener("DOMContentLoaded", () => {
