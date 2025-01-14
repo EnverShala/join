@@ -1075,10 +1075,6 @@ label {
   z-index: 1;
 }
 
-.selected-contacts {
-  margin-bottom: 10px;
-}
-
 .okButtonMainContainer {
   position: sticky;
   width: 450px;

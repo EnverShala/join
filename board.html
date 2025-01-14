@@ -255,9 +255,8 @@
       </section>
 
 <!-- POP UP -->
-    <section onclick="closeDialog()" id="popupOnTaskSelectionID" class="popupOnTaskSelection">
-
-      <div id="popupOnTaskSelectionMainContainerID" onclick="event.stopPropagation()" class="popupOnTaskSelectionMainContainer">
+ <section onclick="closeDialog()" id="popupOnTaskSelectionID" class="popupOnTaskSelection">
+  <div id="popupOnTaskSelectionMainContainerID" onclick="event.stopPropagation()" class="popupOnTaskSelectionMainContainer">
         <div class="popupKategorieOnTopMainContainer">
           <div>
                <h2 id="popUpUserStory">User Story</h2>
@@ -310,98 +309,108 @@
                 </div>
             </div>
           </div>
-      </div>
-    <!--  EDIT POPUP  -->
-    <div id="editPopUpID" onclick="event.stopPropagation()" class="popupOnTaskEdit d-none">
-      <div class="editClosePopupMainContainer">
-        <img onclick="closeDialog()" id="closePopupID" src="./img/close.svg" style="cursor: pointer;" alt="">
-    </div>
-  
-  <div class="scrollbar">
-      <div class="editPopupTitelMainContainer">
-        <span class="editPopupTitelTxt">Title</span>
-        <input id="inputEdit" class="editTitelInput" type="text">
-      </div>
-
-      <div class="editPopupDescriptionMainContainer">
-        <span class="editPopupDescriptionTxt">Description</span>
-        <input id="inputDescription" class="editDescriptionInput" type="text">
-      </div>
-        
-        <div class="editPopupDateMainContainer">
-          <p class="editPopupDateTxt">Due date</p>
-          <input id="inputDueDate" class="editDateInput" type="date">
-        </div>
-
-        <div class="editPrio">
-          <label id="inputPrio"></label>
-          <div class="buttonsPrioOnEditPopUp">
-            <button onclick="clickOnUrgent()" type="button" id="urgent" class="btn-prio">
-              Urgent<img id="urgentID" src="./img/urgent.svg" class="">
-                    <img id="urgent-whiteID" class="d-none" src="./img/urgent-white.svg">
-            </button>
-          
-            <button onclick="clickOnMedium()" type="button" id="medium" class="btn-prio">
-              Medium<img id="mediumID" src="./img/medium.svg" class="d-none">
-              <img id="medium-whiteID" class="" src="./img/medium-white.svg">
-            </button>
-          
-            <button onclick="clickOnLow()" type="button" id="low" class="btn-prio">
-              Low<img id="lowID" src="./img/low.svg" class="">
-              <img id="low-whiteID" class="d-none" src="./img/low-white.svg">
-            </button>
-          </div>
-        </div>
-
-
-        <!-- Begin Assigned to  -->
-        <div class="editPopupAssignedToMainContainer">
-          <p class="editAssignedToTxt">Assigned to</p>
-          <div class="editDropdown">
-            <div id="contacts-list" class="selectOnEditPopUp assigned-to" onclick="toggleDropdown()">
-              <input class="select-input placeholder" type="text" placeholder="Select contacts to assign" readonly/>
-              <span class="down-arrow">
-                <img src="img/arrow_drop_downaa.svg" alt="">
-              </span>
-            </div>
-            <div id="selected-contacts-container" class="selected-contacts"></div>
-            <!-- Begin Contacts Assigned to-->
-            <ul id="myDropdown" class="dropdown-content "></ul>
-            <!-- End Contacts Assigned to-->
-            <div class="selected-contacts"></div>
-          </div>
-        </div>
-        <!-- End Assigned to -->
-
-        <!--Begin subtask-->
-        <div class="editPopupSubtasksMainContainer">
-          <p class="editPopupSubtasksTxt">Subtask</p>
-          <div class="input-container-subtask">
-            <input id="addNewSubtaskInput" class="inputOnEditPopup subtask" type="text" placeholder="Add new subtask" onkeydown="subtaskOnKeyDown(-1)"/>
-            <div class="btn-subtask add">
-              <img src="./img/add.png" alt="Add" />
-            </div>
-            <div class="btn-subtask check-cancel">
-              <div class="cancel-subtask">
-                <img src="./img/close.png" alt="Cancel" />
-              </div>
-              <div class="divider-subtask"></div>
-              <div id="addNewSubtaskDiv" onclick="addNewSubtask()" class="check-subtask">
-                <img src="./img/check.png" alt="Check" />
-              </div>
-              </div>
-          </div>
-            <div class="container-subtasks-display">
-                <ul id="subtaskList" class="list-subtasks"></ul>
-            </div>
-        </div>
   </div>
-      <div class="okButtonMainContainer" >
-        <button onclick="editCurrentTask()" class="okButtonOnEditPopUp">OK</button>
+
+<!--  EDIT POPUP  -->
+<div id="editPopUpID" onclick="closeAssignedto(), event.stopPropagation()" class="popupOnTaskEdit d-none">
+  <div class="editClosePopupMainContainer">
+    <img onclick="closeDialog()" id="closePopupID" src="./img/close.svg" style="cursor: pointer;" alt="">
+  </div>
+
+<div onclick="closeAssignedto()" class="scrollbar">
+  <!-- Begin Titel -->
+   <div class="editPopupTitelMainContainer">
+    <span class="editPopupTitelTxt">Title</span>
+    <input id="inputEdit" class="editTitelInput" type="text">
+  </div>
+  <!-- End Titel -->
+
+  <!-- Begin Description -->
+   <div class="editPopupDescriptionMainContainer">
+    <span class="editPopupDescriptionTxt">Description</span>
+    <input id="inputDescription" class="editDescriptionInput" type="text">
+  </div>
+  <!-- End Description -->
+
+  <!-- Begin Date -->
+   <div class="editPopupDateMainContainer">
+    <p class="editPopupDateTxt">Due date</p>
+    <input id="inputDueDate" class="editDateInput" type="date">
+  </div>
+  <!-- End Date -->
+
+  <!-- Begin Prio Buttons  -->
+   <div class="editPrio">
+    <label id="inputPrio"></label>
+    <div class="buttonsPrioOnEditPopUp">
+      <button onclick="clickOnUrgent()" type="button" id="urgent" class="btn-prio">
+        Urgent<img id="urgentID" src="./img/urgent.svg" class="">
+        <img id="urgent-whiteID" class="d-none" src="./img/urgent-white.svg">
+      </button>
+          
+      <button onclick="clickOnMedium()" type="button" id="medium" class="btn-prio">
+        Medium<img id="mediumID" src="./img/medium.svg" class="d-none">
+        <img id="medium-whiteID" class="" src="./img/medium-white.svg">
+      </button>
+          
+      <button onclick="clickOnLow()" type="button" id="low" class="btn-prio">
+        Low<img id="lowID" src="./img/low.svg" class="">
+        <img id="low-whiteID" class="d-none" src="./img/low-white.svg">
+      </button>
+    </div>
+  </div>
+  <!-- End Prio Buttons  -->
+
+  <!-- Begin Assigned to  -->
+   <div class="editPopupAssignedToMainContainer">
+    <p class="editAssignedToTxt">Assigned to</p>
+    <div class="editDropdown">
+      <div id="contacts-list" class="selectOnEditPopUp assigned-to" onclick="toggleDropdown()">
+        <input class="select-input placeholder" type="text" placeholder="Select contacts to assign" readonly/>
+        <span class="down-arrow">
+          <img src="img/arrow_drop_downaa.svg" alt="">
+        </span>
+      </div>
+      
+      <!-- Begin Contacts Assigned to-->
+       <ul id="myDropdown" class="dropdown-content"></ul>
+       <!-- End Contacts Assigned to-->
+       <div id="selected-contacts-container" class="selected-contacts"></div>
+      </div>
+  </div>
+  <!-- End Assigned to -->
+
+  <!--Begin subtask-->
+  <div class="editPopupSubtasksMainContainer">
+    <p class="editPopupSubtasksTxt">Subtask</p>
+    <div class="input-container-subtask">
+      <input id="addNewSubtaskInput" class="inputOnEditPopup subtask" type="text" placeholder="Add new subtask" onkeydown="subtaskOnKeyDown(-1)"/>
+      <div class="btn-subtask add">
+        <img src="./img/add.png" alt="Add" />
+      </div>
+      <div class="btn-subtask check-cancel">
+        <div class="cancel-subtask">
+          <img src="./img/close.png" alt="Cancel" />
+        </div>
+        <div class="divider-subtask"></div>
+        <div id="addNewSubtaskDiv" onclick="addNewSubtask()" class="check-subtask">
+          <img src="./img/check.png" alt="Check" />
+        </div>
       </div>
     </div>
-    <!-- END Edit Popup -->
-    </section>
+    <div class="container-subtasks-display">
+      <ul id="subtaskList" class="list-subtasks"></ul>
+    </div>
+  </div>
+  <!--End subtask-->
+</div>
+
+<div class="okButtonMainContainer" >
+  <button onclick="editCurrentTask()" class="okButtonOnEditPopUp">OK</button>
+</div>
+</div>
+<!-- END Edit Popup -->
+</section>
 
 
 
