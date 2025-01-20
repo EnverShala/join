@@ -203,7 +203,7 @@ function subtaskOnKeyDownPopup(position) {
     if(event.key == "Escape") { cancelSubtaskEditPopup(position); }
     if(event.key == "Enter") { confirmSubtaskEditPopup(position); }
   } else {
-    if(event.key == "Escape") { document.getElementById("addNewSubtaskInputPopup").value = ""; } // clear the add Subtask Input Field
+    if(event.key == "Escape") { document.getElementById("addSubtaskInputPopup").value = ""; } // clear the add Subtask Input Field
     if(event.key == "Enter") { addSubtaskPopup(); }
   }
 }

@@ -516,7 +516,7 @@
         <div class="inputGroupOnPopUp">
           <label for="subtasks">Subtasks<span class="required"></span></label>
           <div class="input-container-subtask">
-            <input id="addSubtaskInputPopup" class="inputPopup" type="text" placeholder="Add new subtask" />
+            <input id="addSubtaskInputPopup" class="inputPopup" type="text" placeholder="Add new subtask" onkeydown="subtaskOnKeyDownPopup(-1)"/>
             <div class="btn-subtask add" style="cursor: pointer" onclick="addSubtaskPopup()">
               <img src="./img/add.png" alt="Add" />
             </div>

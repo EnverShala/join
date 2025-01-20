@@ -295,10 +295,10 @@ document.addEventListener("DOMContentLoaded", () => {
       subtaskInput.focus();
     });
 
-    subtaskInput.addEventListener("focus", () => {
-      subtaskBtnAdd.style.display = "none";
-      subtaskBtnCheckCancel.style.display = "flex";
-    });
+    // subtaskInput.addEventListener("focus", () => {
+    //   subtaskBtnAdd.style.display = "none";
+    //   subtaskBtnCheckCancel.style.display = "flex";
+    // });
 
     subtaskCancelBtn.addEventListener("click", () => {
       subtaskBtnAdd.style.display = "flex";
@@ -321,11 +321,11 @@ document.addEventListener("DOMContentLoaded", () => {
   subtaskCheckBtn.addEventListener("click", addSubtask);
 
   // Event Listener für das Drücken der Enter-Taste
-  subtaskInput.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      addSubtask();
-    }
-  });
+  // subtaskInput.addEventListener("keydown", (event) => {
+  //   if (event.key === "Enter") {
+  //     addSubtask();
+  //   }
+  // });
 
   /*
   ** renders the subtasks
