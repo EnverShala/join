@@ -252,7 +252,7 @@
               <label for="subtasks"
                 >Subtasks<span class="starFromRequired">*</span></label>
               <div class="input-container-subtask">
-                <input class="input subtask" type="text" placeholder="Add new subtask"/>
+                <input id="addNewSubtaskInput" class="input subtask" type="text" placeholder="Add new subtask"/>
                 <div class="btn-subtask add">
                   <img src="./img/add.png" alt="Add" />
                 </div>
@@ -283,7 +283,7 @@
           <span class="required">This field is required</span>
         </p>
         <div class="actions-form">
-          <button onclick="clearForm()" type="button" class="btn-clear" id="clear-btn">
+          <button onclick="renderAssignedTo(); clearForm()" type="button" class="btn-clear" id="clear-btn">
             Clear
             <img id="cancel-icon" src="./img/close.png" alt=""/>
           </button>

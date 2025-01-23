@@ -159,6 +159,12 @@ function editSubtask(position) {
 
 function renderSubtasks() {
   let subtasksList = document.getElementById("subtaskList");
+
+  if(subtasksArray == "") {
+    subtasksList.innerHTML = "";
+    return;
+  }
+
   subtasksList.innerHTML = "";
   
   for (let j = 0; j < subtasksArray.length; j++) {
@@ -489,7 +495,7 @@ async function renderTaskCards() {
   for (let i = 0; i < tasks.length; i++) {
     const uniqueId = `taskCard-${i}`;
     let assignedUsers = tasks[i].assigned.split(",");
-    let subTasksArray = tasks[i].subtasks.split("|");
+    let subTasksArray = tasks[i].subtasks.split("|") == "" ? [] : tasks[i].subtasks.split("|");
     let assignedUsersHTML = "";
 
     let cardContainerIdName = getCardContainerId(tasks[i].level);
@@ -635,13 +641,13 @@ document.addEventListener("DOMContentLoaded", () => {
 */
 
 function searchTasks() {
-  let searchBar = document.getElementById("searchBar");
+  let searchBar = document.getElementById("searchBar").value;
 
-  if(searchBar.value.length > 0) {
+  if(searchBar.trim().length > 2) {
     hideAllTaskCards();
 
     for(let i = 0; i < tasks.length; i++) {
-      if(tasks[i].title.includes(searchBar.value) || tasks[i].description.includes(searchBar.value)) {
+      if(tasks[i].title.toLowerCase().includes(searchBar.toLowerCase()) || tasks[i].description.includes(searchBar.toLowerCase())) {
         showTaskCard(i);
       }
     }

@@ -3,6 +3,8 @@
 */
 
 function taskCardTemplate(uniqueId, i, subTasksArray, assignedUsersHTML) {
+  let widthPercent = subTasksArray.length > 0 ? 50 : 0;
+
   return `
                 <div draggable="true" id="${uniqueId}" class="taskCard">
                 <div class="taskCardTop">
@@ -26,7 +28,7 @@ function taskCardTemplate(uniqueId, i, subTasksArray, assignedUsersHTML) {
                   <div>
                     <div class="progress">
                       <div class="progressBarContainer">
-                        <div id="" class="progressBar" style="width: 50%;"></div>
+                        <div id="" class="progressBar" style="width: ${widthPercent}%;"></div>
                       </div>
                       <p class="amountSubtasks">${subTasksArray.length} subtask(s)</p>
                     </div>
@@ -80,10 +82,29 @@ function createRenderAssignedToUserTemplate(i, j, userInitials, userName, id = "
 }
 
 /*
+** template for creating subtask list item for add Task
+*/
+
+function createSubtaskListItemAddTaskTemplate(index, item) {
+  if(item == "") { return ""; }
+  return `
+            <li class="subtask-list-item" data-index="${index}">
+                <div class="li-text">${item}</div>
+                <div class="subtask-edit-icon-div">
+                    <img id="editTask${index}" class="edit-subtask-btn" src="./img/edit.png" alt="">
+                    <div class="subtask-divider-2"></div>
+                    <img id="deleteSubtask${index}"class="delete-subtask-btn" src="./img/delete.png" alt="">
+                </div>
+            </li>
+        `;
+}
+
+/*
 ** template for creating subtask list item
 */
 
 function createSubtaskListItemTemplate(index, item) {
+  if(item == "") { return ""; }
   return `
             <li class="subtask-list-item" data-index="${index}">
                 <div class="li-text">${item}</div>

@@ -199,6 +199,27 @@ function toggleDropdownCategory() {
 }
 
 /*
+** returns the assigned Users (as a String)
+*/
+
+function getAssignedUsers(id = "") {
+  let newAssigned = "";
+
+  if (users.length > 0) {
+    for (let i = 0; i < users.length; i++) {
+      let checkbox = document.getElementById(`AssignedContact${id}${i}`);
+
+      if(checkbox.checked == true) {
+        newAssigned += users[i].name + ",";
+      }
+    }
+    newAssigned = newAssigned.slice(0, -1);
+  }
+
+  return newAssigned;
+}
+
+/*
 ** render assigned to menu with users, initials, etc.
 */
 
@@ -280,7 +301,7 @@ function toggleBackground(checkbox) {
 
 /*Begin Subtask input*/
 document.addEventListener("DOMContentLoaded", () => {
-  const subtaskInput = document.querySelector(".input.subtask");
+  const subtaskInput = document.getElementById("addNewSubtaskInput");
   const subtaskBtnAdd = document.querySelector(".btn-subtask.add");
   const subtaskBtnCheckCancel = document.querySelector(".btn-subtask.check-cancel");
   const subtaskCancelBtn = document.querySelector(".cancel-subtask");
@@ -295,10 +316,10 @@ document.addEventListener("DOMContentLoaded", () => {
       subtaskInput.focus();
     });
 
-    // subtaskInput.addEventListener("focus", () => {
-    //   subtaskBtnAdd.style.display = "none";
-    //   subtaskBtnCheckCancel.style.display = "flex";
-    // });
+    subtaskInput.addEventListener("focus", () => {
+      subtaskBtnAdd.style.display = "none";
+      subtaskBtnCheckCancel.style.display = "flex";
+    });
 
     subtaskCancelBtn.addEventListener("click", () => {
       subtaskBtnAdd.style.display = "flex";
@@ -307,41 +328,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  function addSubtask() {
-    if (subtaskInput.value.trim() !== "") {
-      subtasks.push(subtaskInput.value.trim());
-      renderSubtasks();
-      subtaskInput.value = "";
-      subtaskBtnAdd.style.display = "flex";
-      subtaskBtnCheckCancel.style.display = "none";
-    }
-  }
-
-  // Event Listener für das Hinzufügen eines Subtasks
-  subtaskCheckBtn.addEventListener("click", addSubtask);
-
-  // Event Listener für das Drücken der Enter-Taste
-  // subtaskInput.addEventListener("keydown", (event) => {
-  //   if (event.key === "Enter") {
-  //     addSubtask();
-  //   }
-  // });
-
-  /*
-  ** renders the subtasks
+    /*
+  ** delete subtask from a task
   */
 
-  function renderSubtasks() {
-    const subtasksList = document.querySelector(".list-subtasks");
-    subtasksList.innerHTML = "";
-    subtasks.forEach((item, index) => {
-      subtasksList.innerHTML += createSubtaskListItemTemplate(index, item);
+  function deleteSubtask() {
+    const subtaskListItems = document.querySelectorAll(".subtask-list-item");
+
+    subtaskListItems.forEach((item, index) => {
+      const deleteSubtaskBtn = item.querySelector(".delete-subtask-btn");
+      deleteSubtaskBtn.addEventListener("click", () => {
+        subtasks.splice(index, 1);
+        renderSubtasks();
+      });
     });
-    editSubTask();
-    deleteSubtask();
   }
 
-  /*
+    /*
   ** edit subtask from a task
   */
 
@@ -367,21 +370,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /*
-  ** delete subtask from a task
-  */
-
-  function deleteSubtask() {
-    const subtaskListItems = document.querySelectorAll(".subtask-list-item");
-
-    subtaskListItems.forEach((item, index) => {
-      const deleteSubtaskBtn = item.querySelector(".delete-subtask-btn");
-      deleteSubtaskBtn.addEventListener("click", () => {
-        subtasks.splice(index, 1);
-        renderSubtasks();
-      });
-    });
-  }
 
   /*
   ** confrim editing of a subtask
@@ -402,6 +390,42 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
+
+  function addSubtask() {
+    if (subtaskInput.value.trim() !== "") {
+      subtasks.push(subtaskInput.value.trim());
+      renderSubtasks();
+      subtaskInput.value = "";
+      subtaskBtnAdd.style.display = "flex";
+      subtaskBtnCheckCancel.style.display = "none";
+    }
+  }
+
+  // Event Listener für das Hinzufügen eines Subtasks
+  subtaskCheckBtn.addEventListener("click", addSubtask);
+
+  // Event Listener für das Drücken der Enter-Taste
+   subtaskInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      addSubtask();
+    }
+  });
+
+  /*
+  ** renders the subtasks
+  */
+
+    function renderSubtasks() {
+    const subtasksList = document.querySelector(".list-subtasks");
+    subtasksList.innerHTML = "";
+    subtasks.forEach((item, index) => {
+      subtasksList.innerHTML += createSubtaskListItemAddTaskTemplate(index, item);
+    });
+    editSubTask();
+    deleteSubtask();
+  }
+
+
 
   styleSubtaskInput();
 });
@@ -553,7 +577,12 @@ function clearForm(id = "") {
 
   // Setzt die Subtask-Liste zurück
   document.getElementById('subtaskList' + id).innerHTML = '';
-  document.getElementById('addSubtaskInputPopup').value = '';
+
+  if(id == "Popup") {
+    document.getElementById('addSubtaskInputPopup').value = '';
+  } else {
+    document.getElementById('addNewSubtaskInput').value = '';
+  }
 
   // Leert das Dropdown-Menü "Assigned to"
   document.getElementById('selected-contacts-container' + id).innerHTML = '';
