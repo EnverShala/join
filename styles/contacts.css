@@ -809,6 +809,18 @@ body {
     width: 70px !important;
   }
 }
+@media (max-width: 425px) and (max-height: 730px) {
+  .display-contact,
+  .display-contact-header {
+    margin-top: -30px;
+  }
+  .display-contact {
+    margin-top: -70px;
+  }
+  .back-arrow-on-responsive {
+    top: 0;
+  }
+}
 @keyframes slideIn {
   0% {
     transform: translateX(100%);
