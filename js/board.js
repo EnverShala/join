@@ -425,7 +425,7 @@ async function popupValueImplementFromTask(taskNr) {
   subtasksList.innerHTML = "";
   
   for (let j = 0; j < subtasksArray.length; j++) {
-    subtasksList.innerHTML += `<p class="subtasksP">${subtasksArray[j]}<p>`;
+    subtasksList.innerHTML += `<p class="subtasksP"><input type="checkbox" id="subtaskCheckbox${j}">${subtasksArray[j]}<p>`;
   }
 }
 
