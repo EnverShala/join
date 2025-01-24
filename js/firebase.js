@@ -60,6 +60,7 @@ async function loadTasks(path = "/tasks") {
         level: responseToJson[key]["level"],
         subtasks: responseToJson[key]["subtasks"],
         assigned: responseToJson[key]["assigned"],
+        subtasksDone: responseToJson[key]["subtasksDone"],
       });
     });
   }

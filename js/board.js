@@ -3,8 +3,8 @@ let subtasksArrayPopup = [];
 let pos;
 
 /*
-** Funktion zum Hinzufügen der Drag-and-Drop-Events
-*/
+ ** Funktion zum Hinzufügen der Drag-and-Drop-Events
+ */
 
 function addDragAndDropEvents() {
   const draggedCards = document.querySelectorAll(".taskCard");
@@ -14,14 +14,16 @@ function addDragAndDropEvents() {
 
   // Die ID des zu ziehenden Elements wird in den Datenübertragungsobjekt gespeichert
   draggedCards.forEach((card) => {
-    card.ondragstart = (event) => { event.dataTransfer.setData("text", event.target.id); };
+    card.ondragstart = (event) => {
+      event.dataTransfer.setData("text", event.target.id);
+    };
   });
 
   //event.currentTarget.style.backgroundColor = "#1FD7C1";
   dropZones.forEach((zone) => {
-      zone.ondragover = (event) => {
-        event.preventDefault();
-        event.currentTarget.style.border = "dotted 2px grey";
+    zone.ondragover = (event) => {
+      event.preventDefault();
+      event.currentTarget.style.border = "dotted 2px grey";
     };
 
     zone.ondragleave = (event) => {
@@ -52,19 +54,24 @@ function addDragAndDropEvents() {
 }
 
 /*
-** returns the Name of the new Drag and Drop Container when dropping
-*/
+ ** returns the Name of the new Drag and Drop Container when dropping
+ */
 
 function getNewDragAndDropContainerName(targetId) {
-  if (targetId.includes("cardContainertoDo")) { return "To do"; }
-  else if (targetId.includes("cardContainerinProgress")) { return "In Progress"; }
-  else if (targetId.includes("cardContainerawaitingFeedback")) { return "Awaiting Feedback"; }
-  else if (targetId.includes("cardContainerdone")) { return "Done"; }
+  if (targetId.includes("cardContainertoDo")) {
+    return "To do";
+  } else if (targetId.includes("cardContainerinProgress")) {
+    return "In Progress";
+  } else if (targetId.includes("cardContainerawaitingFeedback")) {
+    return "Awaiting Feedback";
+  } else if (targetId.includes("cardContainerdone")) {
+    return "Done";
+  }
 }
 
 /*
-** checks if a task card is in the container or not, if not, show "no tasks" information into container
-*/
+ ** checks if a task card is in the container or not, if not, show "no tasks" information into container
+ */
 
 function checkTaskLevels() {
   if (document.getElementById("cardContainertoDo").childElementCount == 0) {
@@ -93,23 +100,22 @@ function checkTaskLevels() {
 }
 
 /*
-** adds a new subtask (and renders the subtasks then)
-*/
+ ** adds a new subtask (and renders the subtasks then)
+ */
 
 function addNewSubtask() {
   let newSubtask = document.getElementById("addNewSubtaskInput").value.trim();
 
-  if(newSubtask != "") {
+  if (newSubtask != "") {
     subtasksArray.push(newSubtask);
     renderSubtasks();
     document.getElementById("addNewSubtaskInput").value = "";
   }
 }
 
-
 /*
-** deletes the subtask and renders the subtasks again
-*/
+ ** deletes the subtask and renders the subtasks again
+ */
 
 function deleteSubtask(position) {
   subtasksArray.splice(position, 1);
@@ -117,25 +123,24 @@ function deleteSubtask(position) {
   renderSubtasks();
 }
 
-
 /*
-** cancels the subtask edit, and changes the subtask editing input field back to a list element
-*/
-
+ ** cancels the subtask edit, and changes the subtask editing input field back to a list element
+ */
 
 function cancelSubtaskEdit(position) {
   let listItem = document.querySelector(`ul li[data-index="${position}"]`);
   listItem.innerHTML = changeSubtaskInputFieldBackToListElement(position, subtasksArray[position]);
 }
 
-
 /*
-** confirms the subtask edit, saves the new subtask into the array, and changes the subtask editing input field back to a list element
-*/
-
+ ** confirms the subtask edit, saves the new subtask into the array, and changes the subtask editing input field back to a list element
+ */
 
 function confirmSubtaskEdit(position) {
-  if(document.getElementById(`editSubtaskInput${position}`).value.trim() == "") { cancelSubtaskEdit(position); return; }
+  if (document.getElementById(`editSubtaskInput${position}`).value.trim() == "") {
+    cancelSubtaskEdit(position);
+    return;
+  }
 
   let listItem = document.querySelector(`ul li[data-index="${position}"]`);
 
@@ -144,9 +149,8 @@ function confirmSubtaskEdit(position) {
 }
 
 /*
-** changes the subtask from a list element into an input field for editing
-*/
-
+ ** changes the subtask from a list element into an input field for editing
+ */
 
 function editSubtask(position) {
   let listItem = document.querySelector(`ul li[data-index="${position}"]`);
@@ -154,27 +158,52 @@ function editSubtask(position) {
 }
 
 /*
-** renders the subtasks intro the ul list
-*/
+ ** renders the subtasks intro the ul list
+ */
 
 function renderSubtasks() {
   let subtasksList = document.getElementById("subtaskList");
 
-  if(subtasksArray == "") {
+  if (subtasksArray == "") {
     subtasksList.innerHTML = "";
     return;
   }
 
   subtasksList.innerHTML = "";
-  
+
   for (let j = 0; j < subtasksArray.length; j++) {
     subtasksList.innerHTML += createSubtaskListItemTemplate(j, subtasksArray[j]);
   }
 }
 
 /*
-** toggles the checkboxes of the assignedusers in the assigneduser menu
-*/
+ ** toggles the checkboxes of the done subtasks on taskcards
+ */
+
+async function toggleSubtaskDone(taskNr, subtaskName, checkBoxNr) {
+  if (document.getElementById(`subtaskCheckbox${checkBoxNr}`).hasAttribute("checked")) {
+    if (tasks[taskNr].subtasksDone.includes(subtaskName)) {
+      tasks[taskNr].subtasksDone = tasks[taskNr].subtasksDone.replace(subtaskName, "");
+      tasks[taskNr].subtasksDone = tasks[taskNr].subtasksDone.replace("||", "|");
+      if (tasks[taskNr].subtasksDone.endsWith("|")) {
+        tasks[taskNr].subtasksDone.slice(0, -1);
+      }
+      if (tasks[taskNr].subtasksDone[0] == "|") {
+        tasks[taskNr].subtasksDone = tasks[taskNr].subtasksDone.slice(1);
+      }
+    }
+    document.getElementById(`subtaskCheckbox${checkBoxNr}`).removeAttribute("checked");
+  } else {
+    tasks[taskNr].subtasksDone += `${subtaskName}|`;
+    document.getElementById(`subtaskCheckbox${checkBoxNr}`).setAttribute("checked", true);
+  }
+  await editTask(currentId, tasks[taskNr]);
+  await renderTaskCards();
+}
+
+/*
+ ** toggles the checkboxes of the assignedusers in the assigneduser menu
+ */
 
 function toggleAssignedUsers(assignedUsers, id = "") {
   for (let c = 0; c < users.length; c++) {
@@ -187,40 +216,56 @@ function toggleAssignedUsers(assignedUsers, id = "") {
 }
 
 /*
-** function for onkeydown (using enter to confirm or escape to clear) on subtask editing on edit task page:
-*/
+ ** function for onkeydown (using enter to confirm or escape to clear) on subtask editing on edit task page:
+ */
 
 function subtaskOnKeyDown(position) {
-  if(position != -1) {
-    if(event.key == "Escape") { cancelSubtaskEdit(position); }
-    if(event.key == "Enter") { confirmSubtaskEdit(position); }
+  if (position != -1) {
+    if (event.key == "Escape") {
+      cancelSubtaskEdit(position);
+    }
+    if (event.key == "Enter") {
+      confirmSubtaskEdit(position);
+    }
   } else {
-    if(event.key == "Escape") { document.getElementById("addNewSubtaskInput").value = ""; } // clear the add Subtask Input Field
-    if(event.key == "Enter") { addNewSubtask(); }
+    if (event.key == "Escape") {
+      document.getElementById("addNewSubtaskInput").value = "";
+    } // clear the add Subtask Input Field
+    if (event.key == "Enter") {
+      addNewSubtask();
+    }
   }
 }
 
 /*
-** function for onkeydown (using enter to confirm or escape to clear) on subtask editing on add task popup
-*/
+ ** function for onkeydown (using enter to confirm or escape to clear) on subtask editing on add task popup
+ */
 
 function subtaskOnKeyDownPopup(position) {
-  if(position != -1) {
-    if(event.key == "Escape") { cancelSubtaskEditPopup(position); }
-    if(event.key == "Enter") { confirmSubtaskEditPopup(position); }
+  if (position != -1) {
+    if (event.key == "Escape") {
+      cancelSubtaskEditPopup(position);
+    }
+    if (event.key == "Enter") {
+      confirmSubtaskEditPopup(position);
+    }
   } else {
-    if(event.key == "Escape") { document.getElementById("addSubtaskInputPopup").value = ""; } // clear the add Subtask Input Field
-    if(event.key == "Enter") { addSubtaskPopup(); }
+    if (event.key == "Escape") {
+      document.getElementById("addSubtaskInputPopup").value = "";
+    } // clear the add Subtask Input Field
+    if (event.key == "Enter") {
+      addSubtaskPopup();
+    }
   }
 }
 
 /*
-** load task information into the edit task form
-*/
+ ** load task information into the edit task form
+ */
 
 function editPopupTask() {
   clearForm();
-  
+
   for (let i = 0; i < tasks.length; i++) {
     if (tasks[i].id == currentId) {
       document.getElementById("inputEdit").value = tasks[i].title;
@@ -231,30 +276,35 @@ function editPopupTask() {
 
       clearPrioButtons();
       activatePrioButton(tasks[i].priority);
-      
+
       renderSubtasks();
 
       toggleAssignedUsers(assignedArray);
     }
-  }  
+  }
   document.getElementById("popupOnTaskSelectionMainContainerID").classList.add("d-none");
   document.getElementById("editPopUpID").classList.remove("d-none");
 }
 
 /*
-** activates the selected prio button
-*/
+ ** activates the selected prio button
+ */
 
 function activatePrioButton(prioName, id = "") {
-  if (prioName == "Urgent") { clickOnUrgent(id); }
-  if (prioName == "Medium") { clickOnMedium(id); }
-  if (prioName == "Low") { clickOnLow(id); }
+  if (prioName == "Urgent") {
+    clickOnUrgent(id);
+  }
+  if (prioName == "Medium") {
+    clickOnMedium(id);
+  }
+  if (prioName == "Low") {
+    clickOnLow(id);
+  }
 }
 
 /*
-** returns the current task nr through comparing all tasks with the current task ID
-*/
-
+ ** returns the current task nr through comparing all tasks with the current task ID
+ */
 
 function getTaskNrFromCurrentId() {
   for (let i = 0; i < tasks.length; i++) {
@@ -265,8 +315,8 @@ function getTaskNrFromCurrentId() {
 }
 
 /*
-** gets/reads the subtasks from the UL list (to save them into the task then)
-*/
+ ** gets/reads the subtasks from the UL list (to save them into the task then)
+ */
 
 function getSubtaskItems(id = "") {
   let subtaskItems = document.getElementById("subtaskList" + id).getElementsByTagName("li");
@@ -284,8 +334,8 @@ function getSubtaskItems(id = "") {
 }
 
 /*
-** returns the assigned Users (as a String)
-*/
+ ** returns the assigned Users (as a String)
+ */
 
 function getAssignedUsers(id = "") {
   let newAssigned = "";
@@ -294,7 +344,7 @@ function getAssignedUsers(id = "") {
     for (let i = 0; i < users.length; i++) {
       let checkbox = document.getElementById(`AssignedContact${id}${i}`);
 
-      if(checkbox.checked == true) {
+      if (checkbox.checked == true) {
         newAssigned += users[i].name + ",";
       }
     }
@@ -305,8 +355,8 @@ function getAssignedUsers(id = "") {
 }
 
 /*
-** edits the current/opened Task
-*/
+ ** edits the current/opened Task
+ */
 
 async function editCurrentTask() {
   let newTitle = document.getElementById("inputEdit").value.trim();
@@ -322,11 +372,13 @@ async function editCurrentTask() {
   let oldLevel = tasks[currentTask].level;
   let oldCategory = tasks[currentTask].category;
 
+  let subtasksDone = tasks[currentTask].subtasksDone;
+
   newSubtasks = getSubtaskItems();
 
   newAssigned = getAssignedUsers();
 
-  let newTask = createTaskArray(newTitle, newDescription, newDate, oldCategory, newPrio, oldLevel, newSubtasks, newAssigned);
+  let newTask = createTaskArray(newTitle, newDescription, newDate, oldCategory, newPrio, oldLevel, newSubtasks, newAssigned, subtasksDone);
 
   await editTask(currentId, newTask);
   await renderTaskCards();
@@ -335,8 +387,8 @@ async function editCurrentTask() {
 }
 
 /*
-** creates an array with the task informations
-*/
+ ** creates an array with the task informations
+ */
 
 function createTaskArray(newTitle, newDescription, newDate, oldCategory, newPrio, oldLevel, newSubtasks, newAssigned) {
   return {
@@ -352,8 +404,8 @@ function createTaskArray(newTitle, newDescription, newDate, oldCategory, newPrio
 }
 
 /*
-** make edit task popup visible, timeout so the dialog will be showed after its fully loaded
-*/
+ ** make edit task popup visible, timeout so the dialog will be showed after its fully loaded
+ */
 
 function openDialog() {
   setTimeout(() => {
@@ -362,20 +414,21 @@ function openDialog() {
 }
 
 /*
-** make edit task popup invisible, time out to hide the closing dialogs
-*/
+ ** make edit task popup invisible, time out to hide the closing dialogs
+ */
 
 function closeDialog() {
   document.getElementById("popupOnTaskSelectionID").style.visibility = "hidden";
-  document.getElementById('editPopUpID').classList.add('d-none');
-  
-  setTimeout(() => { document.getElementById('popupOnTaskSelectionMainContainerID').classList.remove('d-none')
+  document.getElementById("editPopUpID").classList.add("d-none");
+
+  setTimeout(() => {
+    document.getElementById("popupOnTaskSelectionMainContainerID").classList.remove("d-none");
   }, 250);
 }
 
 /*
-** shows data in card container popup
-*/
+ ** shows data in card container popup
+ */
 
 function loadPopupValueData(taskNr, contactEllipse) {
   document.getElementById("popUpUserStory").innerHTML = tasks[taskNr].category;
@@ -390,15 +443,15 @@ function loadPopupValueData(taskNr, contactEllipse) {
 }
 
 /*
-** load task values into the task popup
-*/
+ ** load task values into the task popup
+ */
 
 async function popupValueImplementFromTask(taskNr) {
   await loadTasks();
 
   subtasksArray = tasks[taskNr].subtasks.split("|");
   let contactEllipse = "";
-  
+
   let assignedUsers = tasks[taskNr].assigned.split(",");
 
   while (assignedUsers.length > 0) {
@@ -423,15 +476,19 @@ async function popupValueImplementFromTask(taskNr) {
 
   let subtasksList = document.getElementById("showSubtasksContainer");
   subtasksList.innerHTML = "";
-  
+
   for (let j = 0; j < subtasksArray.length; j++) {
-    subtasksList.innerHTML += `<p class="subtasksP"><input type="checkbox" id="subtaskCheckbox${j}">${subtasksArray[j]}<p>`;
+    if (tasks[taskNr].subtasksDone.includes(subtasksArray[j])) {
+      subtasksList.innerHTML += `<p class="subtasksP"><input type="checkbox" id="subtaskCheckbox${j}" onclick="toggleSubtaskDone(${taskNr}, '${subtasksArray[j]}', ${j})" checked>${subtasksArray[j]}<p>`;
+    } else {
+      subtasksList.innerHTML += `<p class="subtasksP"><input type="checkbox" id="subtaskCheckbox${j}" onclick="toggleSubtaskDone(${taskNr}, '${subtasksArray[j]}', ${j})">${subtasksArray[j]}<p>`;
+    }
   }
 }
 
 /*
-** get user color rotating from 1-15
-*/
+ ** get user color rotating from 1-15
+ */
 
 async function getUserColor(userName) {
   await loadUsers("/users");
@@ -449,11 +506,10 @@ async function getUserColor(userName) {
   return returnColor;
 }
 
-
 /*
-** function returns id name of card containers from task level
-** also if a card container gets its first card the "no task ..." gets hidden
-*/
+ ** function returns id name of card containers from task level
+ ** also if a card container gets its first card the "no task ..." gets hidden
+ */
 
 function getCardContainerId(cardContainerIdName) {
   let result;
@@ -484,8 +540,8 @@ function getCardContainerId(cardContainerIdName) {
 }
 
 /*
-** render task cards into board
-*/
+ ** render task cards into board
+ */
 
 async function renderTaskCards() {
   await loadTasks("/tasks");
@@ -504,11 +560,13 @@ async function renderTaskCards() {
     let taskUsers = assignedUsers.length;
 
     while (assignedUsers.length > 0) {
-      assignedUsersHTML += `<div class="badgeImg initialsColor${await getUserColor(assignedUsers[0])}">${getUserInitials(assignedUsers[0])}</div>`;
+      assignedUsersHTML += `<div class="badgeImg initialsColor${await getUserColor(assignedUsers[0])}">${getUserInitials(
+        assignedUsers[0]
+      )}</div>`;
       assignedUsers.splice(0, 1);
       counter++;
 
-      if(counter == 4 && taskUsers > 4) {
+      if (counter == 4 && taskUsers > 4) {
         assignedUsersHTML += `<div class="badgeImg initialsColor0">+${taskUsers - counter}</div>`;
         break;
       }
@@ -521,27 +579,29 @@ async function renderTaskCards() {
 }
 
 /*
-** clears the innerHTML of all card containers
-*/
+ ** clears the innerHTML of all card containers
+ */
 
 function clearCardContainersInnerHtml() {
   document.getElementById("cardContainertoDo").innerHTML = "";
   document.getElementById("cardContainerinProgress").innerHTML = "";
   document.getElementById("cardContainerawaitingFeedback").innerHTML = "";
-  document.getElementById("cardContainerdone").innerHTML = "";  
+  document.getElementById("cardContainerdone").innerHTML = "";
 }
 
 /*
-** AddTask add Subtask
-*/
+ ** AddTask add Subtask
+ */
 
 function addSubtaskPopup() {
   let subtasksListPopup = document.getElementById("subtaskListPopup");
   let subtask = document.getElementById("addSubtaskInputPopup").value.trim();
   let listIndex = subtasksListPopup.getElementsByTagName("li").length;
 
-  if(subtask == "") { return; }
-  
+  if (subtask == "") {
+    return;
+  }
+
   subtasksListPopup.innerHTML += createSubtaskListItemPopupTemplate(listIndex, subtask);
 
   subtasksArrayPopup.push(subtask);
@@ -550,8 +610,8 @@ function addSubtaskPopup() {
 }
 
 /*
-** changes the subtask from a list element into an input field for editing for add task popup
-*/
+ ** changes the subtask from a list element into an input field for editing for add task popup
+ */
 
 function editSubtaskPopup(position) {
   let listItem = document.querySelector(`ul li[data-index="${position}"]`);
@@ -559,8 +619,8 @@ function editSubtaskPopup(position) {
 }
 
 /*
-** AddTask Popup delete subtask
-*/
+ ** AddTask Popup delete subtask
+ */
 
 function deleteSubtaskPopup(position) {
   let subtasksListPopup = document.getElementById("subtaskListPopup");
@@ -572,8 +632,8 @@ function deleteSubtaskPopup(position) {
 }
 
 /*
-** AddTask Popup confirm subtask editing
-*/
+ ** AddTask Popup confirm subtask editing
+ */
 
 function confirmSubtaskEditPopup(position) {
   let subtasksListPopup = document.getElementById("subtaskListPopup");
@@ -585,18 +645,21 @@ function confirmSubtaskEditPopup(position) {
 }
 
 /*
-** AddTask Popup cancel subtask editing
-*/
+ ** AddTask Popup cancel subtask editing
+ */
 
 function cancelSubtaskEditPopup(position) {
   let subtasksListPopup = document.getElementById("subtaskListPopup");
 
-  subtasksListPopup.getElementsByTagName("li")[position].innerHTML = changeSubtaskInputFieldBackToListElementPopup(position, subtasksArrayPopup[position]);
+  subtasksListPopup.getElementsByTagName("li")[position].innerHTML = changeSubtaskInputFieldBackToListElementPopup(
+    position,
+    subtasksArrayPopup[position]
+  );
 }
 
 /*
-** AddTask Pop up modal opening / closing
-*/
+ ** AddTask Pop up modal opening / closing
+ */
 
 document.addEventListener("DOMContentLoaded", () => {
   const modal = document.querySelector("dialog[data-modal]");
@@ -609,7 +672,7 @@ document.addEventListener("DOMContentLoaded", () => {
     openModalButton.addEventListener("click", () => {
       popupIdString = "Popup";
       modal.showModal();
-      renderAssignedTo('Popup');
+      renderAssignedTo("Popup");
       activatePrioButton("Medium", "Popup");
       clearForm("Popup");
     });
@@ -618,18 +681,24 @@ document.addEventListener("DOMContentLoaded", () => {
       button.addEventListener("click", () => {
         popupIdString = "Popup";
         modal.showModal();
-        renderAssignedTo('Popup');
+        renderAssignedTo("Popup");
         activatePrioButton("Medium", "Popup");
         clearForm("Popup");
       });
     });
 
     // Modal schließen
-    closeModalButton.addEventListener("click", () => { modal.close(); popupIdString = ""; });
+    closeModalButton.addEventListener("click", () => {
+      modal.close();
+      popupIdString = "";
+    });
 
     // Optional: Modal schließen, wenn man außerhalb des Modals klickt
     modal.addEventListener("click", (event) => {
-      if (event.target === modal) { modal.close(); popupIdString = ""; }
+      if (event.target === modal) {
+        modal.close();
+        popupIdString = "";
+      }
     });
   } else {
     console.error("Modal, Open Button, or Close Button not found in the DOM.");
@@ -637,17 +706,17 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /*
-** search tasks function, only matches are visible, rest hidden
-*/
+ ** search tasks function, only matches are visible, rest hidden
+ */
 
 function searchTasks() {
   let searchBar = document.getElementById("searchBar").value;
 
-  if(searchBar.trim().length > 2) {
+  if (searchBar.trim().length > 2) {
     hideAllTaskCards();
 
-    for(let i = 0; i < tasks.length; i++) {
-      if(tasks[i].title.toLowerCase().includes(searchBar.toLowerCase()) || tasks[i].description.includes(searchBar.toLowerCase())) {
+    for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i].title.toLowerCase().includes(searchBar.toLowerCase()) || tasks[i].description.includes(searchBar.toLowerCase())) {
         showTaskCard(i);
       }
     }
@@ -657,37 +726,37 @@ function searchTasks() {
 }
 
 /*
-** hide single task card
-*/
+ ** hide single task card
+ */
 
 function hideTaskCard(i) {
   document.getElementById(`taskCard-${i}`).classList.add("d-none");
 }
 
 /*
-** show single task card
-*/
+ ** show single task card
+ */
 
 function showTaskCard(i) {
   document.getElementById(`taskCard-${i}`).classList.remove("d-none");
 }
 
 /*
-** hide all task cards
-*/
+ ** hide all task cards
+ */
 
 function hideAllTaskCards() {
-  for(let i = 0; i < tasks.length; i++) {
+  for (let i = 0; i < tasks.length; i++) {
     hideTaskCard(i);
   }
 }
 
 /*
-** show all task cards
-*/
+ ** show all task cards
+ */
 
 function showAllTaskCards() {
-  for(let i = 0; i < tasks.length; i++) {
+  for (let i = 0; i < tasks.length; i++) {
     showTaskCard(i);
   }
 }

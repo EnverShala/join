@@ -56,6 +56,7 @@ function createTaskArray(newTitle, newDescription, newDate, oldCategory, newPrio
     level: oldLevel,
     subtasks: newSubtasks,
     assigned: newAssigned,
+    subtasksDone: "",
   };
 }
 

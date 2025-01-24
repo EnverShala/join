@@ -3,7 +3,15 @@
 */
 
 function taskCardTemplate(uniqueId, i, subTasksArray, assignedUsersHTML) {
-  let widthPercent = subTasksArray.length > 0 ? 50 : 0;
+  let subtasksDone = tasks[i].subtasksDone;
+
+  if(subtasksDone.endsWith("|")) {
+    subtasksDone = subtasksDone.slice(0, -1);
+  }
+
+  subtasksDone = subtasksDone == "" ? [] : subtasksDone.split("|");
+
+  let widthPercent = (100 / subTasksArray.length) * subtasksDone.length;
 
   return `
                 <div draggable="true" id="${uniqueId}" class="taskCard">
