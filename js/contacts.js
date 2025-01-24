@@ -40,3 +40,13 @@ async function addUserButton() {
   await addUser();
   closePopup();
 }
+
+function selectedUser() {
+  let selectedUser = document.getElementById(`user-container('${i}')`);
+  selectedUser.classList.add('selectedUser');
+}
+
+function notSelectedUser() {
+  let selectedUser = document.getElementById(`user-container('${i}')`);
+  selectedUser.classList.add('selectedUser');
+}
