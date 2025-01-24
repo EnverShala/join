@@ -57,6 +57,28 @@ function addDragAndDropEvents() {
 }
 
 /*
+ ** moves the taskcards from one field to another field, saves & updates
+ */
+
+async function  moveTaskCardResponsive(taskNr, newLevel) {
+  if(newLevel != "To do" ||
+    newLevel != "In Progress" ||
+    newLevel != "Awaiting Feedback" ||
+    newLevel != "Done") {
+      return;
+    }
+
+  if(tasks[taskNr].level == newLevel) {
+    return;
+  }
+
+  tasks[taskNr].level = newLevel;
+
+  await editTask(tasks[taskNr].id, tasks[taskNr]);
+  await renderTaskCards();
+}
+
+/*
  ** returns the Name of the new Drag and Drop Container when dropping
  */
 

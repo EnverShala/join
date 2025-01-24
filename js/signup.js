@@ -83,6 +83,12 @@
 
   function clearPasswordMismatchMessage() {
     let messageContainer = document.getElementById("requiredConfirmation");
+    
+    if(document.getElementById("confirmPassword").value.trim() == "") {
+      messageContainer.classList.add("d-none");
+      document.getElementById("confirmPasswordBox").classList.add("margin-bottom24px");      
+      return false;
+    }
 
     if(document.getElementById("userPassword").value.trim() == document.getElementById("confirmPassword").value.trim()) {
       messageContainer.classList.add("d-none");
