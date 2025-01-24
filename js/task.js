@@ -1,5 +1,9 @@
 let popupIdString = "";
 
+/*
+** creates a new task
+*/
+
 async function createTask(id = "") {
   let taskTitle = document.getElementById("title").value;
   let taskDescription = document.getElementById("description").value;
@@ -35,10 +39,8 @@ async function createTask(id = "") {
 
   saveTasks("/tasks", newTask);
 
-  // Erfolgsmeldung anzeigen
   showSuccessMessage();
 
-  // Formular zurücksetzen (falls gewünscht)
   clearForm(id);
 }
 
@@ -228,13 +230,11 @@ async function renderAssignedTo(id = "") {
   let assignedMenu = document.getElementById("myDropdown" + id);
   let j = 1;
 
-  // Setze den Inhalt von assignedMenu zurück
   assignedMenu.innerHTML = "";
 
-  // Benutzer laden
   await loadUsers("/users");
 
-  // Duplikate entfernen
+  // remove doubles (only user should appear only once)
   let uniqueUsers = [];
   users.forEach(user => {
       if (!uniqueUsers.some(uniqueUser => uniqueUser.email == user.email)) {
@@ -242,7 +242,6 @@ async function renderAssignedTo(id = "") {
       }
   });
 
-  // Nutze eine temporäre Variable, um den gesamten HTML-Inhalt zu erstellen
   let htmlContent = "";
 
   for (let i = 0; i < uniqueUsers.length; i++) {
@@ -254,7 +253,6 @@ async function renderAssignedTo(id = "") {
       }
   }
 
-  // Weisen Sie den gesamten generierten HTML-Inhalt einmal zu
   assignedMenu.innerHTML = htmlContent;
 }
 
@@ -264,8 +262,8 @@ async function renderAssignedTo(id = "") {
 
 function toggleCheckbox(checkboxId) {
   const checkbox = document.getElementById(checkboxId);
-  checkbox.checked = !checkbox.checked;  // Umschalten des aktuellen Zustands der Checkbox
-  toggleBackground(checkbox);  // Optional: Deine Funktion aufrufen, um das Hintergrund-Design zu ändern
+  checkbox.checked = !checkbox.checked;
+  toggleBackground(checkbox);
 }
 
 /*
@@ -275,7 +273,7 @@ function toggleCheckbox(checkboxId) {
 
 function toggleBackground(checkbox) {
   const listItem = checkbox.closest(".list-item");
-  const contactCircle = listItem.querySelector(".circle").cloneNode(true); // Kopiere das Kreis-Element
+  const contactCircle = listItem.querySelector(".circle").cloneNode(true);
 
   const selectedContactsContainer = document.getElementById("selected-contacts-container" + popupIdString);
 
@@ -283,13 +281,13 @@ function toggleBackground(checkbox) {
     listItem.style.backgroundColor = "#2a3647";
     listItem.style.color = "white";
 
-    // Füge das Kreis-Element zum ausgewählten Kontaktcontainer hinzu
+    // add contact circle to the contact container
     selectedContactsContainer.appendChild(contactCircle);
   } else {
-    listItem.style.backgroundColor = ""; // Setzt die Hintergrundfarbe zurück
+    listItem.style.backgroundColor = "";
     listItem.style.color = "black";
 
-    // Entferne das Kreis-Element aus dem ausgewählten Kontaktcontainer
+    // remove contact circle to the contact container
     const circles = selectedContactsContainer.querySelectorAll(".circle");
     circles.forEach((circle) => {
       if (circle.textContent.trim() === contactCircle.textContent.trim()) {
@@ -392,6 +390,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+      /*
+  ** add subtask to task
+  */
+
   function addSubtask() {
     if (subtaskInput.value.trim() !== "") {
       subtasks.push(subtaskInput.value.trim());
@@ -402,10 +404,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Event Listener für das Hinzufügen eines Subtasks
+  // eventlistener to addsubtask via click
   subtaskCheckBtn.addEventListener("click", addSubtask);
 
-  // Event Listener für das Drücken der Enter-Taste
+  // eventlistener to addsubtask via enter on keyboard
    subtaskInput.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
       addSubtask();
@@ -436,10 +438,10 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", function () {
   const dateInput = document.getElementById("due-date-input");
 
-  // Hole das heutige Datum im Format YYYY-MM-DD
+  // get todays Date in Format YYYY-MM-DD
   const today = new Date().toISOString().split("T")[0];
 
-  // Setze das min-Attribut auf das heutige Datum
+  // Set the min-Attribute to todays Date
   dateInput.setAttribute("min", today);
 });
 
@@ -474,7 +476,7 @@ function selectUserStory()
 */
 
 function validateAndCreateTask(event, id = "") {
-  event.preventDefault(); // Immer das Standardverhalten verhindern
+  event.preventDefault(); // stop default behaviour
 
   let isValid = true;
 
@@ -518,7 +520,7 @@ function validateAndCreateTask(event, id = "") {
       descriptionError.style.display = "none";
   }
 
-  // "Assigned To"-Validierung
+  // "Assigned To"-Validation
   const assignedToError = document.getElementById("assigned-to-required");
   const assignedUsers = getAssignedUsers(id);
   if (assignedUsers === "") {
@@ -528,19 +530,17 @@ function validateAndCreateTask(event, id = "") {
       assignedToError.style.display = "none";
   }
 
-  // Prioritäts-Validierung
+  // Priority validation
 const priority = getTaskPrio(id);
 const priorityError = document.getElementById("prio-required");
-if (priority === "None") { // Überprüfen, ob die Priorität auf "None" gesetzt ist
+if (priority === "None") {
     priorityError.style.display = "block";
     isValid = false;
 } else {
     priorityError.style.display = "none";
 }
 
-
   if (isValid) {
-      // Wenn die Validierung erfolgreich war, die Aufgabe erstellen
       createTask(id);
   }
 }
@@ -550,15 +550,12 @@ if (priority === "None") { // Überprüfen, ob die Priorität auf "None" gesetzt
 */
 
 function clearForm(id = "") {
-  // Leert alle Textfelder
   document.getElementById('title').value = '';
   document.getElementById('description').value = '';
   document.getElementById('due-date-input').value = '';
 
-  // Setzt den ausgewählten Kategorie-Text zurück
   document.getElementById('category-displayed').textContent = 'Select task category';
 
-  // Setzt das ausgewählte Prio-Design zurück
   clearPrioButtons(id);
   clickOnMedium(id);
 
@@ -576,7 +573,6 @@ function clearForm(id = "") {
 
   document.getElementById('prio-required').style.display = 'none';
 
-  // Setzt die Subtask-Liste zurück
   document.getElementById('subtaskList' + id).innerHTML = '';
 
   if(id == "Popup") {
@@ -585,16 +581,14 @@ function clearForm(id = "") {
     document.getElementById('addNewSubtaskInput').value = '';
   }
 
-  // Leert das Dropdown-Menü "Assigned to"
   document.getElementById('selected-contacts-container' + id).innerHTML = '';
 
-  // Alle Checkboxen im Dropdown "Assigned to" zurücksetzen
   const checkboxes = document.querySelectorAll(`#myDropdown${id} input[type="checkbox"]`);
   checkboxes.forEach(checkbox => {
       checkbox.checked = false;
       const listItem = checkbox.closest(".list-item");
-      listItem.style.backgroundColor = '';  // Hintergrundfarbe zurücksetzen
-      listItem.style.color = 'black';  // Textfarbe zurücksetzen
+      listItem.style.backgroundColor = '';
+      listItem.style.color = 'black';
   });  
 }
 
@@ -606,7 +600,7 @@ function showSuccessMessage() {
   const successMessage = document.querySelector('.msg-task-added');
   successMessage.style.display = 'flex';
 
-  // Erfolgsmeldung nach einigen Sekunden ausblenden
+  // after 3 seconds remove success message
   setTimeout(() => {
       successMessage.style.display = 'none';
       window.location.href = "board.html";

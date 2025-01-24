@@ -170,13 +170,13 @@
 
   function toggleCheckbox(checkboxId) {
     const checkbox = document.getElementById(checkboxId);
-    checkbox.dataset.checked = checkbox.dataset.checked == true ? false : true;  // Umschalten des aktuellen Zustands der Checkbox
+    checkbox.dataset.checked = checkbox.dataset.checked == true ? false : true;
     
     if (checkbox.checked) {
       checkbox.style.backgroundColor = "#2a3647";
       checkbox.style.color = "white";
     } else {
-      checkbox.style.backgroundColor = ""; // Setzt die Hintergrundfarbe zurück
+      checkbox.style.backgroundColor = "";
       checkbox.style.color = "black";
     }
   }

@@ -11,7 +11,6 @@ let currentId = -1;
  */
 
 function indexHtmlInit() {
-  // Hier noch eine if Abfrage einbauen: wenn User bereits eingeloggt ist, verlinke direkt zu summary.html, ansonsten zu login.html
   window.location.href = "login.html";
 }
 
@@ -34,7 +33,7 @@ async function loadUsers(path = "/users") {
       });
     });
     users.sort((a, b) => {
-      return a.name.localeCompare(b.name); // sortiere users nach dem Wert "name"
+      return a.name.localeCompare(b.name); // sort users by name
     });
   }
 }

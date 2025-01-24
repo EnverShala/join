@@ -1,5 +1,5 @@
 /**
- * Öffnet das Pop-up-Fenster und lädt den Inhalt von addContacts.html.
+ * opens popup window and loads content of addContacts.html.
  */
 function addNewUser() {
   fetch("addContacts.html")
@@ -11,14 +11,14 @@ function addNewUser() {
 }
 
 /**
- * Schließt das Pop-up-Fenster.
+ * closes popup window
  */
 function closePopup() {
   document.getElementById("popup").style.display = "none";
 }
 
 /**
- * Öffnet das Pop-up-Fenster und lädt den Inhalt von editContacts.html.
+ * opens popup window and loads content of editContacts.html.
  */
 function editUserPopup() {
   fetch("editContacts.html")
@@ -34,17 +34,19 @@ function editUserPopup() {
 }
 
 /**
- * fügt einen User hinzu & schließt das Popup
+ * adds user and closes popup
  */
 async function addUserButton() {
   await addUser();
   closePopup();
 }
 
+
 function selectedUser() {
   let selectedUser = document.getElementById(`user-container('${i}')`);
   selectedUser.classList.add('selectedUser');
 }
+
 
 function notSelectedUser() {
   let selectedUser = document.getElementById(`user-container('${i}')`);

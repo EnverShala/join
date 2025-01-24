@@ -3,7 +3,7 @@ let subtasksArrayPopup = [];
 let pos;
 
 /*
- ** Funktion zum Hinzufügen der Drag-and-Drop-Events
+ ** function to add/implement Drag-and-Drop-Events
  */
 
 function addDragAndDropEvents() {
@@ -12,7 +12,10 @@ function addDragAndDropEvents() {
     "#cardContainertoDo, #cardContainerinProgress, #cardContainerawaitingFeedback, #cardContainerdone"
   );
 
-  // Die ID des zu ziehenden Elements wird in den Datenübertragungsobjekt gespeichert
+
+ /*
+ ** saving the to drag element ID into the data transfer object
+ */
   draggedCards.forEach((card) => {
     card.ondragstart = (event) => {
       event.dataTransfer.setData("text", event.target.id);
@@ -27,13 +30,13 @@ function addDragAndDropEvents() {
     };
 
     zone.ondragleave = (event) => {
-      event.currentTarget.style.backgroundColor = ""; // Zurücksetzen des Hintergrunds
+      event.currentTarget.style.backgroundColor = "";
       event.currentTarget.style.border = "none";
     };
 
     zone.ondrop = (event) => {
       event.preventDefault();
-      event.currentTarget.style.backgroundColor = ""; // Zurücksetzen des Hintergrunds
+      event.currentTarget.style.backgroundColor = "";
       const data = event.dataTransfer.getData("text");
       const card = document.getElementById(data);
       event.currentTarget.appendChild(card);
@@ -574,7 +577,6 @@ async function renderTaskCards() {
 
     document.getElementById(cardContainerIdName).innerHTML += taskCardTemplate(uniqueId, i, subTasksArray, assignedUsersHTML);
   }
-  // Drag-and-Drop-Events nach dem Rendern der Karten hinzufügen
   addDragAndDropEvents();
 }
 
@@ -668,7 +670,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const alsoOpenButtons = document.querySelectorAll(".alsoOpenModal"); // Alle Elemente mit der Klasse "alsobtn"
 
   if (modal && openModalButton && closeModalButton) {
-    // Modal öffnen
+    // open modal
     openModalButton.addEventListener("click", () => {
       popupIdString = "Popup";
       modal.showModal();
@@ -677,6 +679,7 @@ document.addEventListener("DOMContentLoaded", () => {
       clearForm("Popup");
     });
 
+    // close modal
     alsoOpenButtons.forEach((button) => {
       button.addEventListener("click", () => {
         popupIdString = "Popup";
@@ -687,13 +690,13 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    // Modal schließen
+    
     closeModalButton.addEventListener("click", () => {
       modal.close();
       popupIdString = "";
     });
 
-    // Optional: Modal schließen, wenn man außerhalb des Modals klickt
+    // closing the modal wenn clicking out of the modal
     modal.addEventListener("click", (event) => {
       if (event.target === modal) {
         modal.close();
