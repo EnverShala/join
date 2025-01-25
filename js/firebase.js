@@ -232,17 +232,16 @@ async function loginUser() {
           }
         }
         logInUserAccount(userEmail);
-        alert("LOGIN ERFOLGREICH");
-        window.location.href = "board.html";
+        showLoginMessage("Login erfolgreich!", 1);
         return;
       } else {
-        alert("PASSWORT FALSCH!");
+        showLoginMessage("Login fehlgeschlagen!", 0);
         return;
       }
     }
   }
 
-  alert("ZU DIESER EMAIL EXISTIERT KEIN ACCOUNT");
+  showLoginMessage("Zu dieser E-Mail existiert kein Account!", 0);
 }
 
 /*

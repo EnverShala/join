@@ -37,3 +37,24 @@ function showLoginContainer() {
 function guestLogin() {
   window.location.href = 'summary.html';
 }
+
+
+
+/*
+** show message that the task has been added
+*/
+
+function showLoginMessage(messageText, success) {
+  const successMessage = document.querySelector('.msg-login');
+  successMessage.style.display = 'flex';
+  document.getElementById("loginMessage").textContent = messageText;
+
+  
+  // after 3 seconds remove success message
+  setTimeout(() => {
+      successMessage.style.display = 'none';
+      if(success) {
+        window.location.href = "summary.html";
+      }
+  }, 3000);
+}
