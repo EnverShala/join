@@ -617,6 +617,15 @@ label {
     height: 32px;
   }
 }
+@media (max-width: 430px) {
+  .taskContainer {
+    margin-bottom: 0px;
+  }
+  .bottom-form{
+    margin-bottom: 150px;
+  }
+  
+}
 @media (max-width: 380px) {
   .addTaskLeft,
   .inputGroup,
