@@ -255,7 +255,7 @@ a {
 }
 
 /*Mobile Header and Nav*/
-@media (max-width: 1024px) {
+@media (max-width: 800px) {
   .desktop-header {
     display: none;
   }
