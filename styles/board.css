@@ -112,7 +112,7 @@ button {
 }
 
 .taskCard {
-  width: 252px;
+  width: 220px;
   background-color: #ffffff;
   border-radius: 24px;
   padding: 16px;
@@ -415,33 +415,35 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .popupOnTaskSelection {
-  position: fixed;
+  position: absolute;
   top: 0;
-  opacity: 1;
+  left: 0;
+  right: 0;
+  bottom: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.2);
   z-index: 1000;
   display: flex;
   align-items: center;
+  justify-content: center;
   transition: opacity 0.125s ease, visibility 0.125s ease;
   visibility: hidden;
 }
 
-.popupOnTaskSelectionMainContainer {
+.popupOnTaskSelectionMainContainer,.popupOnTaskEdit {
   background-color: #ffffff;
   width: 525px;
   max-height: 80%;
   padding: 48px 0;
-
   box-shadow: 0px 0px 4px 0px #00000029;
   border-radius: 30px;
-  transform: translateX(100%);
-  transition: transform 0.3s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow-y: auto;
+  /* transform: translateX(100%);
+  transition: transform 0.3s ease; */
 }
 .popupOnTaskSelectionMainContainer::-webkit-scrollbar {
   width: 8px;
@@ -451,23 +453,10 @@ input[type="search"]::-webkit-search-cancel-button {
   border-radius: 100px;
 }
 
-.popupOnTaskEdit {
-  background-color: #ffffff;
-  width: 525px;
-  padding: 48px 0;
-  box-shadow: 0px 0px 4px 0px #00000029;
-  border-radius: 30px;
-  transform: translateX(100%);
-  transition: transform 0.3s ease;
-  height: 92%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-height: 900px;
-}
-
 h2 {
-  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 36px;
   padding: 4px 24px 4px 24px;
   gap: 10px;
@@ -476,6 +465,7 @@ h2 {
   color: white;
   font-weight: 300;
   text-wrap: nowrap;
+  margin-top: 0;
 }
 
 .popupKategorieOnTopMainContainer {
@@ -818,7 +808,7 @@ h2 {
 #myModal {
   height: 85%;
   position: absolute;
-  top: 50%;
+  top: 90%;
   left: 50%;
   translate: -50% -50%;
   border: 0;
@@ -971,7 +961,6 @@ label {
 .editPopupDescriptionMainContainer,
 .editPopupSubtasksMainContainer {
   width: 90%;
-  margin-left: 20px;
 }
 
 .editPopupTitelTxt,
@@ -981,6 +970,9 @@ label {
 .editPopupSubtasksTxt {
   font-size: 20px;
   color: #2a3647;
+  margin-block-start: 0;
+  margin-block-end: 0;
+
 }
 
 .editInputGroup,
@@ -994,24 +986,24 @@ label {
   border: 1px solid #d1d1d1;
   border-radius: 10px;
   margin-top: 8px;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
   padding: 0 10px;
 }
 
 .editPrio {
-  width: 90%;
-  margin-bottom: 32px;
-  margin-left: 20px;
+  width: 95%;
+  margin-bottom: 24px;
+  margin-top: 10px;
 }
 
 .inputOnEditPopup {
+  width: 100%;
   border-radius: 10px;
-  padding: 12px 21px;
+  padding: 10px 10px;
   border: 1px solid #dfdede;
   font-family: inherit;
   font-size: 20px;
   cursor: auto;
-  width: 440px;
 }
 
 .addTaskLeft,
@@ -1099,16 +1091,19 @@ label {
   justify-content: center;
 }
 .selectOnEditPopUp {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 48px;
-  padding: 0 16px;
+  padding: 0 10px;
   border: 1px solid #dfdede;
   border-radius: 10px;
   background-color: #ffffff;
   font-size: 20px;
   cursor: pointer;
+  margin-bottom: 24px;
+  margin-top: 10px;
 }
 
 .editClosePopupMainContainer {
@@ -1141,15 +1136,8 @@ label {
   }
 }
 @media (max-width: 1270px) {
-  .popupOnTaskSelectionMainContainer,
-  .popupOnTaskEdit {
-    position: fixed;
-    left: -100px;
-    width: 520px;
-  }
   .statuses {
     gap: 20px;
-    justify-content: unset;
   }
   .searchBar {
     width: 120px;
@@ -1157,35 +1145,17 @@ label {
   .addBtn {
     text-wrap: nowrap;
   }
-}
-@media (max-width: 1180px) {
-  .addBtnText {
-    display: none;
-  }
-  .statusItem,
   .taskCard {
     width: 180px;
-  }
-  .popupOnTaskSelectionMainContainer,
-  .popupOnTaskEdit {
-    left: -240px;
-    width: 500px;
-  }
-  .statusHeader p {
-    font-size: 16px;
-    text-wrap: nowrap;
-  }
-  .emptyTask {
-    font-size: 14px;
-    text-wrap: nowrap;
+    gap: 20px;
   }
 }
-@media (max-width: 1024px) {
+@media (max-width: 1180px) {
   .boardSection {
-    margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-right: 100px;
   }
   .addBtnText {
     display: none;
@@ -1213,7 +1183,6 @@ label {
   }
   .popupOnTaskSelectionMainContainer,
   .popupOnTaskEdit {
-    left: -240px;
     width: 500px;
   }
   .statusHeader p {
@@ -1231,28 +1200,29 @@ label {
 @media (max-width: 941px) {
   .popupOnTaskSelectionMainContainer,
   .popupOnTaskEdit {
-    left: -300px;
     width: 500px;
+  }
+}
+@media (max-width: 800px) {
+  .boardSection {
+    margin: 0;
   }
 }
 @media (max-width: 830px) {
   .popupOnTaskSelectionMainContainer,
   .popupOnTaskEdit {
-    left: -350px;
     width: 500px;
   }
 }
 @media (max-width: 725px) {
   .popupOnTaskSelectionMainContainer,
   .popupOnTaskEdit {
-    left: -400px;
     width: 500px;
   }
 }
 @media (max-width: 650px) {
   .popupOnTaskSelectionMainContainer,
   .popupOnTaskEdit {
-    left: -440px;
     width: 500px;
   }
   .deleteAndEditMainContainer {
@@ -1262,7 +1232,6 @@ label {
 @media (max-width: 595px) {
   .popupOnTaskSelectionMainContainer,
   .popupOnTaskEdit {
-    left: -470px;
     width: 500px;
   }
 }
@@ -1295,7 +1264,6 @@ label {
 @media (max-width: 560px) {
   .popupOnTaskSelectionMainContainer,
   .popupOnTaskEdit {
-    left: -340px;
     width: 400px;
     height: 80%;
     overflow-x: hidden;
@@ -1328,99 +1296,33 @@ label {
   }
 }
 @media (max-width: 480px) {
-  .popupOnTaskSelectionMainContainer,
-  .popupOnTaskEdit {
-    left: -320px;
-    width: 350px;
-    height: 80%;
+  .headerTitle h1 {
+    font-size: 50px;
+    margin-right: 32px;
   }
-  .buttonsPrioOnPopUp {
-    width: 280px;
-    gap: 2px;
-  }
-  .btn-prio {
-    width: 90px;
-  }
-  #myModal {
-    width: 320px;
-  }
-  .inputGroupOnPopUp {
-    width: 280px;
-  }
-  .inputPopup {
-    width: 280px;
-  }
-  .buttonsPrioOnEditPopUp {
-    gap: 0;
-  }
-  .btnClearOnPopup,
-  .btnCreateOnPopup {
-    padding: 10px;
-    gap: 6px;
-    font-size: 16px;
-  }
-  .statuses {
-    margin-bottom: 120px;
-  }
-}
-@media (max-width: 410px) {
-  .popupKategorieOnTopMainContainer,
-  .popupHeader,
-  .popupSpan,
-  .popupDateMainContainer,
-  .popupPrioMainContainer,
-  .popupAssignedToMainContainer,
-  .assignedToContainer,
-  .assignedToTxt,
-  .popupTest,
-  .subtasksMainContainer,
-  .subtasksTxt,
-  .subtasks,
-  .popupCheckboxContainer,
-  .deleteAndEditMainContainer {
-    width: 300px;
-  }
-  .inputOnEditPopup,
-  .okButtonMainContainer {
+  .searchContainer {
     width: 260px;
   }
-
-  .btn-prio {
-    width: 90px;
+  .addBtn {
+    margin-left: -70px;
   }
-  .popupOnTaskSelectionMainContainer,
-  .popupOnTaskEdit {
-    left: -280px;
-    width: 320px;
+  .searchBar {
+    width: 150px !important;
   }
-  .checkboxTxt {
-    width: 200px;
-    text-wrap: wrap;
-    margin: 0;
+  .statuses,
+  .statusItem,
+  .taskCard {
+    width: 260px !important;
+    margin-left: -4px;
   }
-  .subtasks,
-  .popupCheckboxContainer {
-    margin-bottom: 14px;
-    height: 40px;
+  #myModal {
+    width: 300px;
+    height: 80%;
+    padding: 24px 10px 24px 10px;
   }
-  .subtasksTxt {
-    margin-bottom: 0;
-  }
-  .deleteAndEditMainContainer {
-    width: 150px;
-  }
-}
-@media (max-width: 370px) {
-  .editPopupTitelMainContainer,
-  .editPopupDescriptionMainContainer,
-  .editPopupDateMainContainer,
-  .editPopupAssignedToMainContainer,
-  .editPopupSubtasksMainContainer {
-    margin-left: 10px;
-  }
-  .editPrio {
-    margin: 0;
-    margin-bottom: 20px;
+  /* PopUp-STANDARD */
+  .popupOnTaskSelectionMainContainer,.popupOnTaskEdit {
+    width: 300px;
   }
   .popupKategorieOnTopMainContainer,
   .popupHeader,
@@ -1436,37 +1338,13 @@ label {
   .subtasks,
   .popupCheckboxContainer,
   .deleteAndEditMainContainer,
-  .editClosePopupMainContainer {
-    width: 240px;
-  }
-  .inputOnEditPopup,
+  .editClosePopupMainContainer,
   .okButtonMainContainer {
-    width: 240px;
-  }
-  .popupOnTaskSelectionMainContainer,
-  .popupOnTaskEdit {
-    width: 300px;
-    left: -290px;
-  }
-  .searchContainer {
     width: 280px;
   }
-  .addBtn {
-    margin-left: -70px;
-  }
-  .searchBar {
-    width: 150px !important;
-  }
-  .statuses,
-  .statusItem,
-  .taskCard {
-    width: 300px !important;
-    margin-left: -4px;
-  }
-  #myModal {
-    width: 300px;
-    height: 600px;
-  }
+/* END POPUP-STANDARD */
+
+
   .inputGroupOnPopUp {
     width: 240px;
   }
@@ -1477,7 +1355,7 @@ label {
     width: 260px;
   }
   .buttonsPrioOnPopUp {
-    width: 230px;
+    width: 280px;
   }
   .btnClearOnPopup,
   .btnCreateOnPopup {
@@ -1487,5 +1365,42 @@ label {
   }
   .addTaskPopupClose {
     right: 20px;
+    top: 30px;
   }
+
+  /* editPopup */
+  .editPopupTitelMainContainer,
+  .editPopupDescriptionMainContainer,
+  .editPopupDateMainContainer,
+  .editPopupAssignedToMainContainer,
+  .editPopupSubtasksMainContainer {
+    margin-left: 10px;
+  }
+  .editTitelInput,.editDescriptionInput,.editDateInput,.selectOnEditPopUp  {
+    width: 220px;
+    margin-left: 0;
+  }
+  .editPrio {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    margin-bottom: 20px;
+  }
+  .buttonsPrioOnEditPopUp {
+    width: 100%;
+  }
+  #urgent,#medium,#low {
+    padding: 14px 5px;
+    gap: 4px;
+    flex: 0;
+  }
+  #urgentID,#urgent-whiteID,#mediumID,#medium-whiteID,#lowID,#low-whiteID {
+    width: 16px;
+    height: 16px;
+  }
+  .okButtonMainContainer {
+    display: flex;
+    justify-content: center;
+  }
+  
 }
