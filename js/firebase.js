@@ -502,13 +502,27 @@ async function loadUserInformation(id) {
  */
 
 function hideContactsListInResponsiveMode() {
-  if (window.innerWidth <= 768) {
+  if (window.innerWidth <= 799) {
     document.getElementById("contact-list").classList.add("d-none");
     document.getElementById("add-contact-containerID").style.display = "none";
     document.getElementById("back-arrow-on-responsiveID").classList.remove("d-none");
     showContactsInDetailInResponsiveMode();
   }
 }
+
+window.onresize = function showContactListOnExitResponsiveMode() {
+  if (window.innerWidth >= 800) {
+    document.getElementById("display-contact-headerID").style.display = "flex";
+    document.getElementById("display-contactID").style.display = "block";
+    document.getElementById("add-contact-containerID").style.display = "flex";
+    document.getElementById("contact-list").classList.remove("d-none");
+    document.getElementById("back-arrow-on-responsiveID").classList.add("d-none");
+  }
+  else if (hideContactsListInResponsiveMode()) {
+    hideContactsListInResponsiveMode();
+  }
+}
+
 
 /*
  ** show contacts in detail in responsive mode
@@ -524,7 +538,7 @@ function showContactsInDetailInResponsiveMode() {
  */
 
 function showContactListAgainInResponsiveMode() {
-  if (window.innerWidth <= 768) {
+  if (window.innerWidth < 800) {
     document.getElementById("display-contact-headerID").style.display = "none";
     document.getElementById("display-contactID").style.display = "none";
     document.getElementById("contact-list").classList.remove("d-none");
