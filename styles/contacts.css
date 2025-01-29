@@ -105,6 +105,10 @@ body {
   border-radius: 16px;
 }
 
+.contact-container-no-hover:hover {
+  background-color: inherit !important;
+}
+
 .contact {
   width: 140px;
   height: 48px;

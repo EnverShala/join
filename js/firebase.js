@@ -576,4 +576,12 @@ function highlightUser(userIndex) {
     document.getElementById(`user-container${i}`).classList.remove("highlightUser");
   }
   document.getElementById(`user-container${userIndex}`).classList.add("highlightUser");
+
+  document.querySelectorAll(".contact-container").forEach(item =>
+    item.addEventListener("click", () => {
+        document.querySelector(".contact-container-no-hover")?.classList.remove("contact-container-no-hover"); 
+        item.classList.add("contact-container-no-hover");
+    })
+);
+
 }
