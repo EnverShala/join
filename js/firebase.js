@@ -510,6 +510,9 @@ function hideContactsListInResponsiveMode() {
   }
 }
 
+/*
+ ** show contact list back again when exit responsive mode
+ */
 window.onresize = function showContactListOnExitResponsiveMode() {
   if (window.innerWidth >= 800) {
     document.getElementById("display-contact-headerID").style.display = "flex";
