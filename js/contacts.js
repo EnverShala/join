@@ -2,9 +2,7 @@
  * opens popup window and loads content of addContacts.html.
  */
 function addNewUser() {
-  fetch("addContacts.html")
-    .then((response) => response.text())
-    .then((data) => {
+  fetch("addContacts.html").then((response) => response.text()).then((data) => {
       document.getElementById("popup-body").innerHTML = data;
       document.getElementById("popup").style.display = "block";
     });
@@ -14,6 +12,8 @@ function addNewUser() {
  * closes popup window
  */
 function closePopup() {
+  fetch("addContacts.html").then((response) => response.text());
+  document.getElementById("popup-body").innerHTML = "";
   document.getElementById("popup").style.display = "none";
 }
 
@@ -34,7 +34,7 @@ function editUserPopup() {
 }
 
 /**
- * adds user and closes popup 
+ * adds user and closes popup
  */
 async function addUserButton() {
   await addUser();
