@@ -453,6 +453,7 @@ async function renderContacts() {
   }
 
   document.getElementById("contact-list").innerHTML = html;
+  removeHover();
 }
 
 /**
@@ -576,12 +577,13 @@ function highlightUser(userIndex) {
     document.getElementById(`user-container${i}`).classList.remove("highlightUser");
   }
   document.getElementById(`user-container${userIndex}`).classList.add("highlightUser");
+}
 
+function removeHover() {
   document.querySelectorAll(".contact-container").forEach(selContact =>
     selContact.addEventListener("click", () => {
         document.querySelector(".contact-container-no-hover")?.classList.remove("contact-container-no-hover"); 
         selContact.classList.add("contact-container-no-hover");
     })
 );
-
 }

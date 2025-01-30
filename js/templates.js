@@ -58,9 +58,9 @@ function taskCardTemplate(uniqueId, i, subTasksArray, assignedUsersHTML) {
 ** template for creating contact into contact list
 */
 
-function contactTemplate(i, j) {
+function contactTemplate(i, j, x) {
   return `<div id="user-container${i}">
-            <div id="contact-containerID" class="contact-container" onclick="loadUserInformation(${i}); hideContactsListInResponsiveMode()">
+            <div id="contact-containerID${x}" class="contact-container" onclick="loadUserInformation(${i}); hideContactsListInResponsiveMode()">
             <div class="contact-list-ellipse">
                <div id="userColor${i}" class="ellipse-list initialsColor${j}">${getUserInitials(users[i].name)}</div>
             </div>
