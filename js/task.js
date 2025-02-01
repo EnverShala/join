@@ -1,9 +1,14 @@
 let popupIdString = "";
 
-/*
-** creates a new task
-*/
-
+/**
+ * Asynchronously creates a new task. Retrieves task details from the form,
+ * including title, description, due date, category, priority, subtasks, and
+ * assigned users.  Saves the new task to the Firebase database using the
+ * `saveTasks` function, displays a success message, and clears the form.
+ * @param {string} [id=""] An optional ID, likely used for distinguishing between
+ *                          different task forms (e.g., in a modal or popup).
+ * @returns {Promise<void>}
+ */
 async function createTask(id = "") {
   let taskTitle = document.getElementById("title").value;
   let taskDescription = document.getElementById("description").value;
@@ -44,10 +49,18 @@ async function createTask(id = "") {
   clearForm(id);
 }
 
-/*
-** creates an array with the task informations
-*/
-
+/**
+ * Creates a new task object with the provided details.
+ * @param {string} newTitle The title of the new task.
+ * @param {string} newDescription The description of the new task.
+ * @param {string} newDate The due date of the new task.
+ * @param {string} oldCategory The category of the new task.
+ * @param {string} newPrio The priority of the new task.
+ * @param {string} oldLevel The level of the new task.
+ * @param {string} newSubtasks The subtasks of the new task (e.g., comma-separated).
+ * @param {string} newAssigned The users assigned to the task (e.g., comma-separated).
+ * @returns {object} A new task object.
+ */
 function createTaskArray(newTitle, newDescription, newDate, oldCategory, newPrio, oldLevel, newSubtasks, newAssigned) {
   return {
     title: newTitle,
@@ -62,10 +75,12 @@ function createTaskArray(newTitle, newDescription, newDate, oldCategory, newPrio
   };
 }
 
-/*
-** gets the priority level of the current/opened task
-*/
-
+/**
+ * Determines the priority of a task based on the active priority button.
+ * @param {string} [id=""] An optional ID, likely used for distinguishing between
+ *                          different task forms.
+ * @returns {string} The priority of the task ("Urgent", "Medium", "Low", or "None").
+ */
 function getTaskPrio(id = "") {
   if (document.getElementById("urgent" + id).className.includes("btn-bg-change-urgent-onclick")) {
     return "Urgent";
@@ -79,10 +94,11 @@ function getTaskPrio(id = "") {
   return "None";
 }
 
-/*
-**reset all Class from Prio Buttons
-*/
-
+/**
+ * Clears the styling of all priority buttons, resetting them to their default state.
+ * @param {string} [id=""] An optional ID, likely used for distinguishing between
+ *                          different sets of priority buttons.
+ */
 function clearPrioButtons(id = "")
 {
   document.getElementById('urgent' + id).className = "btn-prio";
@@ -101,10 +117,13 @@ function clearPrioButtons(id = "")
   document.getElementById('low' + id).style.boxShadow = "";
 }
 
-/*
-** click on Urgent Prio Button
-*/
-
+/**
+ * Handles a click event on the "Urgent" priority button. If "Urgent" is already
+ * selected, deselects it. Otherwise, deselects all other priority buttons and
+ * selects "Urgent".
+ * @param {string} [id=""] An optional ID, likely used for distinguishing between
+ *                          different sets of priority buttons.
+ */
 function clickOnUrgent(id = "") {
   if (getTaskPrio(id) == "Urgent") {
     clearPrioButtons(id);
@@ -119,10 +138,13 @@ function clickOnUrgent(id = "") {
   document.getElementById("urgent-whiteID" + id).className = "";
 }
 
-/*
-** click on Medium Prio Button
-*/
-
+/**
+ * Handles a click event on the "Medium" priority button. If "Medium" is already
+ * selected, deselects it. Otherwise, deselects all other priority buttons and
+ * selects "Medium".
+ * @param {string} [id=""] An optional ID, likely used for distinguishing between
+ *                          different sets of priority buttons.
+ */
 function clickOnMedium(id = "") {
   if (getTaskPrio(id) == "Medium") {
     clearPrioButtons(id);
@@ -137,10 +159,13 @@ function clickOnMedium(id = "") {
   document.getElementById("medium-whiteID" + id).className = "";
 }
 
-/*
-** click on Low Prio Button
-*/
-
+/**
+ * Handles a click event on the "Low" priority button. If "Low" is already
+ * selected, deselects it. Otherwise, deselects all other priority buttons and
+ * selects "Low".
+ * @param {string} [id=""] An optional ID, likely used for distinguishing between
+ *                          different sets of priority buttons.
+ */
 function clickOnLow(id = "") {
   if (getTaskPrio(id) == "Low") {
     clearPrioButtons(id);
@@ -155,18 +180,22 @@ function clickOnLow(id = "") {
   document.getElementById("low-whiteID" + id).className = "";
 }
 
-/*
-** open dropdown assigned to and dropdown category
-*/
-
+/**
+ * Toggles the visibility of a dropdown menu.
+ * @param {string} [id=""] An optional ID, likely used for distinguishing between
+ *                          different dropdown menus.
+ */
 function toggleDropdown(id = "") {
   document.getElementById("myDropdown" + id).classList.toggle("show");
 }
 
-/*
-** close dropdown assigned to and dropdown category
-*/
-
+/**
+ * Closes the assigned-to dropdown menu when the user clicks outside of it.
+ * Adds a global click event listener that checks if the click occurred
+ * outside the dropdown and, if so, closes the dropdown.
+ * @param {string} [id=""] An optional ID, likely used for distinguishing between
+ *                          different dropdown menus.
+ */
 function closeAssignedto(id = "") {
   let dropdown = document.getElementById('myDropdown' + id);
   let container = document.getElementById('contacts-list' + id);
@@ -178,10 +207,11 @@ function closeAssignedto(id = "") {
 });
 }
 
-/*
-** close dropdown category
-*/
-
+/**
+ * Closes the category dropdown menu when the user clicks outside of it.
+ * Adds a global click event listener that checks if the click occurred
+ * outside the dropdown and, if so, closes the dropdown.
+ */
 function closeCategory() {
   let dropdown = document.getElementById('myDropdownCategory');
   let container = document.getElementById('category-container'); 
@@ -193,18 +223,20 @@ function closeCategory() {
 });
 }
 
-/*
-** toggle dropdown category
-*/
-
+/**
+ * Toggles the visibility of the category dropdown menu.
+ */
 function toggleDropdownCategory() {
   document.getElementById("myDropdownCategory").classList.toggle("show");
 }
 
-/*
-** returns the assigned Users (as a String)
-*/
-
+/**
+ * Retrieves a comma-separated string of names of assigned users.
+ * @param {string} [id=""] An optional ID, likely used for distinguishing between
+ *                          different sets of assigned user checkboxes.
+ * @returns {string} A comma-separated string of assigned user names, or an
+ *                   empty string if no users are assigned.
+ */
 function getAssignedUsers(id = "") {
   let newAssigned = "";
 
@@ -222,10 +254,15 @@ function getAssignedUsers(id = "") {
   return newAssigned;
 }
 
-/*
-** render assigned to menu with users, initials, etc.
-*/
-
+/**
+ * Asynchronously renders the assigned-to user list in the dropdown menu.
+ * Loads user data, removes duplicate users based on email, and generates the
+ * HTML for the assigned-to user list using the `createRenderAssignedToUserTemplate`
+ * function.
+ * @param {string} [id=""] An optional ID, likely used for distinguishing between
+ *                          different dropdown menus.
+ * @returns {Promise<void>}
+ */
 async function renderAssignedTo(id = "") {
   let assignedMenu = document.getElementById("myDropdown" + id);
   let j = 1;
@@ -256,21 +293,22 @@ async function renderAssignedTo(id = "") {
   assignedMenu.innerHTML = htmlContent;
 }
 
-/*
-** toggle checkbox from assigned users
-*/
-
+/**
+ * Toggles the checked state of a checkbox and updates its background.
+ * @param {string} checkboxId The ID of the checkbox element.
+ */
 function toggleCheckbox(checkboxId) {
   const checkbox = document.getElementById(checkboxId);
   checkbox.checked = !checkbox.checked;
   toggleBackground(checkbox);
 }
 
-/*
-** toggles the background of the menu
-*/
-
-
+/**
+ * Toggles the background color and text color of a list item and adds/removes
+ * a cloned contact circle to/from the selected contacts container based on the
+ * checked state of a checkbox.
+ * @param {HTMLInputElement} checkbox The checkbox element that triggered the toggle.
+ */
 function toggleBackground(checkbox) {
   const listItem = checkbox.closest(".list-item");
   const contactCircle = listItem.querySelector(".circle").cloneNode(true);
@@ -327,10 +365,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-    /*
-  ** delete subtask from a task
-  */
-
+/**
+ * Attaches click event listeners to the delete buttons of subtask list items.
+ * When a delete button is clicked, the corresponding subtask is removed from the
+ * `subtasks` array, and the subtask list is re-rendered.  This function should
+ * be called *after* the subtask list items have been added to the DOM.  It
+ * assumes that the `subtasks` array and `renderSubtasks` function are defined
+ * elsewhere.
+ */
   function deleteSubtask() {
     const subtaskListItems = document.querySelectorAll(".subtask-list-item");
 
@@ -343,10 +385,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-    /*
-  ** edit subtask from a task
-  */
-
+/**
+ * Attaches click and double-click event listeners to the edit buttons and list
+ * items of subtasks. When an edit button or a list item is clicked/double-clicked,
+ * the subtask item's content is replaced with an input field for editing.
+ * The `createListItemTextContentTemplate`, `deleteSubtask`, and
+ * `confirmSubtaskEdit` functions are assumed to be defined elsewhere. This
+ * function should be called *after* the subtask list items have been added
+ * to the DOM.
+ */
   function editSubTask() {
     const subtaskListItems = document.querySelectorAll(".subtask-list-item");
 
@@ -370,10 +417,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /*
-  ** confrim editing of a subtask
-  */
-
+/**
+ * Attaches click event listeners to the confirm buttons of subtask edit input
+ * fields. When a confirm button is clicked, the edited subtask text is retrieved
+ * from the input field, and if it's not empty, the `subtasks` array is updated,
+ * and the subtask list is re-rendered. This function should be called *after*
+ * the subtask edit input fields have been added to the DOM. It assumes that
+ * the `subtasks` array and `renderSubtasks` function are defined elsewhere.
+ */
   function confirmSubtaskEdit() {
     const subtaskListItemsEdit = document.querySelectorAll(".subtask-list-item-edit");
 
@@ -390,10 +441,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-      /*
-  ** add subtask to task
-  */
-
+/**
+ * Adds a new subtask to the `subtasks` array and re-renders the subtask list.
+ * The subtask text is retrieved from the `subtaskInput` element, and if it's
+ * not empty or just whitespace, it's added to the array. The input field is
+ * then cleared, and the appropriate buttons are shown/hidden.  Event listeners
+ * are attached to the `subtaskCheckBtn` (click) and `subtaskInput` (Enter key)
+ * to trigger the `addSubtask` function. It is assumed that the `subtaskInput`,
+ * `subtaskCheckBtn`, `subtaskBtnAdd`, `subtaskBtnCheckCancel`, `subtasks` array,
+ * and `renderSubtasks` function are defined elsewhere.
+ */
   function addSubtask() {
     if (subtaskInput.value.trim() !== "") {
       subtasks.push(subtaskInput.value.trim());
@@ -445,10 +502,12 @@ document.addEventListener("DOMContentLoaded", function () {
   dateInput.setAttribute("min", today);
 });
 
-/*
-** function for the select category dropdown menu to select technical stack
-*/
-
+/**
+ * Selects the technical stack category and updates the displayed category.
+ * Retrieves the technical stack category from the element with the ID
+ * 'categoryTechnicalStack' and sets it as the content of the element with the
+ * ID 'category-displayed'.
+ */
 function selectTechnicalStack()
 {
   let categoryTechnicalStack = document.getElementById('categoryTechnicalStack').innerHTML;
@@ -458,10 +517,11 @@ function selectTechnicalStack()
   selectCategory.innerHTML = categoryTechnicalStack;
 }
 
-/*
-** function for the select category dropdown menu to select user story
-*/
-
+/**
+ * Selects the user story category and updates the displayed category.
+ * Retrieves the user story category from the element with the ID 'categoryUserStory'
+ * and sets it as the content of the element with the ID 'category-displayed'.
+ */
 function selectUserStory()
 {
   let categoryselectUserStory = document.getElementById('categoryUserStory').innerHTML;
@@ -471,10 +531,16 @@ function selectUserStory()
   selectCategory.innerHTML = categoryselectUserStory;
 }
 
-/*
-** Begin Form validation
-*/
-
+/**
+ * Validates the task input form and creates a new task if the input is valid.
+ * Prevents the default form submission behavior, performs validation checks
+ * for title, due date, category, description, assigned users, and priority.
+ * Displays error messages for invalid fields. If all fields are valid, calls
+ * the `createTask` function to create the new task.
+ * @param {Event} event The form submit event.
+ * @param {string} [id=""] An optional ID, likely used for distinguishing between
+ *                          different task forms.
+ */
 function validateAndCreateTask(event, id = "") {
   event.preventDefault(); // stop default behaviour
 
@@ -545,10 +611,16 @@ if (priority === "None") {
   }
 }
 
-/*
-** setting back the create task form
-*/
-
+/**
+ * Clears the task input form, resetting all fields to their default values.
+ * This includes clearing text inputs, resetting the displayed category, clearing
+ * priority buttons, closing the assigned-to dropdown, hiding error messages,
+ * clearing the subtask list, clearing the subtask input field (depending on
+ * whether it's in a popup or not), clearing the selected contacts container,
+ * and unchecking all assigned-to checkboxes.
+ * @param {string} [id=""] An optional ID, likely used for distinguishing between
+ *                          different task forms.
+ */
 function clearForm(id = "") {
   document.getElementById('title').value = '';
   document.getElementById('description').value = '';
@@ -592,10 +664,9 @@ function clearForm(id = "") {
   });  
 }
 
-/*
-** show message that the task has been added
-*/
-
+/**
+ * Displays a success message and redirects the user to the board page after 3 seconds.
+ */
 function showSuccessMessage() {
   const successMessage = document.querySelector('.msg-task-added');
   successMessage.style.display = 'flex';
