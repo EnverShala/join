@@ -1037,9 +1037,15 @@ label {
   border-top: none;
   display: none;
   z-index: 100;
-  margin-top: -10px;
   font-size: 20px;
   z-index: 10;
+}
+
+.dropdownContentPopup ul {
+  margin-block-start: 0;
+    margin-block-end: 0;
+    padding-inline-start: 0;
+    padding-inline-end: 0;
 }
 
 .dropdownContentPopup li {
@@ -1065,6 +1071,11 @@ label {
   position: fixed;
   padding-top: 5px;
   z-index: 1;
+  margin-top: 10px;
+}
+
+.due-date {
+  margin-top: 20px;
 }
 
 .okButtonMainContainer {
@@ -1091,7 +1102,7 @@ label {
   justify-content: center;
 }
 .selectOnEditPopUp {
-  width: 100%;
+  width: 462px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1102,7 +1113,6 @@ label {
   background-color: #ffffff;
   font-size: 20px;
   cursor: pointer;
-  margin-bottom: 24px;
   margin-top: 10px;
 }
 
@@ -1245,8 +1255,11 @@ label {
     width: 400px;
   }
   .inputGroupOnPopUp,
-  .inputPopup {
+  .inputPopup  {
     width: 350px;
+  }
+  .selectOnEditPopUp {
+    width: 370px;
   }
   .selectPopup {
     display: flex;
@@ -1402,5 +1415,7 @@ label {
     display: flex;
     justify-content: center;
   }
-  
+  .selectOnEditPopUp {
+    width: 260px;
+  }
 }
