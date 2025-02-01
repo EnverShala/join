@@ -1,7 +1,12 @@
-/*
-** task card template for render task cards function
-*/
-
+/**
+ * Generates the HTML template for a task card.
+ *
+ * @param {string} uniqueId The unique ID of the task card.
+ * @param {number} i The index of the task in the tasks array.
+ * @param {string[]} subTasksArray An array of subtask descriptions.
+ * @param {string} assignedUsersHTML HTML for the assigned user badges.
+ * @returns {string} The HTML template for the task card.
+ */
 function taskCardTemplate(uniqueId, i, subTasksArray, assignedUsersHTML) {
   let subtasksDone = tasks[i].subtasksDone;
 
@@ -54,10 +59,14 @@ function taskCardTemplate(uniqueId, i, subTasksArray, assignedUsersHTML) {
                   `;
 }
 
-/*
-** template for creating contact into contact list
-*/
-
+/**
+ * Generates the HTML template for a contact list item.
+ *
+ * @param {number} i The index of the user in the users array.
+ * @param {number} j The color index for the user.
+ * @param {number} x A unique identifier for the contact container.
+ * @returns {string} The HTML template for the contact list item.
+ */
 function contactTemplate(i, j, x) {
   return `<div id="user-container${i}">
             <div id="contact-containerID${x}" class="contact-container" onclick="loadUserInformation(${i}); hideContactsListInResponsiveMode()">
@@ -73,10 +82,14 @@ function contactTemplate(i, j, x) {
             `;
 }
 
-/*
-** template for creating render assigned to menu user
-*/
-
+/**
+ * Generates the HTML template for a contact list item.
+ *
+ * @param {number} i The index of the user in the users array.
+ * @param {number} j The color index for the user.
+ * @param {number} x A unique identifier for the contact container.
+ * @returns {string} The HTML template for the contact list item, or an empty string if the user is not found.
+ */
 function createRenderAssignedToUserTemplate(i, j, userInitials, userName, id = "") {
   return `
         <label onclick="event.stopPropagation()"><li class="list-item assigned-to"></label>
@@ -89,10 +102,13 @@ function createRenderAssignedToUserTemplate(i, j, userInitials, userName, id = "
     `;
 }
 
-/*
-** template for creating subtask list item for add Task
-*/
-
+/**
+ * Generates the HTML template for a subtask list item in the "add task" context.
+ *
+ * @param {number} index The index of the subtask.
+ * @param {string} item The subtask description.
+ * @returns {string} The HTML template for the subtask list item, or an empty string if the item is empty.
+ */
 function createSubtaskListItemAddTaskTemplate(index, item) {
   if(item == "") { return ""; }
   return `
@@ -107,10 +123,13 @@ function createSubtaskListItemAddTaskTemplate(index, item) {
         `;
 }
 
-/*
-** template for creating subtask list item
-*/
-
+/**
+ * Generates the HTML template for a subtask list item.
+ *
+ * @param {number} index The index of the subtask.
+ * @param {string} item The subtask description.
+ * @returns {string} The HTML template for the subtask list item, or an empty string if the item is empty.
+ */
 function createSubtaskListItemTemplate(index, item) {
   if(item == "") { return ""; }
   return `
@@ -125,10 +144,13 @@ function createSubtaskListItemTemplate(index, item) {
         `;
 }
 
-/*
-** template for creating subtask list item for add task Popup
-*/
-
+/**
+ * Creates an HTML list item for a subtask in a popup, including edit/delete icons 
+ * that call popup-specific functions.  Icon IDs include "Popup".
+ * @param {number} index Subtask index (used for unique icon IDs).
+ * @param {string} item Subtask text.
+ * @returns {string} HTML list item string.
+ */
 function createSubtaskListItemPopupTemplate(index, item) {
   return `
             <li class="subtask-list-item" data-index="${index}">
@@ -142,10 +164,15 @@ function createSubtaskListItemPopupTemplate(index, item) {
         `;
 }
 
-/*
-** changes the subtask input field (for editing) back into a list element
-*/
-
+/**
+ * Generates the HTML for a subtask list item, reverting from an input field 
+ * back to a display element with edit and delete icons.
+ *
+ * @param {number} index The index of the subtask. Used for generating unique
+ *                       IDs for the edit and delete icons.
+ * @param {string} item The text content of the subtask.
+ * @returns {string} The HTML string representing the list item content.
+ */
 function changeSubtaskInputFieldBackToListElement(index, item) {
   return `
                 <div class="li-text">${item}</div>
@@ -157,10 +184,14 @@ function changeSubtaskInputFieldBackToListElement(index, item) {
         `;
 }
 
-/*
-** changes the subtask input field (for editing) back into a list element for add task popup
-*/
-
+/**
+ * Generates HTML for a subtask list item in a popup, reverting from an input
+ * field back to a display element with popup-specific edit/delete icons.
+ * Icon IDs include "Popup".
+ * @param {number} index Subtask index (used for unique icon IDs).
+ * @param {string} item Subtask text.
+ * @returns {string} HTML string representing the list item content.
+ */
 function changeSubtaskInputFieldBackToListElementPopup(index, item) {
   return `
                 <div class="li-text">${item}</div>
@@ -172,10 +203,13 @@ function changeSubtaskInputFieldBackToListElementPopup(index, item) {
         `;
 }
 
-/*
-** changes the subtask list item into an inpud field to edit the subtask
-*/
-
+/**
+ * Generates HTML for an input field to edit a subtask, replacing the display
+ * element. Includes "cancel" and "confirm" buttons.
+ * @param {number} position The subtask's position/index. Used for element IDs.
+ * @param {string} actualContent The current text content of the subtask.
+ * @returns {string} HTML string for the edit input field and buttons.
+ */
 function changeSubtaskContentToInputForEditTemplate(position, actualContent) {
   return `
     <input id="editSubtaskInput${position}" class="edit-subtask-input" type="text" value="${actualContent}" onkeydown = "subtaskOnKeyDown(${position})">
@@ -187,10 +221,14 @@ function changeSubtaskContentToInputForEditTemplate(position, actualContent) {
 `;
 }
 
-/*
-** changes the subtask list item into an inpud field to edit the subtask
-*/
-
+/**
+ * Generates HTML for an input field to edit a subtask *within a popup*,
+ * replacing the display element. Includes popup-specific "cancel" and "confirm"
+ * buttons. Input ID and button IDs include "Popup".
+ * @param {number} position The subtask's position/index. Used for element IDs.
+ * @param {string} actualContent The current text content of the subtask.
+ * @returns {string} HTML string for the edit input field and buttons.
+ */
 function changeSubtaskContentToInputForEditPopupTemplate(position, actualContent) {
   return `
     <input id="editSubtaskInputPopup${position}" class="edit-subtask-input" type="text" value="${actualContent}" onkeydown = "subtaskOnKeyDownPopup(${position})">
@@ -202,10 +240,14 @@ function changeSubtaskContentToInputForEditPopupTemplate(position, actualContent
 `;
 }
 
-/*
-** template for creating list item text content
-*/
-
+/**
+ * Generates HTML for an input field with "cancel" and "confirm" buttons,
+ * intended for editing the text content of a list item.  Note: This template
+ * lacks specific event handlers (onclick, etc.) which should be added 
+ * dynamically after the HTML is inserted into the DOM.
+ * @param {string} textContent The initial text content to display in the input field.
+ * @returns {string} HTML string for the input field and buttons.
+ */
 function createListItemTextContentTemplate(textContent) {
   return `
                     <input class="edit-subtask-input" type="text" value="${textContent}">
