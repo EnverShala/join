@@ -6,18 +6,20 @@ let login = [];
 let currentUser = -1;
 let currentId = -1;
 
-/*
- ** routes user to login html (or to summary if user already logged in)
+/**
+ * Initializes the index.html page by redirecting the user to the login page (login.html).
  */
-
 function indexHtmlInit() {
   window.location.href = "login.html";
 }
 
-/*
- ** load users from firebase
+/**
+ * Asynchronously loads user data from a Firebase database.
+ * @param {string} [path="/users"] The path to the user data in the Firebase database.
+ *                             Defaults to "/users".
+ * @returns {Promise<void>} A Promise that resolves when the user data is loaded.
+ *                           The loaded user data is stored in the global `users` array.
  */
-
 async function loadUsers(path = "/users") {
   users = [];
   let userResponse = await fetch(FIREBASE_URL + path + ".json");
@@ -38,10 +40,13 @@ async function loadUsers(path = "/users") {
   }
 }
 
-/*
- ** load tasks from firebase
+/**
+ * Asynchronously loads task data from a Firebase database.
+ * @param {string} [path="/tasks"] The path to the task data in the Firebase database.
+ *                             Defaults to "/tasks".
+ * @returns {Promise<void>} A Promise that resolves when the task data is loaded.
+ *                           The loaded task data is stored in the global `tasks` array.
  */
-
 async function loadTasks(path = "/tasks") {
   tasks = [];
   let userResponse = await fetch(FIREBASE_URL + path + ".json");
@@ -65,10 +70,15 @@ async function loadTasks(path = "/tasks") {
   }
 }
 
-/*
- ** save task function
+/**
+ * Asynchronously saves task data to a Firebase database using the POST method.
+ * @param {string} [path=""] The path to save the task data in the Firebase database.
+ *                         If empty, the data will be added to the root.
+ * @param {object} [data={}] The task data to be saved.  Should be a JSON-serializable
+ *                         object.
+ * @returns {Promise<void>} A Promise that resolves when the data is successfully
+ *                           saved.
  */
-
 async function saveTasks(path = "", data = {}) {
   await fetch(FIREBASE_URL + path + ".json", {
     method: "POST",
@@ -79,10 +89,12 @@ async function saveTasks(path = "", data = {}) {
   });
 }
 
-/*
- ** edit task function
+/**
+ * Asynchronously edits an existing task in the Firebase database using the PUT method.
+ * @param {string} id The ID of the task to be edited.
+ * @param {object} [data={}] The updated task data. Should be a JSON-serializable object.
+ * @returns {Promise<void>} A Promise that resolves when the task is successfully updated.
  */
-
 async function editTask(id, data = {}) {
   await fetch(FIREBASE_URL + `/tasks/${id}` + ".json", {
     method: "PUT",
@@ -93,10 +105,14 @@ async function editTask(id, data = {}) {
   });
 }
 
-/*
- ** delete task function
+/**
+ * Asynchronously deletes a task from the Firebase database using the DELETE method.
+ * If the provided ID is -1, the function does nothing and returns immediately.
+ * After successful deletion, redirects the user to the "board.html" page.
+ * @param {string|number} id The ID of the task to be deleted. Can be a string or a number.
+ * @returns {Promise<void>} A Promise that resolves when the task is successfully deleted
+ *                           or if the ID is -1.
  */
-
 async function deleteTask(id) {
   if (id == -1) {
     return;
@@ -108,10 +124,12 @@ async function deleteTask(id) {
   window.location.href = "board.html";
 }
 
-/*
- ** remembers user account
+/**
+ * Stores a user's email address in local storage to remember their account.
+ * If the email is already stored, this function does nothing.  Emails are stored
+ * as a comma-separated string.
+ * @param {string} accountEmail The email address of the user account to remember.
  */
-
 function rememberUserAccount(accountEmail) {
   let rememberedUsers = localStorage.getItem("remember");
 
@@ -126,10 +144,18 @@ function rememberUserAccount(accountEmail) {
   }
 }
 
-  /*
- ** checks if the email is a valid email address
+/**
+ * Checks if a given email address is valid based on a basic set of criteria.
+ * This function performs a simple validation, checking for the presence of "@" and ".",
+ * a minimum length, and ensuring that the TLD (top-level domain) is present and not
+ * immediately preceded by an "@" symbol.  It is important to note that this
+ * function does *not* perform full email address validation according to RFC standards.
+ * For more robust validation, consider using a dedicated email validation library.
+ *
+ * @param {string} email The email address to validate.
+ * @returns {boolean} True if the email is considered valid based on these criteria,
+ *                    false otherwise.
  */
-
  function isEmailValid(email) {
   return (email.includes("@") &&
           email.includes(".") &&
@@ -138,10 +164,12 @@ function rememberUserAccount(accountEmail) {
           (email[email.length - 4] != "@" && email[email.length - 5] != "@"));
 }
 
-/*
- ** load Password from remembered Users and checks the rememberme checkbox
+/**
+ * Asynchronously handles login input changes. Loads user accounts, checks
+ * if the entered email is remembered, and enables/disables the login button
+ * based on password length and email validity.
+ * @returns {Promise<void>}
  */
-
 async function loginOnInput() {
   await loadAccounts();
   let password = document.getElementById("userPassword").value;
@@ -169,10 +197,10 @@ async function loginOnInput() {
   }
 }
 
-/*
- ** logs user in (via email address)
+/**
+ * Logs in a user by storing their email and username in local storage.
+ * @param {string} accountEmail The email address of the logged-in user.
  */
-
 function logInUserAccount(accountEmail) {
   let accountAsText = JSON.stringify(accountEmail);
 
@@ -185,19 +213,18 @@ function logInUserAccount(accountEmail) {
   localStorage.setItem("loggedInAccount", accountAsText);
 }
 
-/*
- ** logs out actual user
+/**
+ * Logs out the current user by clearing their email and username from local storage.
  */
-
 function logOutUserAccount() {
   localStorage.setItem("loggedInAccount", "");
   localStorage.setItem("username", "");
 }
 
-/*
- ** returns email address of logged in user or empty string if nobody is logged in
+/**
+ * Retrieves the email address of the logged-in user from local storage.
+ * @returns {string|null} The email address of the logged-in user, or `null` if no user is logged in.
  */
-
 function getLoggedInUser() {
   let loggedInUserAsText = localStorage.getItem("loggedInAccount");
 
@@ -208,10 +235,12 @@ function getLoggedInUser() {
   return "";
 }
 
-/*
- ** login user (check password also)
+/**
+ * Asynchronously handles user login. Loads user accounts, checks credentials,
+ * remembers the user if requested, logs the user in, and displays messages
+ * based on the login result.
+ * @returns {Promise<void>}
  */
-
 async function loginUser() {
   let userEmail = document.getElementById("userEmail").value.trim();
   let userPassword = document.getElementById("userPassword").value;
@@ -244,10 +273,15 @@ async function loginUser() {
   showLoginMessage("Zu dieser E-Mail existiert kein Account!", 0);
 }
 
-/*
- ** sign up user (also check if user/email already exists)
+/**
+ * Asynchronously handles user sign-up. Checks for existing accounts with the
+ * given email, and if no account exists, creates a new account in the Firebase
+ * database.
+ * @param {object} [data={}] The user data for the new account. Should be a
+ *                           JSON-serializable object containing at least 'email'
+ *                           and 'password' properties.
+ * @returns {Promise<void>}
  */
-
 async function signUpUser(data = {}) {
   let stopSignUp = false;
   await loadAccounts();
@@ -270,10 +304,11 @@ async function signUpUser(data = {}) {
   }
 }
 
-/*
- ** load accounts from firebase
+/**
+ * Asynchronously loads user account data from a Firebase database.
+ * The loaded account data is stored in the global `accounts` array.
+ * @returns {Promise<void>} A Promise that resolves when the account data is loaded.
  */
-
 async function loadAccounts() {
   accounts = [];
   let userResponse = await fetch(FIREBASE_URL + "/accounts" + ".json");
@@ -291,20 +326,23 @@ async function loadAccounts() {
   }
 }
 
-/*
- ** loads the accounts username initials into the header profile icon
+/**
+ * Loads and displays the user's initials in the header profile icon.
+ * If no username is found in local storage, displays "Guest" initials.
  */
-
 function loadAccountInitials() {
   let accountName = localStorage.getItem("username");
   accountName = accountName == "" ? "Guest" : accountName;
   document.getElementById("header-profile-icon").innerHTML = getUserInitials(accountName);
 }
 
-/*
- ** register user function (also check if passwords are both same while creating)
+/**
+ * Asynchronously registers a new user. Retrieves user input, creates a user
+ * data object, checks sign-up conditions, and then calls the `signUpUser`
+ * function to create the account.  Redirects to the login page upon
+ * successful registration.  Displays an alert if sign-up conditions are not met.
+ * @returns {Promise<void>}
  */
-
 async function registerUser() {
   let name = document.getElementById("fullName").value.trim();
   let email = document.getElementById("userEmail").value.trim();
@@ -324,10 +362,12 @@ async function registerUser() {
   }
 }
 
-/*
- ** add user function & save on firebase & load users new into array (sorted)
+/**
+ * Asynchronously adds a new user. Retrieves user input from the form,
+ * creates a user object, clears the form fields, saves the user data using
+ * the `postData` function, and re-renders the contact list.
+ * @returns {Promise<void>}
  */
-
 async function addUser() {
   let nameValue = document.getElementById("name").value;
   let phoneValue = document.getElementById("phone").value;
@@ -340,10 +380,13 @@ async function addUser() {
   await renderContacts();
 }
 
-/*
- ** save data into firebase
+/**
+ * Asynchronously posts data to a specified path in the Firebase database using the POST method.
+ * @param {string} [path=""] The path in the Firebase database to post the data to.
+ *                         If empty, the data will be added to the root.
+ * @param {object} [data={}] The data to be posted. Must be a JSON-serializable object.
+ * @returns {Promise<void>} A Promise that resolves when the data is successfully posted.
  */
-
 async function postData(path = "", data = {}) {
   await fetch(FIREBASE_URL + path + ".json", {
     method: "POST",
@@ -354,11 +397,15 @@ async function postData(path = "", data = {}) {
   });
 }
 
-/*
- ** id = path in firebase. delete user function. also checks if user is integrated into tasks, which has to be removed before deleting
- ** save in firebase, load users new (sorted)
+/**
+ * Asynchronously deletes a user and updates associated tasks.
+ * Loads all tasks, finds tasks assigned to the user to be deleted,
+ * removes the user's name from the assigned list for those tasks,
+ * updates the tasks in the database, and finally deletes the user.
+ * Re-renders the contact list and updates user information display.
+ * @param {string} id The ID of the user to delete.
+ * @returns {Promise<void>}
  */
-
 async function deleteUser(id) {
   await loadTasks("/tasks");
 
@@ -385,10 +432,16 @@ async function deleteUser(id) {
   loadUserInformation(-1);
 }
 
-/*
- ** edit user function, save in firebase and load users new into array (sorted)
+/**
+ * Asynchronously edits an existing user. Retrieves updated user data from the
+ * form, updates the user data object, saves the changes to the Firebase database
+ * using the PUT method, re-renders the contact list, updates the displayed user
+ * information, and closes the edit popup.
+ * @param {string} id The ID of the user to edit.
+ * @param {object} [data={}] The current user data.  This object will be modified
+ *                           by the function.
+ * @returns {Promise<void>}
  */
-
 async function editUser(id, data = {}) {
   data.name = document.getElementById("name").value;
   data.email = document.getElementById("email").value;
@@ -407,10 +460,11 @@ async function editUser(id, data = {}) {
   closePopup();
 }
 
-/*
- ** get user id, compare users via mail, because there might be 2 persons with the same name
+/**
+ * Retrieves the ID of a user based on their email address.
+ * @param {string} email The email address of the user.
+ * @returns {string|number} The ID of the user if found, or -1 if the user is not found.
  */
-
 function getUserId(email) {
   if (users.length > 0) {
     for (let i = 0; i < users.length; i++) {
@@ -423,10 +477,14 @@ function getUserId(email) {
   }
 }
 
-/*
- ** renders via templates the Contacts into the contact-list incl. the sorter-div/seperator
+/**
+ * Asynchronously renders the contact list. Loads user data, groups contacts
+ * by the first letter of their name, and generates the HTML for the contact list.
+ * The `contactTemplate` function is assumed to be defined elsewhere and generates
+ * the HTML for individual contacts.  After rendering, calls `removeHover` to
+ * presumably remove any hover effects from the previous rendering.
+ * @returns {Promise<void>}
  */
-
 async function renderContacts() {
   let html = "";
   let firstLetter = "0";
@@ -457,8 +515,12 @@ async function renderContacts() {
 }
 
 /**
- * filters the first Letter (to upper case) from every word(name)
- * gets first Letter from first Name and first Letter from last Name
+ * Generates user initials from a username.
+ * If the username contains multiple words, the initials are formed from the first
+ * letter of the first and last words.  If the username contains only one word,
+ * the initial is the first letter of that word.
+ * @param {string} username The username to generate initials from.
+ * @returns {string} The user initials.
  */
 function getUserInitials(username) {
   let result = username
@@ -474,10 +536,11 @@ function getUserInitials(username) {
   return result;
 }
 
-/*
- ** load user information into user container
+/**
+ * Loads user info into the UI or clears it if id is -1.
+ * @async
+ * @param {number} id - User ID (-1 to clear).
  */
-
 async function loadUserInformation(id) {
   document.getElementById("contact-name").innerHTML = id == -1 ? "" : users[id].name;
   document.getElementById("contact-email").innerHTML = id == -1 ? "" : users[id].email;
@@ -498,10 +561,9 @@ async function loadUserInformation(id) {
   currentUser = id;
 }
 
-/*
- ** hide contacts list in responsive mode
+/**
+ * Hides the contacts list and shows the back arrow in responsive mode (screen width <= 799px).
  */
-
 function hideContactsListInResponsiveMode() {
   if (window.innerWidth <= 799) {
     document.getElementById("contact-list").classList.add("d-none");
@@ -511,8 +573,9 @@ function hideContactsListInResponsiveMode() {
   }
 }
 
-/*
- ** show contact list back again when exit responsive mode
+/**
+ * Adjusts the UI when the window is resized. Shows the contact list and related elements
+ * for screens >= 800px, otherwise hides them in responsive mode.
  */
 window.onresize = function showContactListOnExitResponsiveMode() {
   if (window.innerWidth >= 800) {
@@ -528,19 +591,17 @@ window.onresize = function showContactListOnExitResponsiveMode() {
 }
 
 
-/*
- ** show contacts in detail in responsive mode
+/**
+ * Displays the contact details section in responsive mode by setting the appropriate styles.
  */
-
 function showContactsInDetailInResponsiveMode() {
   document.getElementById("display-contact-headerID").style.display = "flex";
   document.getElementById("display-contactID").style.display = "flex";
 }
 
-/*
- ** show contact list back again in responsive mode
+/**
+ * Shows the contact list and hides the contact details in responsive mode (screen width < 800px).
  */
-
 function showContactListAgainInResponsiveMode() {
   if (window.innerWidth < 800) {
     document.getElementById("display-contact-headerID").style.display = "none";
@@ -551,27 +612,28 @@ function showContactListAgainInResponsiveMode() {
   }
 }
 
-/*
- ** change background on selected user
+/**
+ * Adds a background color class to highlight the selected user.
+ * @param {number} id - The ID of the selected user (unused in the function).
  */
-
 function changeBgOnSelectedUser(id) {
   document.getElementById("contact-containerID").classList.add("selected-user-color");
 }
 
-/*
- ** initialize contacts
+/**
+ * Initializes the contacts by rendering them and resetting the user information display.
+ * @async
  */
-
 async function initContacts() {
   await renderContacts();
   loadUserInformation(-1);
 }
 
-/*
- ** highlight user
+/**
+ * Highlights a user in the contact list. Removes the highlight from all other
+ * users and adds the highlight to the specified user.
+ * @param {number} userIndex The index of the user to highlight.
  */
-
 function highlightUser(userIndex) {
   for (let i = 0; i < users.length; i++) {
     document.getElementById(`user-container${i}`).classList.remove("highlightUser");
@@ -579,6 +641,13 @@ function highlightUser(userIndex) {
   document.getElementById(`user-container${userIndex}`).classList.add("highlightUser");
 }
 
+/**
+ * Adds a click event listener to each contact container element.
+ * When a contact container is clicked, it removes the "contact-container-no-hover"
+ * class from any other contact container that has it and then adds the class to
+ * the clicked container. This effectively prevents hover effects on the
+ * currently selected contact.
+ */
 function removeHover() {
   document.querySelectorAll(".contact-container").forEach(selContact =>
     selContact.addEventListener("click", () => {
