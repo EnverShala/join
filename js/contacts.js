@@ -29,7 +29,6 @@ function closePopup() {
  * Loads "editContacts.html" into the pop-up and pre-fills user data.
  * Assumes `users[currentUser]` contains the selected user's details.
  */
-
 function editUserPopup() {
   fetch("editContacts.html")
     .then((response) => response.text())
