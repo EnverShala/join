@@ -1,7 +1,7 @@
-/*
-** load and show summary information on summary page
-*/
-
+/**
+ * Loads tasks and calculates summary information (To Do, Done, Urgent, Total, In Progress, Awaiting Feedback).
+ * Then, updates the summary information display and greets the user.
+ */
 async function loadSummaryInfos() {
   await loadTasks();
 
@@ -25,10 +25,16 @@ async function loadSummaryInfos() {
   greetUser();
 }
 
-/*
-** updates summary informations
-*/
-
+/**
+ * Updates the summary information display with the provided values.
+ *
+ * @param {number} sumTodo The number of "To Do" tasks.
+ * @param {number} sumDone The number of "Done" tasks.
+ * @param {number} sumUrgent The number of "Urgent" tasks.
+ * @param {number} sumTasks The total number of tasks.
+ * @param {number} sumProgress The number of "In Progress" tasks.
+ * @param {number} sumFeedback The number of "Awaiting Feedback" tasks.
+ */
 function updateSummaryInfos(sumTodo, sumDone, sumUrgent, sumTasks, sumProgress, sumFeedback) {
   document.getElementById("summary__todo").innerHTML = sumTodo;
   document.getElementById("summary__done").innerHTML = sumDone;
@@ -40,10 +46,11 @@ function updateSummaryInfos(sumTodo, sumDone, sumUrgent, sumTasks, sumProgress, 
   document.getElementById("summary__date").innerHTML = getUpcomingDeadline();
 }
 
-/*
-** check which task deadline is the nearest and show it on summary page
-*/
-
+/**
+ * Retrieves the upcoming deadline from urgent tasks.
+ *
+ * @returns {string} The upcoming deadline as a formatted date string, or an empty string if no urgent tasks are found.
+ */
 function getUpcomingDeadline() {
   let upcomingDeadline = "0";
   let allDates = [];
@@ -70,20 +77,21 @@ function getUpcomingDeadline() {
   }
 }
 
-/*
-** return a YYYY-DD-MM date as day month-as-name year
-*/
-
+/**
+ * Formats a date represented as a number string (YYYYMMDD) into a human-readable date string.
+ *
+ * @param {string} numberDate The date as a number string (YYYYMMDD).
+ * @returns {string} The formatted date string (e.g., "January 01, 2024"), or "Invalid Date" if the input is invalid.
+ */
 function numberToDate(numberDate) {
   let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
   return `${months[numberDate.slice(-4, -2) - 1]} ${numberDate.slice(-2)}, ${numberDate.slice(0, 4)}`;
 }
 
-/*
-** user greeting message depending on daytime
-*/
-
+/**
+ * Sets the greeting message and displays the user's name (or "Guest") in the header.
+ */
 function greetUser() {
   const now = new Date();
   const hour = now.getHours();

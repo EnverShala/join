@@ -1,11 +1,13 @@
 /**
- * Loads the content of "addContacts.html" and displays it in a pop-up.  
- * 
- * The function fetches the HTML file, sets its content inside the element  
- * with the ID "popup-body," and makes the pop-up with the ID "popup" visible.  
+ * Loads the content of "addContacts.html" and displays it in a pop-up.
+ *
+ * The function fetches the HTML file, sets its content inside the element
+ * with the ID "popup-body," and makes the pop-up with the ID "popup" visible.
  */
 function addNewUser() {
-  fetch("addContacts.html").then((response) => response.text()).then((data) => {
+  fetch("addContacts.html")
+    .then((response) => response.text())
+    .then((data) => {
       document.getElementById("popup-body").innerHTML = data;
       document.getElementById("popup").style.display = "block";
     });
@@ -13,8 +15,8 @@ function addNewUser() {
 
 /**
  * Closes the pop-up and clears its content.
- * 
- * The function sets the inner HTML of the element with the ID "popup-body"  
+ *
+ * The function sets the inner HTML of the element with the ID "popup-body"
  * to an empty string and hides the pop-up with the ID "popup."
  */
 function closePopup() {
@@ -24,7 +26,7 @@ function closePopup() {
 }
 
 /**
- * Loads "editContacts.html" into the pop-up and pre-fills user data.  
+ * Loads "editContacts.html" into the pop-up and pre-fills user data.
  * Assumes `users[currentUser]` contains the selected user's details.
  */
 
@@ -42,9 +44,9 @@ function editUserPopup() {
 }
 
 /**
- * Adds a new user and closes the pop-up.  
- * 
- * Calls the `addUser` function asynchronously, then hides the pop-up  
+ * Adds a new user and closes the pop-up.
+ *
+ * Calls the `addUser` function asynchronously, then hides the pop-up
  * by calling `closePopup()`.
  */
 async function addUserButton() {
