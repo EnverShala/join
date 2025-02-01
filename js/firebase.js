@@ -418,6 +418,9 @@ async function deleteUser(id) {
           if (tasks[j].assigned[tasks[j].assigned.length - 1] == ",") {
             tasks[j].assigned = tasks[j].assigned.slice(0, -1);
           }
+          if(tasks[j].assigned[0] == ",") {
+            tasks[j].assigned = tasks[j].assigned.slice(1);
+          }
           await editTask(tasks[j].id, tasks[j]);
         }
       }
@@ -523,6 +526,8 @@ async function renderContacts() {
  * @returns {string} The user initials.
  */
 function getUserInitials(username) {
+  if(username.trim() == "") { return "";}
+
   let result = username
     .trim()
     .split(" ")
@@ -578,6 +583,8 @@ function hideContactsListInResponsiveMode() {
  * for screens >= 800px, otherwise hides them in responsive mode.
  */
 window.onresize = function showContactListOnExitResponsiveMode() {
+  if(!window.location.href.includes("contacts.html")) { return; }
+
   if (window.innerWidth >= 800) {
     document.getElementById("display-contact-headerID").style.display = "flex";
     document.getElementById("display-contactID").style.display = "block";
