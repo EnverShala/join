@@ -808,15 +808,17 @@ h2 {
 }
 /*Pop up Addtask*/
 #myModal {
-  height: 85%;
+  width: 525px;
+  max-height: 80%;
+  padding: 48px 0;
   position: absolute;
-  top: 90%;
-  left: 50%;
-  translate: -50% -50%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   border: 0;
   border-radius: 15px;
   background-color: #ffffff;
-  padding: 24px 24px 24px 24px;
 }
 #myModal::-webkit-scrollbar {
   width: 8px;
@@ -835,16 +837,17 @@ h2 {
 }
 
 .inputPopup {
+  width: 360px;
   border-radius: 10px;
   padding: 12px 21px;
   border: 1px solid #dfdede;
   font-family: inherit;
   font-size: 20px;
   cursor: auto;
-  width: 440px;
 }
 
 .selectPopup {
+  width: 370px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -860,6 +863,7 @@ h2 {
 .mainContainerPopUp {
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
   gap: 30px;
 }
@@ -882,6 +886,7 @@ h2 {
   background-color: #2a3647;
   color: white;
   font-weight: 700;
+  margin-left: 10px;
 }
 
 .btnClearOnPopup:hover {
@@ -1024,6 +1029,7 @@ label {
 .inputGroupOnPopUp {
   display: flex;
   flex-direction: column;
+  width: 400px;
 }
 
 .dropdownContentPopup {
@@ -1243,13 +1249,6 @@ label {
   a {
     width: 100% !important;
   }
-  #myModal {
-    width: 400px;
-  }
-  .inputGroupOnPopUp,
-  .inputPopup {
-    width: 350px;
-  }
   .selectPopup {
     display: flex;
     justify-content: space-between;
@@ -1335,6 +1334,19 @@ label {
   }
   .popupHeader {
     font-size: 18px;
+  }
+  /* Modal */
+  #myModal {
+    width: 380px;
+  }
+  .inputGroupOnPopUp {
+    width: 320px;
+  }
+  .inputPopup {
+    width: 280px;
+  }
+  .selectPopup {
+    width: 290px;
   }
 }
 @media (max-width: 480px) {
@@ -1450,5 +1462,19 @@ label {
   .okButtonMainContainer {
     display: flex;
     justify-content: center;
+  }
+
+  /* Modal */
+  #myModal {
+    width: 300px;
+  }
+  .inputGroupOnPopUp {
+    width: 280px;
+  }
+  .inputPopup {
+    width: 235px;
+  }
+  .selectPopup {
+    width: 245px;
   }
 }

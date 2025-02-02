@@ -127,7 +127,7 @@ form {
 }
 
 .dropdown {
-  width: min(440px, 100%);
+  width: 100%;
   position: relative;
   cursor: pointer;
 }
