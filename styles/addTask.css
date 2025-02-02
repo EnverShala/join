@@ -273,8 +273,8 @@ form {
 }
 
 .input.subtask {
-  width: min(440px, 100%);
-  padding-right: 60px; /* Platz für die Buttons rechts im Input-Feld */
+  width: 100%;
+  padding-right: 60px;
   box-sizing: border-box;
 }
 
@@ -557,7 +557,7 @@ label {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 450px;
+    width: 500px;
     gap: 0;
   }
   .col-middle {
@@ -584,18 +584,21 @@ label {
   }
 }
 @media (max-width: 576px) {
-  .taskContainer {
-    margin-left: -40px;
+  input {
+    padding: 0;
   }
   .addTaskLeft,
   .inputGroup,
-  .input,
-  .inputDescription,
-  .select,
   .bottom-form,
   .header,
   form {
-    width: 340px !important;
+    width: 330px !important;
+  }
+  .input,
+  .inputDescription,
+  .select,
+  .buttons-prio {
+    width: 285px;
   }
   .mobile-nav,
   .container-nav-links,
@@ -608,9 +611,25 @@ label {
   .bottom-form {
     font-size: 16px;
   }
+  button {
+    padding-block: 0;
+    padding-inline: 0;
+  }
+  .buttons-prio {
+    gap: 5px;
+  }
+  .inputGroup .buttons-prio{
+    width: 330px;
+  }
   .btn-prio,
   .btn-prio.active {
     font-size: 16px;
+  }
+  .btn-prio {
+    width: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .btn-clear,
   .btn-create,
@@ -621,8 +640,12 @@ label {
     width: 32px;
     height: 32px;
   }
+
+
+ 
+
 }
-@media (max-width: 430px) {
+@media (max-width: 376px) {
   .taskContainer {
     margin-bottom: 0px;
   }
@@ -632,13 +655,16 @@ label {
   }
   .addTaskLeft,
   .inputGroup,
-  .input,
-  .inputDescription,
-  .select,
   .bottom-form,
   .header,
   form {
-    width: 240px !important;
+    width: 280px !important;
+  }
+  .input,
+  .inputDescription,
+  .select,
+  .buttons-prio {
+    width: 240px;
   }
   .input,
   .inputDescription,
@@ -649,7 +675,9 @@ label {
   .header {
     text-wrap: nowrap;
   }
-
+  .inputGroup .buttons-prio{
+    width: 280px;
+  }
   .btn-prio,
   .btn-prio.active {
     font-size: 14px;

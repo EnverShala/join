@@ -431,7 +431,8 @@ input[type="search"]::-webkit-search-cancel-button {
   visibility: hidden;
 }
 
-.popupOnTaskSelectionMainContainer,.popupOnTaskEdit {
+.popupOnTaskSelectionMainContainer,
+.popupOnTaskEdit {
   background-color: #ffffff;
   width: 525px;
   max-height: 80%;
@@ -440,6 +441,7 @@ input[type="search"]::-webkit-search-cancel-button {
   border-radius: 30px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   overflow-y: auto;
   /* transform: translateX(100%);
@@ -947,11 +949,11 @@ label {
 /* EDITPOPUP CLASS */
 .scrollbar {
   overflow-y: auto;
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  margin-right: 10px;
+  width: 100%;
   height: 95%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   margin-bottom: 20px;
 }
 
@@ -960,7 +962,7 @@ label {
 .editPopupAssignedToMainContainer,
 .editPopupDescriptionMainContainer,
 .editPopupSubtasksMainContainer {
-  width: 90%;
+  width: 400px;
 }
 
 .editPopupTitelTxt,
@@ -972,7 +974,6 @@ label {
   color: #2a3647;
   margin-block-start: 0;
   margin-block-end: 0;
-
 }
 
 .editInputGroup,
@@ -981,7 +982,7 @@ label {
 .editDateInput,
 .editAssignedInput,
 .editSubtaskInput {
-  width: 100%;
+  width: 380px;
   height: 48px;
   border: 1px solid #d1d1d1;
   border-radius: 10px;
@@ -991,7 +992,7 @@ label {
 }
 
 .editPrio {
-  width: 95%;
+  width: 400px;
   margin-bottom: 24px;
   margin-top: 10px;
 }
@@ -1017,7 +1018,7 @@ label {
 .buttonsPrioOnPopUp {
   display: flex;
   justify-content: center;
-  gap: 0;
+  gap: 5px;
 }
 
 .inputGroupOnPopUp {
@@ -1037,15 +1038,9 @@ label {
   border-top: none;
   display: none;
   z-index: 100;
+  margin-top: -10px;
   font-size: 20px;
   z-index: 10;
-}
-
-.dropdownContentPopup ul {
-  margin-block-start: 0;
-    margin-block-end: 0;
-    padding-inline-start: 0;
-    padding-inline-end: 0;
 }
 
 .dropdownContentPopup li {
@@ -1071,11 +1066,6 @@ label {
   position: fixed;
   padding-top: 5px;
   z-index: 1;
-  margin-top: 10px;
-}
-
-.due-date {
-  margin-top: 20px;
 }
 
 .okButtonMainContainer {
@@ -1101,8 +1091,9 @@ label {
   align-items: center;
   justify-content: center;
 }
+
 .selectOnEditPopUp {
-  width: 462px;
+  width: 380px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1113,6 +1104,7 @@ label {
   background-color: #ffffff;
   font-size: 20px;
   cursor: pointer;
+  margin-bottom: 24px;
   margin-top: 10px;
 }
 
@@ -1255,11 +1247,8 @@ label {
     width: 400px;
   }
   .inputGroupOnPopUp,
-  .inputPopup  {
+  .inputPopup {
     width: 350px;
-  }
-  .selectOnEditPopUp {
-    width: 370px;
   }
   .selectPopup {
     display: flex;
@@ -1299,6 +1288,46 @@ label {
   .okButtonMainContainer {
     width: 320px;
   }
+
+  .editPopupTitelMainContainer,
+  .editPopupDateMainContainer,
+  .editPopupAssignedToMainContainer,
+  .editPopupDescriptionMainContainer,
+  .editPopupSubtasksMainContainer {
+    width: 320px;
+  }
+
+  .editPopupTitelTxt,
+  .editPopupDescriptionTxt,
+  .editPopupDateTxt,
+  .editAssignedToTxt,
+  .editPopupSubtasksTxt {
+    font-size: 16px;
+  }
+
+  .editInputGroup,
+  .editTitelInput,
+  .editDescriptionInput,
+  .editDateInput,
+  .editAssignedInput,
+  .editSubtaskInput {
+    width: 300px;
+    height: 48px;
+    border: 1px solid #d1d1d1;
+    border-radius: 10px;
+    margin-top: 8px;
+    margin-bottom: 24px;
+    padding: 0 10px;
+  }
+  .selectOnEditPopUp,
+  .inputOnEditPopup  {
+    width: 300px;
+  }
+
+  .editPrio {
+    width: 320px;
+  }
+
   .popupKategorieOnTopMainContainer {
     display: flex;
     justify-content: space-between;
@@ -1334,7 +1363,8 @@ label {
     padding: 24px 10px 24px 10px;
   }
   /* PopUp-STANDARD */
-  .popupOnTaskSelectionMainContainer,.popupOnTaskEdit {
+  .popupOnTaskSelectionMainContainer,
+  .popupOnTaskEdit {
     width: 300px;
   }
   .popupKategorieOnTopMainContainer,
@@ -1355,8 +1385,7 @@ label {
   .okButtonMainContainer {
     width: 280px;
   }
-/* END POPUP-STANDARD */
-
+  /* END POPUP-STANDARD */
 
   .inputGroupOnPopUp {
     width: 240px;
@@ -1382,40 +1411,44 @@ label {
   }
 
   /* editPopup */
+  .popupOnTaskSelectionMainContainer,
+  .popupOnTaskEdit {
+    width: 320px;
+  }
+
   .editPopupTitelMainContainer,
-  .editPopupDescriptionMainContainer,
   .editPopupDateMainContainer,
   .editPopupAssignedToMainContainer,
+  .editPopupDescriptionMainContainer,
   .editPopupSubtasksMainContainer {
-    margin-left: 10px;
+    width: 280px;
   }
-  .editTitelInput,.editDescriptionInput,.editDateInput,.selectOnEditPopUp  {
-    width: 220px;
-    margin-left: 0;
+
+  .editInputGroup,
+  .editTitelInput,
+  .editDescriptionInput,
+  .editDateInput,
+  .editAssignedInput,
+  .editSubtaskInput {
+    width: 255px;
   }
+
+  .selectOnEditPopUp,
+  .inputOnEditPopup  {
+    width: 255px;
+  }
+
   .editPrio {
-    display: flex;
-    justify-content: center;
-    margin: 0;
-    margin-bottom: 20px;
+    width: 200px;
   }
+
   .buttonsPrioOnEditPopUp {
-    width: 100%;
+    width: 200px;
+    gap: 0;
   }
-  #urgent,#medium,#low {
-    padding: 14px 5px;
-    gap: 4px;
-    flex: 0;
-  }
-  #urgentID,#urgent-whiteID,#mediumID,#medium-whiteID,#lowID,#low-whiteID {
-    width: 16px;
-    height: 16px;
-  }
+
   .okButtonMainContainer {
     display: flex;
     justify-content: center;
-  }
-  .selectOnEditPopUp {
-    width: 260px;
   }
 }
