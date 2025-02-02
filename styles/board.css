@@ -1044,7 +1044,6 @@ label {
   border-top: none;
   display: none;
   z-index: 100;
-  margin-top: -10px;
   font-size: 20px;
   z-index: 10;
 }
@@ -1110,7 +1109,6 @@ label {
   background-color: #ffffff;
   font-size: 20px;
   cursor: pointer;
-  margin-bottom: 24px;
   margin-top: 10px;
 }
 
