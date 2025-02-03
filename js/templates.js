@@ -22,6 +22,10 @@ function taskCardTemplate(uniqueId, i, subTasksArray, assignedUsersHTML) {
                 <div draggable="true" id="${uniqueId}" class="taskCard">
                 <div class="taskCardTop">
                   <label class="categoryGreen">${tasks[i].category}</label>
+                  <div class="ResponsiveMenuOnTaskCards">
+                    <img onclick="" src="./img/board/arrow_up.svg" class=arrowUp></img>
+                    <img onclick="" src="./img/board/arrow_down.svg" class=arrowDown></img>
+                  </div>
                   <div class="dropdownCard">
                     <button onclick="toggleDropdown('dropdown-content')" class="dropdown-btn">
                       <div class="dropdownBtnContainer">
