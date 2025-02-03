@@ -257,9 +257,11 @@ button {
   width: 128px;
   height: 8px;
   background: #f4f4f4;
+  border-radius: 10px;
 }
 
 .progressBar {
+  border-radius: 10px;
   height: 8px;
   background-color: #4589ff;
 }
