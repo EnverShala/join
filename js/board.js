@@ -54,34 +54,32 @@ function addDragAndDropEvents() {
   });
 }
 
-/**
- * Moves a task card to a new level in a responsive environment.
- *
- * - Ensures the new level is valid before proceeding.
- * - Prevents unnecessary updates if the task is already at the given level.
- * - Updates the task's level, saves changes asynchronously, and re-renders task cards.
- *
- * @param {number} taskNr - The index of the task in the `tasks` array.
- * @param {string} newLevel - The new task level ("To do", "In Progress", "Awaiting Feedback", "Done").
- */
-async function moveTaskCardResponsive(taskNr, newLevel) {
-  if (
-    newLevel != "To do" ||
-    newLevel != "In Progress" ||
-    newLevel != "Awaiting Feedback" ||
-    newLevel != "Done"
-  ) {
+async function moveTaskUp(i) {
+  if(tasks[i].level == "In Progress") {
+    tasks[i].level = "To do";
+  } else if(tasks[i].level == "Awaiting Feedback") {
+    tasks[i].level = "In Progress";
+  } else if(tasks[i].level == "Done") {
+    tasks[i].level = "Awaiting Feedback";
+  } else {
     return;
   }
+  await editTask(tasks[i].id, tasks[i]);
+  renderTaskCards();
+}
 
-  if (tasks[taskNr].level == newLevel) {
+async function moveTaskDown(i) {
+  if(tasks[i].level == "Awaiting Feedback") {
+    tasks[i].level = "Done";
+  } else if(tasks[i].level == "In Progress") {
+    tasks[i].level = "Awaiting Feedback";
+  } else if(tasks[i].level == "To do") {
+    tasks[i].level = "In Progress";
+  } else {
     return;
   }
-
-  tasks[taskNr].level = newLevel;
-
-  await editTask(tasks[taskNr].id, tasks[taskNr]);
-  await renderTaskCards();
+  await editTask(tasks[i].id, tasks[i]);
+  renderTaskCards();
 }
 
 /**
