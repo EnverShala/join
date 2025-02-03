@@ -1131,12 +1131,7 @@ label {
 }
 
 .ResponsiveMenuOnTaskCards {
-  display: flex;
-}
-.arrowDown,.arrowUp {
-  width: 26px;
-  height: 26px;
-  cursor: pointer;
+  display: none;
 }
 
 @media (max-width: 1450px) {
@@ -1212,6 +1207,14 @@ label {
     width: 500px;
     height: 80%;
     overflow-x: hidden;
+  }
+  .ResponsiveMenuOnTaskCards {
+    display: flex;
+  }
+  .arrowDown,.arrowUp {
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
   }
 }
 @media (max-width: 941px) {
