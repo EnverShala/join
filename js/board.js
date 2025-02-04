@@ -54,6 +54,13 @@ function addDragAndDropEvents() {
   });
 }
 
+/**
+ * Moves a task up one level in the workflow and updates the UI.
+ * 
+ * @async
+ * @param {number} i - Index of the task in the tasks array.
+ * @returns {Promise<void>}
+ */
 async function moveTaskUp(i) {
   if(tasks[i].level == "In Progress") {
     tasks[i].level = "To do";
@@ -68,6 +75,13 @@ async function moveTaskUp(i) {
   renderTaskCards();
 }
 
+/**
+ * Moves a task down one level in the workflow and updates the UI.
+ * 
+ * @async
+ * @param {number} i - Index of the task in the tasks array.
+ * @returns {Promise<void>}
+ */
 async function moveTaskDown(i) {
   if(tasks[i].level == "Awaiting Feedback") {
     tasks[i].level = "Done";
