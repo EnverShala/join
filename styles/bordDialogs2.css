@@ -1,0 +1,57 @@
+
+@media (max-width: 1440px) {
+    .dropdownBtnContainer {
+        display: block;
+        background-color: #fff;
+        padding-top: 8px;
+    }
+
+    .dropdown-btn {
+        display: flex;
+        cursor: pointer;
+    }
+}
+
+@media (max-width: 1140px) {
+    .prioBtn {
+        flex-direction: row;
+    }
+
+    .dropdownBtnContainer {
+        display: block;
+        background-color: #fff;
+
+    }
+
+    .dropdown-btn {
+        display: flex;
+        cursor: pointer;
+    }
+}
+
+@media (max-width: 427px) {
+
+    .custom-scroll {
+        width: unset;
+        margin-right: 0;
+    }
+
+    .prioBtn {
+        flex-direction: row;
+    }
+
+    .dropdownBtnContainer {
+        display: block;
+        background-color: #fff;
+
+    }
+
+    #cardContainerdone {
+        margin-bottom: 50px;
+    }
+
+    .dropdown-btn {
+        display: flex;
+        cursor: pointer;
+    }
+}

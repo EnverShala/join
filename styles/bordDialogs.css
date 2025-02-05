@@ -291,9 +291,6 @@
     padding-left: 50px;
 }
 
-/* CSS für den Hover-Effekt */
-
-
 .imgDelete:hover {
     filter: brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(600%) hue-rotate(180deg);
 }
@@ -301,7 +298,6 @@
 .imgEdit:hover {
     filter: brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(600%) hue-rotate(180deg);
 }
-
 
 .custom-scroll {
     overflow-y: auto;
@@ -333,8 +329,6 @@
     background: rgb(150, 150, 150);
 }
 
-
-
 .custom-scroll::-webkit-scrollbar-button:single-button {
     background-repeat: no-repeat;
     width: 4px;
@@ -358,8 +352,6 @@
 
 .dropdownCard {
     display: none;
-    /*position: relative;
-    display: inline-block;*/
 }
 
 .dropdown-btn {
@@ -373,8 +365,6 @@
     background-color: #fff;
     border: none;
 }
-
-
 .dropdown-content {
     display: none;
     position: absolute;
@@ -394,74 +384,14 @@
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-
-
 }
 
 .dropdown-content p:hover {
     background-color: #4c6589;
     color: black;
-
 }
 
 .taskCardTop {
     display: flex;
     justify-content: space-between;
-}
-
-@media (max-width: 1440px) {
-    .dropdownBtnContainer {
-        display: block;
-        background-color: #fff;
-        padding-top: 8px;
-    }
-
-    .dropdown-btn {
-        display: flex;
-        cursor: pointer;
-    }
-}
-
-@media (max-width: 1140px) {
-    .prioBtn {
-        flex-direction: row;
-    }
-
-    .dropdownBtnContainer {
-        display: block;
-        background-color: #fff;
-
-    }
-
-    .dropdown-btn {
-        display: flex;
-        cursor: pointer;
-    }
-}
-
-@media (max-width: 427px) {
-
-    .custom-scroll {
-        width: unset;
-        margin-right: 0;
-    }
-
-    .prioBtn {
-        flex-direction: row;
-    }
-
-    .dropdownBtnContainer {
-        display: block;
-        background-color: #fff;
-
-    }
-
-    #cardContainerdone {
-        margin-bottom: 50px;
-    }
-
-    .dropdown-btn {
-        display: flex;
-        cursor: pointer;
-    }
 }
