@@ -293,8 +293,8 @@ async function signUpUser(data = {}) {
   await loadAccounts();
 
   for (let i = 0; i < accounts.length; i++) {
-    if (accounts[i].email == data.email) {
-      alert("Zu dieser E-Mail-Adresse besteht bereits ein Account. Passwort vergessen? Selber schuld!");
+    if (accounts[i].email.toLowerCase() == data.email.toLowerCase()) {
+      showSignupMessage("Zu dieser E-Mail-Adresse besteht bereits ein Account!", 0);
       stopSignUp = true;
     }
   }
@@ -307,6 +307,8 @@ async function signUpUser(data = {}) {
       },
       body: JSON.stringify(data),
     });
+    
+    showSignupMessage("Signup erfolgreich!", 1);
   }
 }
 
@@ -346,7 +348,7 @@ function loadAccountInitials() {
  * Asynchronously registers a new user. Retrieves user input, creates a user
  * data object, checks sign-up conditions, and then calls the `signUpUser`
  * function to create the account.  Redirects to the login page upon
- * successful registration.  Displays an alert if sign-up conditions are not met.
+ * successful registration.  Displays a message if sign-up conditions are not met.
  * @returns {Promise<void>}
  */
 async function registerUser() {
@@ -362,9 +364,8 @@ async function registerUser() {
 
   if (checkSignUpConditions()) {
     await signUpUser(loginData);
-    window.location.href = "login.html";
   } else {
-    alert("Please enter the required informations & accept the privacy policy.");
+    showSignupMessage("Please enter the required informations & accept the privacy policy.", 0);
   }
 }
 

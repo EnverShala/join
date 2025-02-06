@@ -212,3 +212,21 @@ function toggleCheckbox(checkboxId) {
     checkbox.style.color = "black";
   }
 }
+
+/**
+ * Displays a signup message to the user.
+ *
+ * @param {string} messageText The text of the message to display.
+ */
+function showSignupMessage(messageText, success) {
+  const successMessage = document.querySelector(".msg-signup");
+  successMessage.style.display = "flex";
+  document.getElementById("signupMessage").textContent = messageText;
+
+  setTimeout(() => {
+    successMessage.style.display = "none";
+    if (success) {
+      window.location.href = "login.html";
+    }
+  }, 3000);
+}
