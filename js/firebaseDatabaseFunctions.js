@@ -340,8 +340,11 @@ async function loadAccounts() {
  */
 function loadAccountInitials() {
   let accountName = localStorage.getItem("username");
-  accountName = accountName == "" ? "Guest" : accountName;
-  document.getElementById("header-profile-icon").innerHTML = getUserInitials(accountName);
+  if(accountName) {
+    document.getElementById("header-profile-icon").innerHTML = getUserInitials(accountName);
+  } else {
+    document.getElementById("header-profile-icon").innerHTML = getUserInitials("Guest");
+  }
 }
 
 /**
