@@ -258,10 +258,12 @@ async function loginUser() {
         if (document.getElementById("rememberMeButton").checked) {
           rememberUserAccount(userEmail);
         } else {
-          if(rememberedAccounts.includes(userEmail)) {
-            rememberedAccounts = rememberedAccounts.replace(`"${userEmail}"`, "");
-
-            localStorage.setItem("remember", rememberedAccounts);
+          if(rememberedAccounts) {
+            if(rememberedAccounts.includes(userEmail)) {
+              rememberedAccounts = rememberedAccounts.replace(`"${userEmail}"`, "");
+  
+              localStorage.setItem("remember", rememberedAccounts);
+            }
           }
         }
         logInUserAccount(userEmail);
