@@ -153,7 +153,7 @@
       for (let i = 0; i < tasks.length; i++) {
         if (
           tasks[i].title.toLowerCase().includes(searchBar.toLowerCase()) ||
-          tasks[i].description.includes(searchBar.toLowerCase())
+          tasks[i].description.toLowerCase().includes(searchBar.toLowerCase())
         ) {
           showTaskCard(i);
         }
