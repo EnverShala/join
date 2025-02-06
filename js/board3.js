@@ -26,12 +26,18 @@
    *
    * @param {number} position The index of the subtask to be edited.
    */
-  function editSubtaskPopup(position) {
-    let listItem = document.querySelector(`ul li[data-index="${position}"]`);
-    listItem.innerHTML = changeSubtaskContentToInputForEditPopupTemplate(
-      position,
-      listItem.textContent.trim()
-    );
+  function editSubtaskPopup(item) {
+    let subtasksListPopup = document.getElementById("subtaskListPopup");
+    let listLength = subtasksListPopup.getElementsByTagName("li").length;
+
+    for(let i = 0; i < listLength; i++) {
+        let listChild = subtasksListPopup.getElementsByTagName("li")[i];
+
+        if(listChild.textContent.trim() == item) {
+            listChild.innerHTML = changeSubtaskContentToInputForEditPopupTemplate(i, listChild.textContent.trim());
+            break;
+        }
+    }
   }
   
   /**
@@ -39,13 +45,20 @@
    *
    * @param {number} position The index of the subtask to delete.
    */
-  function deleteSubtaskPopup(position) {
+  function deleteSubtaskPopup(item) {
     let subtasksListPopup = document.getElementById("subtaskListPopup");
-    let listChild = subtasksListPopup.getElementsByTagName("li")[position];
+    let listLength = subtasksListPopup.getElementsByTagName("li").length;
+    
+    for(let i = 0; i < listLength; i++) {
+        let listChild = subtasksListPopup.getElementsByTagName("li")[i];
+
+        if(listChild.textContent.trim() == item) {
+            subtasksListPopup.removeChild(listChild);
   
-    subtasksListPopup.removeChild(listChild);
-  
-    subtasksArrayPopup.splice(position, 1);
+            subtasksArrayPopup.splice(i, 1);
+            break;
+        }
+    }
   }
   
   /**

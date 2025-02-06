@@ -334,7 +334,7 @@ function toggleBackground(checkbox) {
  * Clears the almost all the Form Fields
  */
 
-function clearFormFields() {
+function clearFormFields(id) {
   document.getElementById('title').value = '';
   document.getElementById('description').value = '';
   document.getElementById('due-date-input').value = '';
@@ -366,7 +366,7 @@ function clearFormFields() {
  */
 
 function clearForm(id = "") {
-  clearFormFields();
+  clearFormFields(id);
 
   document.getElementById('category-displayed').textContent = 'Select task category';
 

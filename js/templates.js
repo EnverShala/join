@@ -160,9 +160,9 @@ function createSubtaskListItemPopupTemplate(index, item) {
             <li class="subtask-list-item" data-index="${index}">
                 <div class="li-text">${item}</div>
                 <div class="subtask-edit-icon-div">
-                    <img onclick="editSubtaskPopup(${index})" id="editTaskPopup${index}" class="edit-subtask-btn" src="./img/edit.png" alt="">
+                    <img onclick="editSubtaskPopup('${item}')" id="editTaskPopup${index}" class="edit-subtask-btn" src="./img/edit.png" alt="">
                     <div class="subtask-divider-2"></div>
-                    <img onclick="deleteSubtaskPopup(${index})" id="deleteSubtaskPopup${index}"class="delete-subtask-btn" src="./img/delete.png" alt="">
+                    <img onclick="deleteSubtaskPopup('${item}')" id="deleteSubtaskPopup${index}"class="delete-subtask-btn" src="./img/delete.png" alt="">
                 </div>
             </li>
         `;
@@ -200,9 +200,9 @@ function changeSubtaskInputFieldBackToListElementPopup(index, item) {
   return `
                 <div class="li-text">${item}</div>
                 <div class="subtask-edit-icon-div">
-                    <img onclick="editSubtaskPopup(${index})" id="editTaskPopup${index}" class="edit-subtask-btn" src="./img/edit.png" alt="">
+                    <img onclick="editSubtaskPopup('${item}')" id="editTaskPopup${index}" class="edit-subtask-btn" src="./img/edit.png" alt="">
                     <div class="subtask-divider-2"></div>
-                    <img onclick="deleteSubtaskPopup(${index})" id="deleteSubtaskPopup${index}"class="delete-subtask-btn" src="./img/delete.png" alt="">
+                    <img onclick="deleteSubtaskPopup('${item}')" id="deleteSubtaskPopup${index}"class="delete-subtask-btn" src="./img/delete.png" alt="">
                 </div>
         `;
 }

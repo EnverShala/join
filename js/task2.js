@@ -244,7 +244,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function validateAssignedTo() {
+  function validateAssignedTo(id) {
     const assignedToError = document.getElementById("assigned-to-required");
     const assignedUsers = getAssignedUsers(id);
     if (assignedUsers === "") {
@@ -256,7 +256,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function validatePriority() {
+  function validatePriority(id) {
     const priority = getTaskPrio(id);
     const priorityError = document.getElementById("prio-required");
     if (priority === "None") {
@@ -282,7 +282,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function validateAndCreateTask(event, id = "") {
     event.preventDefault(); // stop default behaviour
   
-    if (validateTitle() && validateDueDate() && validateCategory() && validateDescription() && validateAssignedTo() && validatePriority()) {
+    if (validateTitle() && validateDueDate() && validateCategory() && validateDescription() && validateAssignedTo(id) && validatePriority(id)) {
         createTask(id);
     }
   }
