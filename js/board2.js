@@ -1,5 +1,3 @@
-
-
 /**
  * Returns the index (task number) of the task with the current ID in the tasks array.
  *
@@ -201,6 +199,16 @@ function getTaskNrFromCurrentId() {
     renderSubtasksDoneCheckboxes(subtasksArray, taskNr);
   }
 
+  /**
+  * Renders a list of subtasks with checkboxes indicating their completion status.
+  * 
+  * @param {string[]} [subtasksArray=[]] - An array of subtasks to be displayed.
+  * @param {number} taskNr - The index of the task in the tasks array.
+  * 
+  * The function clears the existing subtasks list and iterates over the provided subtasksArray.
+  * If a subtask is marked as done in `tasks[taskNr].subtasksDone`, its checkbox is pre-checked.
+  * Each checkbox has an `onclick` event that calls `toggleSubtaskDone` to update the status.
+  */
   function renderSubtasksDoneCheckboxes(subtasksArray = [], taskNr) {
     let subtasksList = document.getElementById("showSubtasksContainer");
     subtasksList.innerHTML = "";

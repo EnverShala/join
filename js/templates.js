@@ -10,7 +10,7 @@
 function taskCardTemplate(uniqueId, i, subTasksArray, assignedUsersHTML) {
   let subtasksDone = tasks[i].subtasksDone;
 
-  if(subtasksDone.endsWith("|")) {
+  if (subtasksDone.endsWith("|")) {
     subtasksDone = subtasksDone.slice(0, -1);
   }
 
@@ -41,20 +41,26 @@ function taskCardTemplate(uniqueId, i, subTasksArray, assignedUsersHTML) {
                 </div>
                 <div class="cardBody" onclick="openDialog(); popupValueImplementFromTask(${i})">
                   <p id="titelCardID" class="titleCard">${tasks[i].title}</p>
-                  <p id="descriptionCardID" class="descriptionCard">${tasks[i].description}</p>
+                  <p id="descriptionCardID" class="descriptionCard">${
+                    tasks[i].description
+                  }</p>
                   <div>
                     <div class="progress">
                       <div class="progressBarContainer">
                         <div id="" class="progressBar" style="width: ${widthPercent}%;"></div>
                       </div>
-                      <p class="amountSubtasks">${subTasksArray.length} subtask(s)</p>
+                      <p class="amountSubtasks">${
+                        subTasksArray.length
+                      } subtask(s)</p>
                     </div>
                     <div class="footerCard">
                       <div id="profileBadges${i}" class="profileBadges">
                         ${assignedUsersHTML}
                       </div>
                       <div class="prioImg">
-                        <img src="./img/${tasks[i].priority.toLowerCase()}.svg" alt="">
+                        <img src="./img/${tasks[
+                          i
+                        ].priority.toLowerCase()}.svg" alt="">
                       </div>
                     </div>
                   </div>
@@ -75,11 +81,17 @@ function contactTemplate(i, j, x) {
   return `<div id="user-container${i}">
             <div id="contact-containerID${x}" class="contact-container" onclick="loadUserInformation(${i}); hideContactsListInResponsiveMode()">
             <div class="contact-list-ellipse">
-               <div id="userColor${i}" class="ellipse-list initialsColor${j}">${getUserInitials(users[i].name)}</div>
+               <div id="userColor${i}" class="ellipse-list initialsColor${j}">${getUserInitials(
+    users[i].name
+  )}</div>
             </div>
             <div class="contact">
-                <div class="contact-list-name" id="contactName">${users[i].name}</div>
-                <div class="contact-list-email" id="contactEmail">${users[i].email}</div>
+                <div class="contact-list-name" id="contactName">${
+                  users[i].name
+                }</div>
+                <div class="contact-list-email" id="contactEmail">${
+                  users[i].email
+                }</div>
             </div>
             </div>
             </div>
@@ -94,7 +106,13 @@ function contactTemplate(i, j, x) {
  * @param {number} x A unique identifier for the contact container.
  * @returns {string} The HTML template for the contact list item, or an empty string if the user is not found.
  */
-function createRenderAssignedToUserTemplate(i, j, userInitials, userName, id = "") {
+function createRenderAssignedToUserTemplate(
+  i,
+  j,
+  userInitials,
+  userName,
+  id = ""
+) {
   return `
         <label onclick="event.stopPropagation()"><li class="list-item assigned-to"></label>
             <div class="list-item-name" onclick="toggleCheckbox('AssignedContact${id}${i}', '${id}')">
@@ -114,7 +132,9 @@ function createRenderAssignedToUserTemplate(i, j, userInitials, userName, id = "
  * @returns {string} The HTML template for the subtask list item, or an empty string if the item is empty.
  */
 function createSubtaskListItemAddTaskTemplate(index, item) {
-  if(item == "") { return ""; }
+  if (item == "") {
+    return "";
+  }
   return `
             <li class="subtask-list-item" data-index="${index}">
                 <div class="li-text">${item}</div>
@@ -135,7 +155,9 @@ function createSubtaskListItemAddTaskTemplate(index, item) {
  * @returns {string} The HTML template for the subtask list item, or an empty string if the item is empty.
  */
 function createSubtaskListItemTemplate(index, item) {
-  if(item == "") { return ""; }
+  if (item == "") {
+    return "";
+  }
   return `
             <li class="subtask-list-item" data-index="${index}">
                 <div class="li-text">${item}</div>
@@ -149,7 +171,7 @@ function createSubtaskListItemTemplate(index, item) {
 }
 
 /**
- * Creates an HTML list item for a subtask in a popup, including edit/delete icons 
+ * Creates an HTML list item for a subtask in a popup, including edit/delete icons
  * that call popup-specific functions.  Icon IDs include "Popup".
  * @param {number} index Subtask index (used for unique icon IDs).
  * @param {string} item Subtask text.
@@ -169,7 +191,7 @@ function createSubtaskListItemPopupTemplate(index, item) {
 }
 
 /**
- * Generates the HTML for a subtask list item, reverting from an input field 
+ * Generates the HTML for a subtask list item, reverting from an input field
  * back to a display element with edit and delete icons.
  *
  * @param {number} index The index of the subtask. Used for generating unique
@@ -233,7 +255,10 @@ function changeSubtaskContentToInputForEditTemplate(position, actualContent) {
  * @param {string} actualContent The current text content of the subtask.
  * @returns {string} HTML string for the edit input field and buttons.
  */
-function changeSubtaskContentToInputForEditPopupTemplate(position, actualContent) {
+function changeSubtaskContentToInputForEditPopupTemplate(
+  position,
+  actualContent
+) {
   return `
     <input id="editSubtaskInputPopup${position}" class="edit-subtask-input" type="text" value="${actualContent}" onkeydown = "subtaskOnKeyDownPopup(${position})">
     <div class="edit-subtask-button-div">
@@ -247,7 +272,7 @@ function changeSubtaskContentToInputForEditPopupTemplate(position, actualContent
 /**
  * Generates HTML for an input field with "cancel" and "confirm" buttons,
  * intended for editing the text content of a list item.  Note: This template
- * lacks specific event handlers (onclick, etc.) which should be added 
+ * lacks specific event handlers (onclick, etc.) which should be added
  * dynamically after the HTML is inserted into the DOM.
  * @param {string} textContent The initial text content to display in the input field.
  * @returns {string} HTML string for the input field and buttons.
