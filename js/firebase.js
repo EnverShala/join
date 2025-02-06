@@ -219,6 +219,10 @@ function logInUserAccount(accountEmail) {
 function logOutUserAccount() {
   localStorage.setItem("loggedInAccount", "");
   localStorage.setItem("username", "");
+
+  setTimeout(() => {
+
+  }, 500);
 }
 
 /**
