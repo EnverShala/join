@@ -71,6 +71,8 @@
   .initialsColor15 {
     background-color: #000000; /* Schwarz */
   }
+
+
   
   @media (max-width: 1315px) {
     .display-contact-header {
@@ -126,8 +128,8 @@
     .contacts-main-container {
       width: 370px;
     }
-    .contact-container {
-      width: 280px;
+    .contact-list {
+      margin-left: 0px;
     }
     .contact-name-main-container {
       width: 420px;
@@ -154,6 +156,14 @@
     .contact-container {
       width: 220px;
       padding: 8px 8px 8px 8px;
+      gap: 10px;
+      box-sizing: border-box;
+    }
+    .contact-list-email {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 200px;
     }
     .add-contact-container {
       padding: 10px 10px 10px 10px;
@@ -172,7 +182,7 @@
   @media (max-width: 950px) {
     /* Right-Side */
     .display-contact-header,.display-contact {
-      left: 490px;
+      left: 484px;
     }
     .h1Contacts {
       font-size: 42px;
@@ -190,6 +200,10 @@
     }
     .span-contact-name {
       font-size: 28px;
+    }
+    /* Left-Side */
+    .contacts-main-container {
+      width: 225px;
     }
   }
   @media (max-width: 800px) {

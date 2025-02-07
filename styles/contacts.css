@@ -89,6 +89,7 @@ body {
 }
 
 .contact-container {
+  box-sizing: border-box;
   display: flex;
   width: 352px;
   gap: 35px;
