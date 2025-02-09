@@ -145,6 +145,22 @@ function rememberUserAccount(accountEmail) {
 }
 
 /**
+ * Deletes a user's email address in local storage of remembered accounts.
+ * If the email is isnt stored, this function does nothing.
+ */
+function dontRememberUserAccount(userEmail) {
+  let rememberedAccounts = localStorage.getItem("remember");
+
+  if(rememberedAccounts) {
+    if(rememberedAccounts.includes(userEmail)) {
+      rememberedAccounts = rememberedAccounts.replace(`"${userEmail}"`, "");
+
+      localStorage.setItem("remember", rememberedAccounts);
+    }
+  }
+}
+
+/**
  * Checks if a given email address is valid based on a basic set of criteria.
  * This function performs a simple validation, checking for the presence of "@" and ".",
  * a minimum length, and ensuring that the TLD (top-level domain) is present and not
@@ -181,9 +197,7 @@ async function loginOnInput() {
     if (rememberedAccounts.includes(email)) {
       for (let i = 0; i < accounts.length; i++) {
         if (accounts[i].email == email) {
-          document.getElementById("userPassword").value = accounts[i].password;
-          document.getElementById("rememberMeButton").checked = true;
-          document.getElementById("loginButton").disabled = false;
+          activateRememberedAccount(i);
           return;
         }
       }
@@ -195,6 +209,15 @@ async function loginOnInput() {
   } else {
     document.getElementById("loginButton").disabled = true;
   }
+}
+
+/**
+ * fills the Account / login input fields when Account is remembered
+ */
+function activateRememberedAccount(accountIndex) {
+  document.getElementById("userPassword").value = accounts[accountIndex].password;
+  document.getElementById("rememberMeButton").checked = true;
+  document.getElementById("loginButton").disabled = false;
 }
 
 /**
@@ -215,6 +238,8 @@ function logInUserAccount(accountEmail) {
 
 /**
  * Logs out the current user by clearing their email and username from local storage.
+ * Sleeps 500 Milliseconds, because sometimes the Page reloaded before localStorage was deleted (logout)
+ * so the User remained logged in without refreshing the login Page again
  */
 function logOutUserAccount() {
   localStorage.setItem("loggedInAccount", "");
@@ -248,7 +273,6 @@ function getLoggedInUser() {
 async function loginUser() {
   let userEmail = document.getElementById("userEmail").value.trim();
   let userPassword = document.getElementById("userPassword").value;
-  let rememberedAccounts = localStorage.getItem("remember");
 
   await loadAccounts();
 
@@ -258,13 +282,7 @@ async function loginUser() {
         if (document.getElementById("rememberMeButton").checked) {
           rememberUserAccount(userEmail);
         } else {
-          if(rememberedAccounts) {
-            if(rememberedAccounts.includes(userEmail)) {
-              rememberedAccounts = rememberedAccounts.replace(`"${userEmail}"`, "");
-  
-              localStorage.setItem("remember", rememberedAccounts);
-            }
-          }
+          dontRememberUserAccount(userEmail);
         }
         logInUserAccount(userEmail);
         showLoginMessage("Login erfolgreich!", 1);
@@ -275,7 +293,6 @@ async function loginUser() {
       }
     }
   }
-
   showLoginMessage("Zu dieser E-Mail existiert kein Account!", 0);
 }
 

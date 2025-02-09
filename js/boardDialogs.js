@@ -67,19 +67,13 @@ function getTaskNrFromCurrentId() {
     let newDescription = document.getElementById("inputDescription").value.trim();
     let newDate = document.getElementById("inputDueDate").value;
     let newPrio = getTaskPrio();
-    let newAssigned = "";
-    let newSubtasks = "";
-    let currentTask = -1;
+    let newAssigned = "", newSubtasks = "", currentTask = -1;
   
     currentTask = getTaskNrFromCurrentId();
   
-    let oldLevel = tasks[currentTask].level;
-    let oldCategory = tasks[currentTask].category;
+    let oldLevel = tasks[currentTask].level, oldCategory = tasks[currentTask].category, subtasksDone = tasks[currentTask].subtasksDone;
   
-    let subtasksDone = tasks[currentTask].subtasksDone;
-  
-    newSubtasks = getSubtaskItems();
-  
+    newSubtasks = getSubtaskItems();  
     newAssigned = getAssignedUsers();
   
     let newTask = createTaskArray(newTitle, newDescription, newDate, oldCategory, newPrio, oldLevel, newSubtasks, newAssigned, subtasksDone);
@@ -175,28 +169,29 @@ function getTaskNrFromCurrentId() {
     let assignedUsers = tasks[taskNr].assigned.split(",");
   
     while (assignedUsers.length > 0) {
-      contactEllipse += `
-      <div class="badgeImg initialsColor${await getUserColor(
-        assignedUsers[0]
-      )}">${getUserInitials(assignedUsers[0])}</div>`;
+      contactEllipse += `<div class="badgeImg initialsColor${await getUserColor(assignedUsers[0])}">${getUserInitials(assignedUsers[0])}</div>`;
       assignedUsers.splice(0, 1);
     }
   
     loadPopupValueData(taskNr, contactEllipse);
   
-    let valueFromName = document.getElementById("popupContactNameID");
-  
-    valueFromName.innerHTML = "";
-  
-    let assignedNames = tasks[taskNr].assigned.split(",");
-  
+    let assignedNames = tasks[taskNr].assigned.split(",");  
     currentId = tasks[taskNr].id;
   
+    renderValueFromNames(assignedNames);
+    renderSubtasksDoneCheckboxes(subtasksArray, taskNr);
+  }
+
+   /**
+   * creates/renders the name Values into HTML Divs
+   */
+  function renderValueFromNames(assignedNames = []) {
+    let valueFromName = document.getElementById("popupContactNameID");
+    valueFromName.innerHTML = "";
+
     for (let j = 0; j < assignedNames.length; j++) {
       valueFromName.innerHTML += `<div>${assignedNames[j]}</div>`;
     }
-
-    renderSubtasksDoneCheckboxes(subtasksArray, taskNr);
   }
 
   /**
@@ -290,26 +285,17 @@ function getTaskNrFromCurrentId() {
     for (let i = 0; i < tasks.length; i++) {
       const uniqueId = `taskCard-${i}`;
       let assignedUsers = tasks[i].assigned.split(",");
-      let subTasksArray =
-        tasks[i].subtasks.split("|") == "" ? [] : tasks[i].subtasks.split("|");
-      let assignedUsersHTML = "";
-  
-      let cardContainerIdName = getCardContainerId(tasks[i].level);
-  
-      let counter = 0;
-      let taskUsers = assignedUsers.length;
+      let subTasksArray =tasks[i].subtasks.split("|") == "" ? [] : tasks[i].subtasks.split("|");  
+      let cardContainerIdName = getCardContainerId(tasks[i].level);  
+      let , assignedUsersHTML = "", counter = 0, taskUsers = assignedUsers.length;
   
       while (assignedUsers.length > 0) {
-        assignedUsersHTML += `<div class="badgeImg initialsColor${await getUserColor(
-          assignedUsers[0]
-        )}">${getUserInitials(assignedUsers[0])}</div>`;
+        assignedUsersHTML += `<div class="badgeImg initialsColor${await getUserColor(assignedUsers[0])}">${getUserInitials(assignedUsers[0])}</div>`;
         assignedUsers.splice(0, 1);
         counter++;
   
         if (counter == 4 && taskUsers > 4) {
-          assignedUsersHTML += `<div class="badgeImg initialsColor0">+${
-            taskUsers - counter
-          }</div>`;
+          assignedUsersHTML += `<div class="badgeImg initialsColor0">+${taskUsers - counter}</div>`;
           break;
         }
       }

@@ -287,3 +287,11 @@ function createListItemTextContentTemplate(textContent) {
                     </div>
                 `;
 }
+
+/**
+ * Generates HTML for the Username Container with the first Letter
+ */
+function contactsFirstLetterTemplate(firstLetter) {
+  return `<div class="contacts-first-letter-container"><span id="firstLetterOfContactName" class="contacts-first-letter">${firstLetter}</span></div>
+                <div class="border-container"> <div class="border"></div></div>`;
+}

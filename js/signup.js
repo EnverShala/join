@@ -97,26 +97,17 @@ function clearPasswordMismatchMessage() {
 
   if (document.getElementById("confirmPassword").value.trim() == "") {
     messageContainer.classList.add("d-none");
-    document
-      .getElementById("confirmPasswordBox")
-      .classList.add("margin-bottom24px");
+    document.getElementById("confirmPasswordBox").classList.add("margin-bottom24px");
     return false;
   }
 
-  if (
-    document.getElementById("userPassword").value.trim() ==
-    document.getElementById("confirmPassword").value.trim()
-  ) {
+  if (document.getElementById("userPassword").value.trim() == document.getElementById("confirmPassword").value.trim()) {
     messageContainer.classList.add("d-none");
-    document
-      .getElementById("confirmPasswordBox")
-      .classList.add("margin-bottom24px");
+    document.getElementById("confirmPasswordBox").classList.add("margin-bottom24px");
     return true;
   } else {
     messageContainer.classList.remove("d-none");
-    document
-      .getElementById("confirmPasswordBox")
-      .classList.remove("margin-bottom24px");
+    document.getElementById("confirmPasswordBox").classList.remove("margin-bottom24px");
   }
   return false;
 }
@@ -139,9 +130,7 @@ function checkPassword() {
     messageContainer.classList.add("d-none");
     document.getElementById("passwordBox").classList.add("margin-bottom24px");
   } else {
-    document
-      .getElementById("passwordBox")
-      .classList.remove("margin-bottom24px");
+    document.getElementById("passwordBox").classList.remove("margin-bottom24px");
     messageContainer.classList.remove("d-none");
   }
 

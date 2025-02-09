@@ -8,7 +8,7 @@ let popupIdString = "";
  *                          different task forms (e.g., in a modal or popup).
  * @returns {Promise<void>}
  */
-async function createTask(id = "") {
+async function createTask(id = "", taskLevel = "To do") {
   let taskTitle = document.getElementById("title").value;
   let taskDescription = document.getElementById("description").value;
   let taskDate = document.getElementById("due-date-input").value;
@@ -16,33 +16,32 @@ async function createTask(id = "") {
 
   let taskPrio = getTaskPrio(id);
 
-  let taskSubtasks = "";
-  let assignedTo = "";
-
   let subtaskItems = document.getElementById("subtaskList" + id).children;
 
-  if (subtaskItems.length > 0) {
-    for (let i = 0; i < subtaskItems.length; i++) {
-      taskSubtasks += subtaskItems[i].textContent.trim() + "|";
-    }
-    taskSubtasks = taskSubtasks.slice(0, -1);
-  }
+  let taskSubtasks = subtaskListToString(subtaskItems);
+  let assignedTo = getAssignedUsers(id);
 
-  if (users.length > 0) {
-    for (let i = 0; i < users.length; i++) {
-      let checkbox = document.getElementById(`AssignedContact${id}${i}`);
+  let newTask = createTaskArray(taskTitle, taskDescription, taskDate, taskCategory, taskPrio, taskLevel, taskSubtasks, assignedTo);
 
-      if (checkbox.checked == true) { assignedTo += users[i].name + ","; }
-    }
-    assignedTo = assignedTo.slice(0, -1);
-  }
-
-  let newTask = createTaskArray(taskTitle, taskDescription, taskDate, taskCategory, taskPrio, "To do", taskSubtasks, assignedTo);
-
-  saveTasks("/tasks", newTask);
+  await saveTasks("/tasks", newTask);
 
   showSuccessMessage();
   clearForm(id);
+}
+
+/**
+ * returns the children of an ul list as a string, seperated via the "|"
+ */
+function subtaskListToString(listChildren = []) {
+  let taskSubtasks = "";
+
+  if (listChildren.length > 0) {
+    for (let i = 0; i < listChildren.length; i++) {
+      taskSubtasks += listChildren[i].textContent.trim() + "|";
+    }
+    taskSubtasks = taskSubtasks.slice(0, -1);
+  }
+  return taskSubtasks;
 }
 
 /**
@@ -307,20 +306,16 @@ function toggleCheckbox(checkboxId) {
 function toggleBackground(checkbox) {
   const listItem = checkbox.closest(".list-item");
   const contactCircle = listItem.querySelector(".circle").cloneNode(true);
-
   const selectedContactsContainer = document.getElementById("selected-contacts-container" + popupIdString);
 
   if (checkbox.checked) {
     listItem.style.backgroundColor = "#2a3647";
     listItem.style.color = "white";
-
-    // add contact circle to the contact container
     selectedContactsContainer.appendChild(contactCircle);
   } else {
     listItem.style.backgroundColor = "";
     listItem.style.color = "black";
 
-    // remove contact circle to the contact container
     const circles = selectedContactsContainer.querySelectorAll(".circle");
     circles.forEach((circle) => {
       if (circle.textContent.trim() === contactCircle.textContent.trim()) {
@@ -375,11 +370,8 @@ function clearForm(id = "") {
 
   closeAssignedto(id);
 
-  if(id == "Popup") {
-    document.getElementById('addSubtaskInputPopup').value = '';
-  } else {
-    document.getElementById('addNewSubtaskInput').value = '';
-  }
+  let isPopup = id == "Popup" ? "addSubtaskInputPopup" : "addNewSubtaskInput";
+  document.getElementById(isPopup).value = '';
 
   document.getElementById('selected-contacts-container' + id).innerHTML = '';
 

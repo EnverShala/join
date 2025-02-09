@@ -17,21 +17,15 @@ async function deleteUser(id) {
           if (tasks[j].assigned.includes(users[i].name)) {
             tasks[j].assigned = tasks[j].assigned.replace(users[i].name, "");
             tasks[j].assigned = tasks[j].assigned.replace(",,", ",");
-            if (tasks[j].assigned[tasks[j].assigned.length - 1] == ",") {
-              tasks[j].assigned = tasks[j].assigned.slice(0, -1);
-            }
-            if(tasks[j].assigned[0] == ",") {
-              tasks[j].assigned = tasks[j].assigned.slice(1);
-            }
+            if(tasks[j].assigned[tasks[j].assigned.length - 1] == ",") { tasks[j].assigned = tasks[j].assigned.slice(0, -1); }
+            if(tasks[j].assigned[0] == ",") { tasks[j].assigned = tasks[j].assigned.slice(1); }
             await editTask(tasks[j].id, tasks[j]);
           }
         }
       }
     }
   
-    await fetch(FIREBASE_URL + `/users/${id}` + ".json", {
-      method: "DELETE",
-    });
+    await fetch(FIREBASE_URL + `/users/${id}` + ".json", { method: "DELETE", });
   
     await renderContacts();
     loadUserInformation(-1);
@@ -99,8 +93,7 @@ async function deleteUser(id) {
   
     for (let i = 0; i < users.length; i++) {
       if (users[i].name[0].toUpperCase() != firstLetter.toUpperCase()) {
-        html += `<div class="contacts-first-letter-container"><span id="firstLetterOfContactName" class="contacts-first-letter">${users[i].name[0].toUpperCase()}</span></div>
-                <div class="border-container"> <div class="border"></div></div>`;
+        html += contactsFirstLetterTemplate(users[i].name[0].toUpperCase());
   
         firstLetter = users[i].name[0].toUpperCase();
       }
@@ -126,10 +119,7 @@ async function deleteUser(id) {
   function getUserInitials(username) {
     if(username.trim() == "") { return "";}
   
-    let result = username
-      .trim()
-      .split(" ")
-      .map((wort) => wort[0].toUpperCase());
+    let result = username.trim().split(" ").map((wort) => wort[0].toUpperCase());
   
     if (username.split(" ").length > 1) {
       result = result[0] + result[result.length - 1];

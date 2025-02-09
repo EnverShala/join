@@ -5,12 +5,7 @@
 async function loadSummaryInfos() {
   await loadTasks();
 
-  let sumTodo = 0;
-  let sumDone = 0;
-  let sumUrgent = 0;
-  let sumTasks = 0;
-  let sumProgress = 0;
-  let sumFeedback = 0;
+  let sumTodo = 0, sumDone = 0, sumUrgent = 0, sumTasks = 0, sumProgress = 0, sumFeedback = 0;
 
   for (let i = 0; i < tasks.length; i++) {
     sumTodo = tasks[i].level == "To do" ? sumTodo + 1 : sumTodo;
@@ -56,8 +51,7 @@ function getUpcomingDeadline() {
   let allDates = [];
   let taskDate = "";
 
-  for (let i = 0; i < tasks.length; i++) {
-    
+  for (let i = 0; i < tasks.length; i++) {    
     if (tasks[i].priority == "Urgent") {
       taskDate = taskDate = tasks[i].date.toString().replace("-", "");
       taskDate = taskDate.replace("-", "");

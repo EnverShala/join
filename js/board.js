@@ -125,18 +125,13 @@ function checkTaskLevels() {
     document.getElementById("emptyTaskTodo").classList.add("d-none");
   }
 
-  if (
-    document.getElementById("cardContainerinProgress").childElementCount == 0
-  ) {
+  if (document.getElementById("cardContainerinProgress").childElementCount == 0) {
     document.getElementById("emptyTaskInProgress").classList.remove("d-none");
   } else {
     document.getElementById("emptyTaskInProgress").classList.add("d-none");
   }
 
-  if (
-    document.getElementById("cardContainerawaitingFeedback")
-      .childElementCount == 0
-  ) {
+  if (document.getElementById("cardContainerawaitingFeedback").childElementCount == 0) {
     document.getElementById("emptyTaskAwait").classList.remove("d-none");
   } else {
     document.getElementById("emptyTaskAwait").classList.add("d-none");
@@ -193,9 +188,7 @@ function cancelSubtaskEdit(position) {
  * @param {number} position The index of the subtask being edited.
  */
 function confirmSubtaskEdit(position) {
-  if (
-    document.getElementById(`editSubtaskInput${position}`).value.trim() == ""
-  ) {
+  if (document.getElementById(`editSubtaskInput${position}`).value.trim() == "") {
     cancelSubtaskEdit(position);
     return;
   }
@@ -253,20 +246,10 @@ function renderSubtasks() {
  * @param {number} checkBoxNr The number of the checkbox associated with the subtask.
  */
 async function toggleSubtaskDone(taskNr, subtaskName, checkBoxNr) {
-  if (
-    document
-      .getElementById(`subtaskCheckbox${checkBoxNr}`)
-      .hasAttribute("checked")
-  ) {
+  if (document.getElementById(`subtaskCheckbox${checkBoxNr}`).hasAttribute("checked")) {
     if (tasks[taskNr].subtasksDone.includes(subtaskName)) {
-      tasks[taskNr].subtasksDone = tasks[taskNr].subtasksDone.replace(
-        subtaskName,
-        ""
-      );
-      tasks[taskNr].subtasksDone = tasks[taskNr].subtasksDone.replace(
-        "||",
-        "|"
-      );
+      tasks[taskNr].subtasksDone = tasks[taskNr].subtasksDone.replace(subtaskName, "");
+      tasks[taskNr].subtasksDone = tasks[taskNr].subtasksDone.replace("||", "|");
       if (tasks[taskNr].subtasksDone.endsWith("|")) {
         tasks[taskNr].subtasksDone.slice(0, -1);
       }
@@ -274,14 +257,10 @@ async function toggleSubtaskDone(taskNr, subtaskName, checkBoxNr) {
         tasks[taskNr].subtasksDone = tasks[taskNr].subtasksDone.slice(1);
       }
     }
-    document
-      .getElementById(`subtaskCheckbox${checkBoxNr}`)
-      .removeAttribute("checked");
+    document.getElementById(`subtaskCheckbox${checkBoxNr}`).removeAttribute("checked");
   } else {
     tasks[taskNr].subtasksDone += `${subtaskName}|`;
-    document
-      .getElementById(`subtaskCheckbox${checkBoxNr}`)
-      .setAttribute("checked", true);
+    document.getElementById(`subtaskCheckbox${checkBoxNr}`).setAttribute("checked", true);
   }
   await editTask(currentId, tasks[taskNr]);
   await renderTaskCards();
@@ -371,9 +350,7 @@ function editPopupTask() {
       toggleAssignedUsers(assignedArray);
     }
   }
-  document
-    .getElementById("popupOnTaskSelectionMainContainerID")
-    .classList.add("d-none");
+  document.getElementById("popupOnTaskSelectionMainContainerID").classList.add("d-none");
   document.getElementById("editPopUpID").classList.remove("d-none");
 }
 
