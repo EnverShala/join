@@ -207,6 +207,8 @@ function getTaskNrFromCurrentId() {
   function renderSubtasksDoneCheckboxes(subtasksArray = [], taskNr) {
     let subtasksList = document.getElementById("showSubtasksContainer");
     subtasksList.innerHTML = "";
+
+    if(tasks[taskNr].subtasks.trim() == "") { return; }
   
     for (let j = 0; j < subtasksArray.length; j++) {
       if (tasks[taskNr].subtasksDone.includes(subtasksArray[j])) {
