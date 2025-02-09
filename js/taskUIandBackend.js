@@ -1,4 +1,5 @@
 let popupIdString = "";
+let taskLevel = "To do";
 /**
  * Asynchronously creates a new task. Retrieves task details from the form,
  * including title, description, due date, category, priority, subtasks, and
@@ -8,7 +9,7 @@ let popupIdString = "";
  *                          different task forms (e.g., in a modal or popup).
  * @returns {Promise<void>}
  */
-async function createTask(id = "", taskLevel = "To do") {
+async function createTask(id = "") {
   let taskTitle = document.getElementById("title").value;
   let taskDescription = document.getElementById("description").value;
   let taskDate = document.getElementById("due-date-input").value;

@@ -1,4 +1,3 @@
-  
   /**
    * Adds a new subtask to the subtask list in the popup.
    */
@@ -106,6 +105,7 @@
       // open modal
       openModalButton.addEventListener("click", () => {
         popupIdString = "Popup";
+        taskLevel = "To do";
         modal.showModal();
         renderAssignedTo("Popup");
         activatePrioButton("Medium", "Popup");
@@ -115,6 +115,12 @@
       // close modal
       alsoOpenButtons.forEach((button) => {
         button.addEventListener("click", () => {
+
+          if(button.id == "alsoOpenModal2") { taskLevel = "In Progress"; }
+          else if(button.id == "alsoOpenModal3") { taskLevel = "Awaiting Feedback"; }
+          else if(button.id == "alsoOpenModal4") { taskLevel = "Done"; }
+          else { taskLevel = "To do"; }
+
           popupIdString = "Popup";
           modal.showModal();
           renderAssignedTo("Popup");
@@ -126,6 +132,7 @@
       closeModalButton.addEventListener("click", () => {
         modal.close();
         popupIdString = "";
+        taskLevel = "To do";
       });
   
       // closing the modal wenn clicking out of the modal
@@ -133,6 +140,7 @@
         if (event.target === modal) {
           modal.close();
           popupIdString = "";
+          taskLevel = "To do";
         }
       });
     } else {
