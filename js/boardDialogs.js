@@ -287,7 +287,7 @@ function getTaskNrFromCurrentId() {
       let assignedUsers = tasks[i].assigned.split(",");
       let subTasksArray =tasks[i].subtasks.split("|") == "" ? [] : tasks[i].subtasks.split("|");  
       let cardContainerIdName = getCardContainerId(tasks[i].level);  
-      let , assignedUsersHTML = "", counter = 0, taskUsers = assignedUsers.length;
+      let assignedUsersHTML = "", counter = 0, taskUsers = assignedUsers.length;
   
       while (assignedUsers.length > 0) {
         assignedUsersHTML += `<div class="badgeImg initialsColor${await getUserColor(assignedUsers[0])}">${getUserInitials(assignedUsers[0])}</div>`;
