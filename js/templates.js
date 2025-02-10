@@ -17,6 +17,7 @@ function taskCardTemplate(uniqueId, i, subTasksArray, assignedUsersHTML) {
   subtasksDone = subtasksDone == "" ? [] : subtasksDone.split("|");
 
   let widthPercent = (100 / subTasksArray.length) * subtasksDone.length;
+  let zeroSubtasks = subTasksArray.length > 0 ? "" : "d-none";
 
   return `
                 <div draggable="true" id="${uniqueId}" class="taskCard">
@@ -45,7 +46,7 @@ function taskCardTemplate(uniqueId, i, subTasksArray, assignedUsersHTML) {
                     tasks[i].description
                   }</p>
                   <div>
-                    <div class="progress">
+                    <div class="progress  ${zeroSubtasks}">
                       <div class="progressBarContainer">
                         <div id="" class="progressBar" style="width: ${widthPercent}%;"></div>
                       </div>
