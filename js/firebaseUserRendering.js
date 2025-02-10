@@ -63,6 +63,7 @@ async function deleteUser(id) {
    * Retrieves the ID of a user based on their email address.
    * @param {string} email The email address of the user.
    * @returns {string|number} The ID of the user if found, or -1 if the user is not found.
+   * Default Value -1 means User not found
    */
   function getUserId(email) {
     if (users.length > 0) {
@@ -72,7 +73,7 @@ async function deleteUser(id) {
         }
       }
     } else {
-      return -1; // Default Value -1 means User not found
+      return -1;
     }
   }
   

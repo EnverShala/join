@@ -49,9 +49,7 @@ function taskCardTemplate(uniqueId, i, subTasksArray, assignedUsersHTML) {
                       <div class="progressBarContainer">
                         <div id="" class="progressBar" style="width: ${widthPercent}%;"></div>
                       </div>
-                      <p class="amountSubtasks">${
-                        subTasksArray.length
-                      } subtask(s)</p>
+                      <p class="amountSubtasks">${subtasksDone.length} / ${subTasksArray.length} subtask(s)</p>
                     </div>
                     <div class="footerCard">
                       <div id="profileBadges${i}" class="profileBadges">

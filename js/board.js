@@ -298,7 +298,7 @@ function subtaskOnKeyDown(position) {
   } else {
     if (event.key == "Escape") {
       document.getElementById("addNewSubtaskInput").value = "";
-    } // clear the add Subtask Input Field
+    } 
     if (event.key == "Enter") {
       addNewSubtask();
     }
@@ -321,7 +321,7 @@ function subtaskOnKeyDownPopup(position) {
   } else {
     if (event.key == "Escape") {
       document.getElementById("addSubtaskInputPopup").value = "";
-    } // clear the add Subtask Input Field
+    }
     if (event.key == "Enter") {
       addSubtaskPopup();
     }

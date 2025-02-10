@@ -266,7 +266,6 @@ async function renderAssignedTo(id = "") {
 
   await loadUsers("/users");
 
-  // remove doubles (only user should appear only once)
   let uniqueUsers = [];
   users.forEach(user => {
       if (!uniqueUsers.some(uniqueUser => uniqueUser.email == user.email)) {
@@ -392,7 +391,6 @@ function showSuccessMessage() {
   const successMessage = document.querySelector('.msg-task-added');
   successMessage.style.display = 'flex';
 
-  // after 3 seconds remove success message
   setTimeout(() => {
       successMessage.style.display = 'none';
       window.location.href = "board.html";

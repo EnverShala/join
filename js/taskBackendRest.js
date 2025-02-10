@@ -130,28 +130,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // eventlistener to addsubtask via click
   subtaskCheckBtn.addEventListener("click", addSubtask);
 
-  // eventlistener to addsubtask via enter on keyboard
   subtaskInput.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
       addSubtask();
     }
   });
 
-  /*
-   ** renders the subtasks
-   */
 
   function renderSubtasks() {
     const subtasksList = document.querySelector(".list-subtasks");
     subtasksList.innerHTML = "";
     subtasks.forEach((item, index) => {
-      subtasksList.innerHTML += createSubtaskListItemAddTaskTemplate(
-        index,
-        item
-      );
+      subtasksList.innerHTML += createSubtaskListItemAddTaskTemplate(index, item);
     });
     editSubTask();
     deleteSubtask();
@@ -159,15 +151,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   styleSubtaskInput();
 });
-/*End Subtask input*/
 
 document.addEventListener("DOMContentLoaded", function () {
   const dateInput = document.getElementById("due-date-input");
 
-  // get todays Date in Format YYYY-MM-DD
   const today = new Date().toISOString().split("T")[0];
 
-  // Set the min-Attribute to todays Date
   dateInput.setAttribute("min", today);
 });
 
@@ -342,7 +331,7 @@ function validatePriority(id) {
  */
 
 function validateAndCreateTask(event, id = "") {
-  event.preventDefault(); // stop default behaviour
+  event.preventDefault();
 
   if (
     validateTitle() &&

@@ -102,7 +102,6 @@
     const alsoOpenButtons = document.querySelectorAll(".alsoOpenModal");
   
     if (modal && openModalButton && closeModalButton) {
-      // open modal
       openModalButton.addEventListener("click", () => {
         popupIdString = "Popup";
         taskLevel = "To do";
@@ -112,7 +111,6 @@
         clearForm("Popup");
       });
   
-      // close modal
       alsoOpenButtons.forEach((button) => {
         button.addEventListener("click", () => {
 
@@ -137,7 +135,6 @@
         taskLevel = "To do";
       });
   
-      // closing the modal wenn clicking out of the modal
       modal.addEventListener("click", (event) => {
         if (event.target === modal) {
           modal.close();

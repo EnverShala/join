@@ -35,7 +35,7 @@ async function loadUsers(path = "/users") {
       });
     });
     users.sort((a, b) => {
-      return a.name.localeCompare(b.name); // sort users by name
+      return a.name.localeCompare(b.name);
     });
   }
 }
