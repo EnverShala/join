@@ -109,6 +109,7 @@ button {
   outline: 2px dashed transparent;
   border-radius: 30px;
   width: 103%;
+  gap: 10px;
 }
 
 .taskCard {

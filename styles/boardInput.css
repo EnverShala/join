@@ -280,7 +280,7 @@ label {
 
 .selectedContactsPopup {
   display: flex;
-  position: fixed;
+  position: absolute;
   padding-top: 5px;
   z-index: 1;
 }
