@@ -1,4 +1,4 @@
-/*Begin Subtask input*/
+
 document.addEventListener("DOMContentLoaded", () => {
   const subtaskInput = document.getElementById("addNewSubtaskInput");
   const subtaskBtnAdd = document.querySelector(".btn-subtask.add");

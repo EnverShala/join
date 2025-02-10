@@ -102,51 +102,39 @@
     const alsoOpenButtons = document.querySelectorAll(".alsoOpenModal");
   
     if (modal && openModalButton && closeModalButton) {
-      openModalButton.addEventListener("click", () => {
-        popupIdString = "Popup";
-        taskLevel = "To do";
-        modal.showModal();
-        renderAssignedTo("Popup");
-        activatePrioButton("Medium", "Popup");
-        clearForm("Popup");
-      });
+      openModalButton.addEventListener("click", () => { modal.showModal(); openModal(openModalButton.id); });
   
-      alsoOpenButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-
-          if(button.id == "alsoOpenModal2") { taskLevel = "In Progress"; }
-          else if(button.id == "alsoOpenModal3") { taskLevel = "Awaiting Feedback"; }
-          else if(button.id == "alsoOpenModal4") { taskLevel = "Done"; }
-          else { taskLevel = "To do"; }
-
-          document.getElementById('htmlID').style.overflow="hidden"
-          popupIdString = "Popup";
-          modal.showModal();
-          renderAssignedTo("Popup");
-          activatePrioButton("Medium", "Popup");
-          clearForm("Popup");
-        });
-      });
+      alsoOpenButtons.forEach((button) => { button.addEventListener("click", () => { modal.showModal(); openModal(button.id); }); });
   
-      closeModalButton.addEventListener("click", () => {
-        modal.close();
-        document.getElementById('htmlID').style.overflow="scroll"
-        popupIdString = "";
-        taskLevel = "To do";
-      });
-  
+      closeModalButton.addEventListener("click", () => { modal.close(); closeModal(); });
+      
       modal.addEventListener("click", (event) => {
         if (event.target === modal) {
           modal.close();
-          document.getElementById('htmlID').style.overflow="scroll"
-          popupIdString = "";
-          taskLevel = "To do";
+          closeModal();
         }
       });
-    } else {
-      console.error("Modal, Open Button, or Close Button not found in the DOM.");
-    }
+    } else { console.error("Modal, Open Button, or Close Button not found in the DOM."); }
   });
+
+  function openModal(buttonid) {
+    if(buttonid == "alsoOpenModal2") { taskLevel = "In Progress"; }
+    else if(buttonid == "alsoOpenModal3") { taskLevel = "Awaiting Feedback"; }
+    else if(buttonid == "alsoOpenModal4") { taskLevel = "Done"; }
+    else { taskLevel = "To do"; }
+
+    document.getElementById('htmlID').style.overflow="hidden"
+    popupIdString = "Popup";
+    renderAssignedTo("Popup");
+    activatePrioButton("Medium", "Popup");
+    clearForm("Popup");
+  }
+
+  function closeModal() {
+    document.getElementById('htmlID').style.overflow="scroll"
+    popupIdString = "";
+    taskLevel = "To do";
+  }
   
   /**
    * Searches tasks based on the text entered in the search bar.
