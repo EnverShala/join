@@ -115,10 +115,12 @@ function getTaskNrFromCurrentId() {
    * Opens the task selection popup dialog.
    */
   function openDialog() {
+    document.getElementById('htmlID').style.overflow="hidden";
     setTimeout(() => {
       document.getElementById("popupOnTaskSelectionID").style.visibility =
         "visible";
     }, 100);
+
   }
   
   /**
@@ -127,7 +129,7 @@ function getTaskNrFromCurrentId() {
   function closeDialog() {
     document.getElementById("popupOnTaskSelectionID").style.visibility = "hidden";
     document.getElementById("editPopUpID").classList.add("d-none");
-  
+    document.getElementById('htmlID').style.overflow="scroll";
     setTimeout(() => {
       document
         .getElementById("popupOnTaskSelectionMainContainerID")

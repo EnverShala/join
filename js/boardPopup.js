@@ -99,7 +99,7 @@
     const modal = document.querySelector("dialog[data-modal]");
     const openModalButton = document.getElementById("openModal");
     const closeModalButton = document.getElementById("closeModal");
-    const alsoOpenButtons = document.querySelectorAll(".alsoOpenModal"); // Alle Elemente mit der Klasse "alsobtn"
+    const alsoOpenButtons = document.querySelectorAll(".alsoOpenModal");
   
     if (modal && openModalButton && closeModalButton) {
       // open modal
@@ -121,6 +121,7 @@
           else if(button.id == "alsoOpenModal4") { taskLevel = "Done"; }
           else { taskLevel = "To do"; }
 
+          document.getElementById('htmlID').style.overflow="hidden"
           popupIdString = "Popup";
           modal.showModal();
           renderAssignedTo("Popup");
@@ -131,6 +132,7 @@
   
       closeModalButton.addEventListener("click", () => {
         modal.close();
+        document.getElementById('htmlID').style.overflow="scroll"
         popupIdString = "";
         taskLevel = "To do";
       });
@@ -139,6 +141,7 @@
       modal.addEventListener("click", (event) => {
         if (event.target === modal) {
           modal.close();
+          document.getElementById('htmlID').style.overflow="scroll"
           popupIdString = "";
           taskLevel = "To do";
         }
