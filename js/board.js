@@ -11,47 +11,41 @@ let pos;
  */
 function addDragAndDropEvents() {
   const draggedCards = document.querySelectorAll(".taskCard");
-  const dropZones = document.querySelectorAll(
-    "#cardContainertoDo, #cardContainerinProgress, #cardContainerawaitingFeedback, #cardContainerdone"
-  );
+  const dropZones = document.querySelectorAll("#cardContainertoDo, #cardContainerinProgress, #cardContainerawaitingFeedback, #cardContainerdone");
 
-  draggedCards.forEach((card) => {
-    card.ondragstart = (event) => {
-      event.dataTransfer.setData("text", event.target.id);
-    };
-  });
+  draggedCards.forEach((card) => { card.ondragstart = (event) => { event.dataTransfer.setData("text", event.target.id); }; });
 
   dropZones.forEach((zone) => {
-    zone.ondragover = (event) => {
-      event.preventDefault();
-      event.currentTarget.style.border = "dotted 2px grey";
-    };
+    zone.ondragover = (event) => { event.preventDefault(); event.currentTarget.style.border = "dotted 2px grey";  };
 
     zone.ondragleave = (event) => {
-      event.currentTarget.style.backgroundColor = "";
-      event.currentTarget.style.border = "none";
+      event.currentTarget.style.backgroundColor = ""; event.currentTarget.style.border = "none";
     };
 
     zone.ondrop = (event) => {
       event.preventDefault();
       event.currentTarget.style.backgroundColor = "";
-      const data = event.dataTransfer.getData("text");
-      const card = document.getElementById(data);
+      const data = event.dataTransfer.getData("text"), card = document.getElementById(data);
       event.currentTarget.appendChild(card);
-
       event.currentTarget.style.border = "none";
-
-      let newLevel = getNewDragAndDropContainerName(event.currentTarget.id);
-
-      let taskNr = data.split("-")[1];
-
-      tasks[taskNr].level = newLevel;
-
-      editTask(tasks[taskNr].id, tasks[taskNr]);
-
-      checkTaskLevels();
+      dragAndDropOnDrop(event.currentTarget.id, data)
     };
   });
+}
+
+/**
+ * sets the Data of the dropped Card for the drag and drop function
+ */
+function dragAndDropOnDrop(targetId, data) {
+  let newLevel = getNewDragAndDropContainerName(targetId);
+
+  let taskNr = data.split("-")[1];
+
+  tasks[taskNr].level = newLevel;
+
+  editTask(tasks[taskNr].id, tasks[taskNr]);
+
+  checkTaskLevels();
 }
 
 /**
@@ -249,13 +243,8 @@ async function toggleSubtaskDone(taskNr, subtaskName, checkBoxNr) {
   if (document.getElementById(`subtaskCheckbox${checkBoxNr}`).hasAttribute("checked")) {
     if (tasks[taskNr].subtasksDone.includes(subtaskName)) {
       tasks[taskNr].subtasksDone = tasks[taskNr].subtasksDone.replace(subtaskName, "");
-      tasks[taskNr].subtasksDone = tasks[taskNr].subtasksDone.replace("||", "|");
-      if (tasks[taskNr].subtasksDone.endsWith("|")) {
-        tasks[taskNr].subtasksDone.slice(0, -1);
-      }
-      if (tasks[taskNr].subtasksDone[0] == "|") {
-        tasks[taskNr].subtasksDone = tasks[taskNr].subtasksDone.slice(1);
-      }
+
+      tasks[taskNr].subtasksDone = cleanSubtasksDoneString(tasks[taskNr].subtasksDone);
     }
     document.getElementById(`subtaskCheckbox${checkBoxNr}`).removeAttribute("checked");
   } else {
@@ -264,6 +253,24 @@ async function toggleSubtaskDone(taskNr, subtaskName, checkBoxNr) {
   }
   await editTask(currentId, tasks[taskNr]);
   await renderTaskCards();
+}
+
+/**
+ * cleans the subtasksdone string from errors for saving on firebase
+ */
+function cleanSubtasksDoneString(str) {
+  let result = str;
+
+  result = result.replace("||", "|");
+
+  if (result.endsWith("|")) {
+    result = result.slice(0, -1);
+  }
+  if (result[0] == "|") {
+    result = result.slice(1);
+  }
+
+  return result;
 }
 
 /**
@@ -344,9 +351,7 @@ function editPopupTask() {
 
       clearPrioButtons();
       activatePrioButton(tasks[i].priority);
-
       renderSubtasks();
-
       toggleAssignedUsers(assignedArray);
     }
   }

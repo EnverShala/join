@@ -109,14 +109,14 @@
       closeModalButton.addEventListener("click", () => { modal.close(); closeModal(); });
       
       modal.addEventListener("click", (event) => {
-        if (event.target === modal) {
-          modal.close();
-          closeModal();
-        }
+        if (event.target === modal) { modal.close(); closeModal(); }
       });
     } else { console.error("Modal, Open Button, or Close Button not found in the DOM."); }
   });
 
+  /*
+   ** opens the Modal and sets information
+   */
   function openModal(buttonid) {
     if(buttonid == "alsoOpenModal2") { taskLevel = "In Progress"; }
     else if(buttonid == "alsoOpenModal3") { taskLevel = "Awaiting Feedback"; }
@@ -130,6 +130,9 @@
     clearForm("Popup");
   }
 
+  /*
+   ** closes the modal
+   */
   function closeModal() {
     document.getElementById('htmlID').style.overflow="scroll"
     popupIdString = "";

@@ -150,9 +150,7 @@ function getTaskNrFromCurrentId() {
   
     document.getElementById("dateId").textContent = tasks[taskNr].date;
     document.getElementById("prioId").textContent = tasks[taskNr].priority;
-    document.getElementById("prioIdImg").src = `./img/${tasks[
-      taskNr
-    ].priority.toLowerCase()}.svg`;
+    document.getElementById("prioIdImg").src = `./img/${tasks[taskNr].priority.toLowerCase()}.svg`;
   
     document.getElementById("popupContactEllipseID").innerHTML = contactEllipse;
   }
@@ -291,22 +289,34 @@ function getTaskNrFromCurrentId() {
       let assignedUsers = tasks[i].assigned.split(",");
       let subTasksArray =tasks[i].subtasks.split("|") == "" ? [] : tasks[i].subtasks.split("|");  
       let cardContainerIdName = getCardContainerId(tasks[i].level);  
-      let assignedUsersHTML = "", counter = 0, taskUsers = assignedUsers.length;
+      let assignedUsersHTML = "";
   
-      while (assignedUsers.length > 0) {
-        assignedUsersHTML += `<div class="badgeImg initialsColor${await getUserColor(assignedUsers[0])}">${getUserInitials(assignedUsers[0])}</div>`;
-        assignedUsers.splice(0, 1);
-        counter++;
-  
-        if (counter == 4 && taskUsers > 4) {
-          assignedUsersHTML += `<div class="badgeImg initialsColor0">+${taskUsers - counter}</div>`;
-          break;
-        }
-      }
+      assignedUsersHTML = await renderTaskCardUserCircles(assignedUsers);
   
       document.getElementById(cardContainerIdName).innerHTML += taskCardTemplate(uniqueId, i, subTasksArray, assignedUsersHTML);
     }
     addDragAndDropEvents();
+  }
+
+   /**
+   * Renders the task cards user circles for the taskcards, if more than 4 Users assigned show circle with number of rest users
+   */
+  async function renderTaskCardUserCircles(assignedUsersArray = []) {
+    let assignedUsersHTML = "", assignedUsers = assignedUsersArray;
+    let counter = 0, taskUsers = assignedUsers.length;
+
+    while (assignedUsers.length > 0) {
+      assignedUsersHTML += `<div class="badgeImg initialsColor${await getUserColor(assignedUsers[0])}">${getUserInitials(assignedUsers[0])}</div>`;
+      assignedUsers.splice(0, 1);
+      counter++;
+
+      if (counter == 4 && taskUsers > 4) {
+        assignedUsersHTML += `<div class="badgeImg initialsColor0">+${taskUsers - counter}</div>`;
+        return assignedUsersHTML;
+      }
+    }
+
+    return assignedUsersHTML;
   }
   
   /**
