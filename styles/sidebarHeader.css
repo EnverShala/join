@@ -255,6 +255,11 @@ a {
 }
 
 /*Mobile Header and Nav*/
+@media (max-height: 690px) {
+  .nav-links-footer {
+    margin-bottom: -50px;
+  }
+}
 @media (max-width: 800px) {
   .desktop-header {
     display: none;
